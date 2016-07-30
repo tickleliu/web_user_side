@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_80"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring31.MYECLIPSE_SPRING31_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring31.MYECLIPSE_SPRING31_Persistence"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring31.MYECLIPSE_SPRING31_Test"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring31.MYECLIPSE_SPRING31_WEB"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring31.MYECLIPSE_SPRING_SECURITY_31"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring31.MYECLIPSE_SPRING_WEBFLOW_23_CORE"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.spring31.MYECLIPSE_SPRING_WEBFLOW_23_JSF"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-beanutils-1.9.2.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-discovery-0.5.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-fileupload-1.3.1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/commons-pool-1.4.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/jackson-all-1.7.6.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/jackson-annotations-2.2.3.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/jackson-core-2.4.4.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/jackson-databind-2.2.3.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/mongo-2.10.1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/mybatis-3.3.1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/mybatis-ehcache-1.0.3.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/mybatis-spring-1.2.1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/mysql-connector-java-5.1.34.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/shiro-all-1.2.3.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/slf4j-api-1.7.9.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/slf4j-log4j12-1.7.9.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/spring-data-mongodb-1.0.0.M2.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/spring-data-mongodb-cross-store-1.0.0.M2.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/spring-data-mongodb-log4j-1.0.0.M2.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/spring-data-commons-aspects-1.0.0.M2.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/spring-data-commons-core-1.0.0.RC1.jar"/>
+	<classpathentry kind="lib" path="F:/快盘/code repository/lib/spring-data-document-core-1.0.0.M2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>
