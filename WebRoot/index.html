@@ -7,69 +7,57 @@
 <script type="text/javascript">
 $(function(){
 	/*jQuery处理函数*/
+	
+	//幻灯效果
+    var isRun=true;
+    var slideNum=$('#slideWrap ul.slide>li').length;//页码数量以及幻灯数量
+    var slideNumHtml='<ul class="num">';
+    for(var i=1;i<=slideNum;i++){
+		slideNumHtml+='<li></li>';
+    }
+    slideNumHtml+='</ul>';
+    $('#slideWrap ul.slide').after(slideNumHtml);
+    function showSlide(num){
+        if(num==$('#slideWrap ul.num>li').index($('#slideWrap ul.num>li.current'))){
+            return null;
+        }
+        $('#slideWrap ul.slide>li')
+            .finish()
+            .filter(':visible')
+            .fadeOut()
+            .css({'z-index':0})
+            .end()
+            .eq(num)
+            .fadeIn()
+            .css({'z-index':1});
+        $('#slideWrap ul.num>li').filter('.current').removeClass('current').end().eq(num).addClass('current');
+    }
+    showSlide(0);
+    $('#slideWrap ul.num>li').on('mouseenter.trigger',function(){
+        showSlide($('#slideWrap ul.num>li').index(this));
+    });
+    $('#slideWrap ul.slide,#slideWrap ul.num>li').hover(function(){
+        isRun=false;  
+    },function(){
+        isRun=true;
+    });
+    setInterval(function(){
+        if(isRun) {
+            if($('#slideWrap ul.num>li.current').next().length==0) {
+                $('#slideWrap ul.num>li').eq(0).triggerHandler('mouseenter.trigger');
+            }else{
+                $('#slideWrap ul.num>li.current').next().triggerHandler('mouseenter.trigger');
+            }
+        }
+    },5000);
+    //幻灯效果结束
 });
 </script>
 </head>
 <!--头部结束-->
 
+<iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="508px" allowtransparency="true"></iframe>
 <body>
-	<div class="top">	<!--顶部，加载logo图像-->
-		<div class="w1000">
-			<div id="logoImg">
-				<img src="images/icon111.jpg" height="114" width="114"/>
-			</div>
-			<div id="logoTitle">
-				<p id="chn">军民融合综合评估中心</p>
-				<p id="eng">Civil-military Integration Comprehensive Assessment Center</p>
-			</div>
-			<div id="toolbar">
-				<div class="search">
-					<span class="search_btn"></span>
-					<input class="keywords" value="搜索..." onfocus="if(this.value=='搜索...'){this.value='';}" onblur="if(this.value==''){this.value='搜索...';}"></input>
-				</div>
-				<a class="register" href="#">注册</a>
-				<a class="login" href="#">登录</a>
-			</div>
-		</div>
-	</div>
-	<div class="mainNav">	<!--首页导航标签-->
-		<div class="w1000">
-			<ul class="nav">  <!--导航菜单-->
-				<li>
-					<a href="#">首页</a>
-				</li>
-				<li>
-					<a href="#">中心概况</a>
-				</li>
-				<li>
-					<a href="#">组织机构</a>
-				</li>
-				<li>
-					<a href="#">试点信息</a>
-				</li>
-				<li>
-					<a href="#">新闻资讯</a>
-				</li>
-				<li>
-					<a href="#">技术前沿</a>
-				</li>
-				<li>
-					<a href="#">政策解读</a>
-				</li>
-				<li>
-					<a href="#">课程信息</a>
-				</li>
-				<li>
-					<a href="#">联系我们</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="navImg">	<!--导航菜单下的图片-->
-		 <div class="w1000">
-			<img src="images/icon111.jpg" height="285" width="1000"/>
-		 </div>
-	</div>
 	<div class="mainbody w1000"> <!--主页内容部分-->
 		<!--正文左侧-->
 		<div class="left"> 
@@ -166,12 +154,34 @@ $(function(){
 				<a class="more" href="#">更多>></a>
 			</div>
 			<div class="xwzx_list">
-				<div class="imgNews">	<!--图片新闻-->
-					<a href="#" target="_blank"><img src="images/icon111.jpg" height="160" width="260"></a>
+				<div id="slideWrap"> <!--滚动图片-->
+					<ul class="slide">
+						<li>
+							<a href="#"><img src="images/img1.jpg" /></a>
+							<a class="img_title">图片1</a>
+						</li>
+						<li>
+							<a href="#"><img src="images/img2.jpg" /></a>
+							<a class="img_title">图片2</a>
+						</li>
+						<li>
+							<a href="#"><img src="images/img3.jpg" /></a>
+							<a class="img_title">图片3</a>
+						</li>
+						<li>
+							<a href="#"><img src="images/img4.jpg" /></a>
+							<a class="img_title">图片4</a>
+						</li>
+						<li>
+							<a href="#"><img src="images/img5.jpg" /></a>
+							<a class="img_title">图片5</a>
+						</li>
+					</ul>
 				</div>
 				<div class="topNews">	<!--头条新闻-->
-					<p class="title" href="#" target="_blank">习近平向2名晋升为上将军官颁发命令状</p>
-					<p class="content" href="#" target="_blank">下午4时，晋衔仪式在庄严的国歌声中开始。中央军委副主席范长龙宣读了中央军委主席习近平签署的晋升上将军衔命令...</p>
+					<a class="title" href="g/news/1470139840025" target="_blank">习近平向2名晋升为上将军官颁发命令状</a>
+					</br>
+					<a class="content" href="#" target="_blank">下午4时，晋衔仪式在庄严的国歌声中开始。中央军委副主席范长龙宣读了中央军委主席习近平签署的晋升上将军衔命令...</a>
 				</div>
 			</div>
 			
@@ -186,27 +196,27 @@ $(function(){
 				<div class="topNews">	<!--头条新闻-->
 					<ul>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="g/news/1470285952449" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 					</ul>
@@ -224,15 +234,15 @@ $(function(){
 				<div class="topNews">	<!--头条新闻-->
 					<ul>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 					</ul>
@@ -246,15 +256,15 @@ $(function(){
 				<div class="topNews">	<!--头条新闻-->
 					<ul>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 						<li>
-							<a href="#" target="_blank" id="contact_1">习近平向2名晋升为上将军官颁发命令...</a>
+							<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
 							<span>07-30</span>
 						</li>
 					</ul>
@@ -263,13 +273,8 @@ $(function(){
 		</div>
 	</div>
 	<div style="clear:both;"></div>
-	<div class="bottom">	<!--顶部，加载logo图像-->
-		<div class="w1000">
-			<div class="end">
-				<p>大神带多少经费和第三方快递费撒谎的沙发看电视 @版权所有<p>
-				<p>打算的撒范德萨范德萨发<p>
-			</div>
-		</div>
-	</div>
 </body>
 </html>
+<iframe id="footer" src="footer.html" frameborder="false" scrolling="off" style="border:none;" width="100%" height="150px" allowtransparency="true"></iframe>
+
+

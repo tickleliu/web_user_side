@@ -1,0 +1,160 @@
+/**基本格式开始***************/
+body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,textarea,p,a {
+	margin:0px;
+	padding:0px;
+	font-size:12px;
+	font-family:微软雅黑;
+	color:#999;
+}
+ul {
+	list-style:none;
+}
+img,a img {
+	border:none;
+}
+a {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+
+.title{		/*标题类颜色*/
+    font-size: 14px;
+    color:#9b0000;
+}
+
+/**基本格式结束***************/
+body .w1000{
+	width:1000px;
+	margin:0 auto;
+}
+
+.articleview .left
+{
+	width:186px;
+	padding:15px 10px 20px 10px;
+	float:left;
+	margin-right:10px;
+}
+
+.articleview .left .leftNav{
+	background-color:#fff;
+	padding:5px 10px;
+	margin-left:0px;
+	height:520px;
+}
+
+.articleview .left .leftNav .title{
+	display:block;
+	line-height:40px;
+}
+
+.articleview .left .leftNav li{
+	margin-bottom:0px;
+	width:160px;
+	height:40px;
+	border-bottom:1px solid #dbdbdb;
+}
+
+.articleview .left .leftNav li:hover{
+	background-color:#a90100;
+}
+
+.articleview .left .leftNav li:hover a{
+	color:#fff;
+}
+
+.articleview .left .leftNav li a{
+	display:block;
+    color:#333;
+	line-height:40px;
+}
+
+.articleview .left .leftNav li a span{
+	background:url("../images/icon111.jpg") no-repeat center center;
+	background-size:4px 4px;
+	float: left;
+	margin:0 auto;
+	height: 40px;
+	width: 20px;
+}
+
+.articleview .right{
+	width:765px;
+}
+
+.articleview .right .title_module{
+	height:50px;
+	margin-top:5px;
+	border-bottom:2px dashed #999;
+}
+
+.articleview .right .title_module a{
+	line-height:50px;
+}
+
+.articleview .right .title_module .place{
+	float:right;
+}
+
+.articleview .right .article_top{
+	border-bottom:1px dashed #999;
+}
+
+.articleview .right .article_top .title{
+	font-size:24px;
+	color:#333;
+	margin:20px 0 16px 0;
+}
+
+.articleview .right .article_top .title{
+	font-size:24px;
+	color:#333;
+	margin:20px 0 16px 0;
+}
+
+.articleview .right .article_top .article_info{
+	margin-bottom:15px;
+}
+
+.articleview .right .article_top .article_info .time{
+	margin-left:20px;
+}
+
+.articleview .right  .article_body{
+	margin-top:15px
+}
+
+.articleview .right  .article_body p,a{
+	color:#666;
+	line-height: 25px;
+}
+
+.articleview .right  .list_article{
+	margin-top:15px;
+	padding-left:10px;
+}
+
+.articleview .right  .list_article li{
+	margin:10px 0;
+	float:left;
+	background:url("../images/icon111.jpg") no-repeat 0 center;
+	background-size:3px 3px;
+	width:100%;
+}
+
+.articleview .right  .list_article li a{
+    padding-left: 12px;
+	display:block;
+	float:left;
+	color:#333;
+	line-height:12px;
+}
+
+.articleview .right  .list_article li span{
+	text-align:center;
+	float:right;
+	line-height:12px;
+}
+
