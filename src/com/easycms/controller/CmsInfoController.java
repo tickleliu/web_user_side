@@ -64,7 +64,10 @@ public class CmsInfoController {
 		CATEGORINDEX_MAP.put("contact", i);
 		i++;
 	}
-
+	
+	/**
+	 * 信息处理页跳转
+	 * */
 	@RequestMapping(value = "/g/{type}/{aid}")
 	public String getInfoPage(@PathVariable String type, @PathVariable String aid, HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("type", type);
@@ -73,7 +76,7 @@ public class CmsInfoController {
 	}
 	
 	/**
-	 * 基本情况
+	 * 信息获取
 	 */
 	@RequestMapping(value = "/i/{type}/{aid}", produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -106,169 +109,13 @@ public class CmsInfoController {
 		
 		resultObject.put("result", "success");
 		resultObject.put("aid", article.getAid());
+		resultObject.put("title", article.getTitle());
 		resultObject.put("content", article.getContent());
 		resultObject.put("author", article.getAuthor());
 		resultObject.put("create_time", article.getCreate_time());
 		resultObject.put("category", article.getCate());
 
 		return resultObject.toString();
-	}
-
-	/**
-	 * 基本情况修改展示
-	 */
-	@RequestMapping("/intro_modify")
-	public String introModify(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		String aidString = request.getParameter("aid");
-		String cate = "";
-		if (aidString == null || aidString.equals("")) {
-			return "exception";
-		} else {
-			Long aid = new Long(aidString);
-			if (aid.equals(CENTERINTRO_ID) || aid.equals(ORGINTRO_ID)
-					|| aid.equals(CONTACT_ID)) {
-
-				cate = "中心概况";
-				if (aid.equals(ORGINTRO_ID)) {
-					cate = "组织架构";
-				} else if (aid.equals(CONTACT_ID)) {
-					cate = "联系我们";
-				}
-				CmsArticle cmsArticle = null;
-				cmsArticle = as.findArticleById(aid);
-				if (cmsArticle == null) {
-					cmsArticle = new CmsArticle();
-					cmsArticle.setAid(aid);
-					cmsArticle.setCate(cate);
-					cmsArticle.setTitle(cate);
-					cmsArticle.setCreate_time(new Date());
-					cmsArticle.setUpdate_time(new Date());
-					cmsArticle.setContent("");
-					as.save(cmsArticle);
-				}
-				cmsArticle.setAuthor("admin");
-				cmsArticle.setContent(request.getParameter("content"));
-				cmsArticle.setUpdate_time(new Date());
-				as.update(cmsArticle);
-				String backurl = "info/intro_e.do?cate=";
-				if (aidString.equals(CENTERINTRO_ID.toString())) {
-					backurl += "info";
-				} else if (aidString.equals(ORGINTRO_ID.toString())) {
-					backurl += "org";
-				} else {
-					backurl += "contact";
-				}
-				model.addAttribute("backurl", backurl);
-				model.addAttribute("cate", cate);
-				return "info/modify_result";
-			}
-			return "exception";
-		}
-	}
-
-	/**
-	 * 信息发布，编辑
-	 * */
-	@RequestMapping("/info_e.do")
-	public String editInfo(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		String content = "这里写你的初始內容";// 缺省编辑器文本区内容
-		String category = "1";
-		String title = "请输入标题";
-		String author = "匿名";
-		String aidString = request.getParameter("aid");
-		Long aid = null;
-
-		if (aidString == null || aidString.equals("")) {
-			aid = System.currentTimeMillis();
-		} else {
-			try {
-				aid = new Long(aidString);
-			} catch (NumberFormatException e) {
-				// TODO: handle exception
-				aid = System.currentTimeMillis();
-			}
-			CmsArticle article = null;// 当前基本情况的信息，如果已经有了，那么使用它初始化文本编辑器
-			article = as.findArticleById(aid);
-			if (article != null) {
-				content = article.getContent();
-				category = article.getCate();
-				int index = 1;
-				for (int i = 0; i < CategoryStrings.length; i++) {
-					if (CategoryStrings[i].equals(category)) {
-						index += i;
-					}
-				}
-				author = article.getAuthor();
-				category = new Integer(index).toString();
-				title = article.getTitle();
-			}
-		}
-		model.addAttribute("content", content);
-		model.addAttribute("aid", aid);
-		model.addAttribute("title", title);
-		model.addAttribute("author", author);
-		model.addAttribute("category", category);
-		model.addAttribute("categories", CategoryStrings);
-
-		return "info/info_editor";
-	}
-
-	/**
-	 * 信息处理结果
-	 */
-	@RequestMapping("/info_modify")
-	public String infoModify(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		String aidString = request.getParameter("aid");
-
-		if (aidString == null || aidString.equals("")) {
-			return "exception";
-		}
-
-		Long aid = 0L;
-		try {
-			aid = new Long(aidString);
-		} catch (NumberFormatException e) {
-			return "exception";
-		}
-
-		// 验证是否提供了正确的分类
-		String category = request.getParameter("category");
-		int categorIndex = 0;
-		if (category == null || category.equals("")) {
-			return "exception";
-		}
-		try {
-			categorIndex = new Integer(category);
-			if (categorIndex > CategoryStrings.length || categorIndex <= 0) {
-				return "exception";
-			}
-		} catch (NumberFormatException e) {
-			return "exception";
-		}
-
-		CmsArticle cmsArticle = null;
-		cmsArticle = as.findArticleById(aid);
-
-		if (cmsArticle == null) {
-			cmsArticle = new CmsArticle();
-			cmsArticle.setAid(aid);
-			as.save(cmsArticle);
-		}
-
-		cmsArticle.setCate(CategoryStrings[categorIndex - 1]);
-		cmsArticle.setAuthor(request.getParameter("author"));
-		cmsArticle.setTitle(request.getParameter("title"));
-		cmsArticle.setContent(request.getParameter("content"));
-		cmsArticle.setUpdate_time(new Date());
-		as.update(cmsArticle);
-		String backurl = "info/info_s";
-		model.addAttribute("backurl", backurl);
-		model.addAttribute("cate", CategoryStrings[categorIndex - 1]);
-		model.addAttribute("title", cmsArticle.getTitle());
-		return "info/modify_result";
 	}
 
 	@RequestMapping(value = "/info_s")
@@ -279,25 +126,6 @@ public class CmsInfoController {
 		return "info/info_show";
 	}
 
-	@RequestMapping(value = "/info_d")
-	@ResponseBody
-	public String deleteInfoResult(@RequestBody String deleteIds,
-			HttpServletRequest request, HttpServletResponse response,
-			Model model) {
-		JSONObject jsonObject = new JSONObject(deleteIds);
-		JSONArray jsonArray = jsonObject.getJSONArray("deleteIds");
-		int length = jsonArray.length();
-		for (int i = 0; i < length; i++) {
-			Long aid = jsonArray.getLong(i);
-			System.out.println(aid);
-			as.deleteArticleById(aid);
-		}
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("result", "success");
-		response.setContentType("text/json;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		return jsonObject2.toString();
-	}
 
 	private String reformatDateString(String dateString) {
 		if (dateString != null && dateString.split("-").length == 3) {
@@ -415,14 +243,6 @@ public class CmsInfoController {
 		return jsonObject.toString();
 	}
 
-	@RequestMapping(value = "/ajax/resp")
-	@ResponseBody
-	public String responose(HttpServletRequest request) {
-		logger.info("get ajax resp");
-		return "ajax result";
-	}
-
-	//
 	@RequestMapping(value = "static")
 	@ResponseBody
 	public String staticText(HttpServletRequest request,
