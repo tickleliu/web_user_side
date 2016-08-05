@@ -1,6 +1,5 @@
 package com.easycms.controller;
 
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,14 +7,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.StringTokenizer;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.border.TitledBorder;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -24,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,7 +32,6 @@ import com.easycms.entity.CmsArticle;
 import com.easycms.service.CmsArticleService;
 
 @Controller
-@RequestMapping("/info")
 public class CmsInfoController {
 
 	@Resource(name = "cmsArticleServiceImpl")
@@ -43,45 +40,78 @@ public class CmsInfoController {
 	private static final Long CENTERINTRO_ID = 100L;
 	private static final Long ORGINTRO_ID = 200L;
 	private static final Long CONTACT_ID = 300L;
-	private static String[] CategoryStrings = { "新闻资讯", "政策解读", "技术前沿", "试点信息",
-			"认证信息" };
+	private static final String[] CategoryStrings = { "新闻资讯", "政策解读", "技术前沿",
+			"试点信息", "认证信息", "中心简介", "组织架构", "联系我们" };
+	private static final Map<String, Integer> CATEGORINDEX_MAP = new HashMap<String, Integer>();
 	private Logger logger = Logger.getLogger(this.getClass());
 
+	static {
+		int i = 0;
+		CATEGORINDEX_MAP.put("news", i);
+		i++;
+		CATEGORINDEX_MAP.put("policy", i);
+		i++;
+		CATEGORINDEX_MAP.put("tech", i);
+		i++;
+		CATEGORINDEX_MAP.put("pilot", i);
+		i++;
+		CATEGORINDEX_MAP.put("identy", i);
+		i++;
+		CATEGORINDEX_MAP.put("intro", i);
+		i++;
+		CATEGORINDEX_MAP.put("org", i);
+		i++;
+		CATEGORINDEX_MAP.put("contact", i);
+		i++;
+	}
+
+	@RequestMapping(value = "/g/{type}/{aid}")
+	public String getInfoPage(@PathVariable String type, @PathVariable String aid, HttpServletRequest request, HttpServletResponse response, Model model) {
+		model.addAttribute("type", type);
+		model.addAttribute("aid", aid);
+		return "get_news";
+	}
+	
 	/**
 	 * 基本情况
 	 */
-	@RequestMapping("/intro_e.do")
-	public String centerInfo(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		String category = request.getParameter("cate");
-		String aid = CENTERINTRO_ID.toString();
-		String content = "这里写你的初始內容";// 缺省编辑器文本区内容
+	@RequestMapping(value = "/i/{type}/{aid}", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String getInfo(@PathVariable String type, @PathVariable String aid,
+			HttpServletRequest request, HttpServletResponse response,
+			Model model) {
 
+		JSONObject resultObject = new JSONObject();
 		CmsArticle article = null;// 当前基本情况的信息，如果已经有了，那么使用它初始化文本编辑器
 
-		if (category == null || category.equals("") || category.equals("info")) {
-			category = "中心概况";
-			aid = CENTERINTRO_ID.toString();
-			article = as.findArticleById(CENTERINTRO_ID);
-		} else if (category.equals("org")) {
-			category = "组织架构";
-			aid = ORGINTRO_ID.toString();
-			article = as.findArticleById(ORGINTRO_ID);
-		} else if (category.equals("contact")) {
-			category = "联系我们";
-			aid = CONTACT_ID.toString();
-			article = as.findArticleById(CONTACT_ID);
+		if (!CATEGORINDEX_MAP.keySet().contains(type)) {
+			resultObject.put("result", "error");
+			return resultObject.toString();
 		}
 
-		if (article != null) {
-			content = article.getContent();
+		Long aidL = null;
+		try {
+			aidL = Long.parseLong(aid);
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			resultObject.put("result", "error");
+			return resultObject.toString();
 		}
 
-		model.addAttribute("content", content);
-		model.addAttribute("aid", aid);
-		model.addAttribute("category", category);
+		article = as.findArticleById(aidL);
+		if(article == null) {
+			resultObject.put("result", "error");
+			return resultObject.toString();
+		}
+		
+		resultObject.put("result", "success");
+		resultObject.put("aid", article.getAid());
+		resultObject.put("content", article.getContent());
+		resultObject.put("author", article.getAuthor());
+		resultObject.put("create_time", article.getCreate_time());
+		resultObject.put("category", article.getCate());
 
-		return "info/center_intro";
+		return resultObject.toString();
 	}
 
 	/**
