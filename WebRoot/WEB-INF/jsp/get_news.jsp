@@ -6,22 +6,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'get_news.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+<head>
+<base href="<%=basePath%>">
 
-  </head>
 <title>军民融合综合评估中心</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">    
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <link rel="stylesheet" type="text/css" href="css/page.css" />
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
@@ -29,25 +24,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 $(function(){
 	/*jQuery处理函数*/
 	$.ajax(
- {
-  url: "i/${type}/${aid}",
-  cache:false,
-  type:'get',
-  contentType: "application/json; charset=utf-8", 
-  data: "data",
-  dataType: "text",
-  success: function(message, status){
-		message = $.parseJSON(message);
-		$(".title").html(message.title);
-		$(".author").html(message.author);
-		$(".time").html(message.create_time);
-		$(".article_body").html(message.content);
-  },
-  error:function()
-  {
-		$(".article_body").html("新闻获取失败，请检查网络连接或与管理员联系");
-  }
- });
+	{
+		url: "i/${type}/${aid}",
+		cache:false,
+		type:'get',
+		contentType: "application/json; charset=utf-8", 
+		/*data: "data",*/
+		data:{aid:'${aid}'},
+		dataType: "text",
+		success: function(message, status){
+			message = $.parseJSON(message);
+			$(".article_top .title").html(message.title);
+			$(".title_module .title").html(message.category);
+			$(".author").html(message.author);
+			$(".time").html(message.create_time);
+			$(".article_body").html(message.content);
+			$(".place a:nth-child(4)").html(message.category);
+			
+			$("head title").html(message.title);	/*修改页面标题*/
+		},
+		error:function()
+		{
+		}
+	});
 });
 </script>
 </head>
