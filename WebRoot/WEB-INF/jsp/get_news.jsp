@@ -45,6 +45,7 @@ $(function(){
   },
   error:function()
   {
+		$(".article_body").html("新闻获取失败，请检查网络连接或与管理员联系");
   }
  });
 });

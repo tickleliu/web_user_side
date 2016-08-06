@@ -64,17 +64,19 @@ public class CmsInfoController {
 		CATEGORINDEX_MAP.put("contact", i);
 		i++;
 	}
-	
+
 	/**
 	 * 信息处理页跳转
 	 * */
 	@RequestMapping(value = "/g/{type}/{aid}")
-	public String getInfoPage(@PathVariable String type, @PathVariable String aid, HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String getInfoPage(@PathVariable String type,
+			@PathVariable String aid, HttpServletRequest request,
+			HttpServletResponse response, Model model) {
 		model.addAttribute("type", type);
 		model.addAttribute("aid", aid);
 		return "get_news";
 	}
-	
+
 	/**
 	 * 信息获取
 	 */
@@ -102,17 +104,20 @@ public class CmsInfoController {
 		}
 
 		article = as.findArticleById(aidL);
-		if(article == null) {
+		if (article == null) {
 			resultObject.put("result", "error");
 			return resultObject.toString();
 		}
-		
+
 		resultObject.put("result", "success");
 		resultObject.put("aid", article.getAid());
 		resultObject.put("title", article.getTitle());
 		resultObject.put("content", article.getContent());
 		resultObject.put("author", article.getAuthor());
-		resultObject.put("create_time", article.getCreate_time());
+
+		resultObject
+				.put("create_time", DateFormatUtils.format(
+						article.getCreate_time(), "yyyy年MM月dd日"));
 		resultObject.put("category", article.getCate());
 
 		return resultObject.toString();
@@ -125,7 +130,6 @@ public class CmsInfoController {
 
 		return "info/info_show";
 	}
-
 
 	private String reformatDateString(String dateString) {
 		if (dateString != null && dateString.split("-").length == 3) {
