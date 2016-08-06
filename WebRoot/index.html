@@ -13,7 +13,7 @@ $(function(){
     var slideNum=$('#slideWrap ul.slide>li').length;//页码数量以及幻灯数量
     var slideNumHtml='<ul class="num">';
     for(var i=1;i<=slideNum;i++){
-		slideNumHtml+='<li></li>';
+		slideNumHtml+='<li>'+i+'</li>';
     }
     slideNumHtml+='</ul>';
     $('#slideWrap ul.slide').after(slideNumHtml);
@@ -149,47 +149,62 @@ $(function(){
 		
 		<!--右侧信息栏-->
 		<div class="right">	
-			<div class="xwzx">
+			<div class="news">
 				<a class="title" href="#"><span></span>新闻资讯</a>
 				<a class="more" href="#">更多>></a>
 			</div>
-			<div class="xwzx_list">
+			<div class="news_list">
 				<div id="slideWrap"> <!--滚动图片-->
 					<ul class="slide">
 						<li>
 							<a href="#"><img src="images/img1.jpg" /></a>
-							<a class="img_title">图片1</a>
+							<div class="news_content">
+								<a class="title" href="#" target="_blank">标题1...</a>
+								</br>
+								<a class="content" href="#" target="_blank">内容1...</a>
+							</div>
 						</li>
 						<li>
 							<a href="#"><img src="images/img2.jpg" /></a>
-							<a class="img_title">图片2</a>
+							<div class="news_content">
+								<a class="title" href="#" target="_blank">标题2...</a>
+								</br>
+								<a class="content" href="#" target="_blank">内容2...</a>
+							</div>
 						</li>
 						<li>
 							<a href="#"><img src="images/img3.jpg" /></a>
-							<a class="img_title">图片3</a>
+							<div class="news_content">
+								<a class="title" href="#" target="_blank">标题3...</a>
+								</br>
+								<a class="content" href="#" target="_blank">内容3...</a>
+							</div>
 						</li>
 						<li>
 							<a href="#"><img src="images/img4.jpg" /></a>
-							<a class="img_title">图片4</a>
+							<div class="news_content">
+								<a class="title" href="#" target="_blank">标题4</a>
+								</br>
+								<a class="content" href="#" target="_blank">内容4...</a>
+							<div>
 						</li>
 						<li>
 							<a href="#"><img src="images/img5.jpg" /></a>
-							<a class="img_title">图片5</a>
+							<div class="news_content">
+								<a class="title" href="#" target="_blank">标题5</a>
+								</br>
+								<a class="content" href="#" target="_blank">内容5...</a>
+							</div>
 						</li>
 					</ul>
 				</div>
-				<div class="topNews">	<!--头条新闻-->
-					<a class="title" href="g/news/1470139840025" target="_blank">习近平向2名晋升为上将军官颁发命令状</a>
-					</br>
-					<a class="content" href="#" target="_blank">下午4时，晋衔仪式在庄严的国歌声中开始。中央军委副主席范长龙宣读了中央军委主席习近平签署的晋升上将军衔命令...</a>
-				</div>
 			</div>
 			
-			<div class="jsqy">
+			<div class="tech">
 				<a class="title" href="#"><span></span>技术前沿</a>
 				<a class="more" href="#">更多>></a>
 			</div>
-			<div class="jsqy_list">
+			<div class="tech_list">
 				<div class="imgNews">	<!--图片新闻-->
 					<a href="#" target="_blank"><img src="images/icon111.jpg" height="150" width="150"></a>
 				</div>
@@ -223,11 +238,11 @@ $(function(){
 				</div>
 			</div>
 			
-			<div class="zcjd">
+			<div class="policy">
 				<a class="title" href="#"><span></span>政策解读</a>
 				<a class="more" href="#">更多>></a>
 			</div>
-			<div class="zcjd_list_1">
+			<div class="policy_list">
 				<div class="imgNews">	<!--图片新闻-->
 					<a href="#" target="_blank"><img src="images/icon111.jpg" height="82" width="112"></a>
 				</div>
@@ -249,7 +264,9 @@ $(function(){
 				</div>
 			</div>
 
-			<div class="zcjd_list_2">
+			<div style='border-bottom:1px solid #dbdbdb'></div> <!--添加一条横线-->
+			
+			<div class="policy_list">
 				<div class="imgNews">	<!--图片新闻-->
 					<a href="#" target="_blank"><img src="images/icon111.jpg" height="82" width="112"></a>
 				</div>
