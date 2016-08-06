@@ -123,12 +123,12 @@ public class CmsInfoController {
 		return resultObject.toString();
 	}
 
-	@RequestMapping(value = "/info_s")
+	@RequestMapping(value = "/info/list")
 	public String showInfo(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		model.addAttribute("categories", CategoryStrings);
 
-		return "info/info_show";
+		return "list_article";
 	}
 
 	private String reformatDateString(String dateString) {
@@ -150,7 +150,7 @@ public class CmsInfoController {
 	/**
 	 * 新闻管理列表生成 增加了中文数据处理
 	 * */
-	@RequestMapping(value = "/info_g", produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/info/get", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getInfo(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
