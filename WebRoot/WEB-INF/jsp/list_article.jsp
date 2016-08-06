@@ -17,37 +17,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="jeasyui/jquery.easyui.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	/*jQuery处理函数*/
+
+function sendAjax(page,rows,ct){
 	$.ajax(
 	{
-		url: "info/list",
+		url: "info/get",
 		cache:false,
 		type:'get',
 		contentType: "application/json; charset=utf-8", 
 		data:{
-			page:1,
-			rows:20,
-			category:1
+			page:page,
+			rows:rows,
+			ct:ct
 		},
 		dataType: "text",
 		success: function(message, status){
 			message = $.parseJSON(message);
+			$('#pp').pagination({
+				total:message.total,
+			});
 			
+			$(".list_article ul").empty();
+			$.each(message.rows, function(i, item){
+				var html = '<li>';
+				 html += '<a href="/g" target="_blank">' + item['title'] + '</a>';
+				 html += '<span>' + item['create_time'] + '</span>';
+				 html += '</li>';
+				 $('.list_article ul').append(html);     
+		　　}); 
 		},
 		error:function()
 		{
 		}
 	});
+};
+
+$(function(){
+	/*jQuery处理函数*/
+	sendAjax(1,20,1);
 	
 	$('#pp').pagination({	/*创建翻页*/
-		total:2000,
 		pageSize:20,
-		pageList: [20,30,50],
-		onSelectPage:function(pageNumber, pageSize){	/*当用户选择新的页面时触发。回调函数包含两个参数*/
-			$(this).pagination('loading');
-			alert('pageNumber:'+pageNumber+',pageSize:'+pageSize);
-			$(this).pagination('loaded');
+		pageList:[20,30,50],
+		onSelectPage:function(pageNumber, pageSize){	/*当用户选择新的页面时触发。回调函数包含两个参数*/	
+			sendAjax(pageNumber,pageSize,1)
 		}
 	});
 });
