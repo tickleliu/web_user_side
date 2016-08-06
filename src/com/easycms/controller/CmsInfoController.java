@@ -176,6 +176,7 @@ public class CmsInfoController {
 			category = Integer.parseInt(categoryString);
 			if (category > 0 && category <= CategoryStrings.length) {
 				map.put("category", CategoryStrings[category - 1]);
+				map.put("cate", CategoryStringsE[category - 1]);
 			}
 		} catch (NumberFormatException e) {
 			// TODO: handle exception
@@ -234,11 +235,12 @@ public class CmsInfoController {
 		jsonObject.put("total", pager.getTotal());
 		List<HashedMap> articles = new ArrayList<HashedMap>();
 		JSONArray jsonArray = new JSONArray();
+		jsonObject.put("cate", map.get("cate") );
+		jsonObject.put("category", map.get("category"));
 
 		for (CmsArticle article : pager.getPageList()) {
 			Map<String, Object> jsonMap = new HashMap<String, Object>();
 			jsonMap.put("aid", article.getAid());
-			jsonMap.put("category", article.getCate());
 			jsonMap.put("author", article.getAuthor());
 			String create_time = DateFormatUtils.format(
 					article.getCreate_time(), "yyyy-MM-dd");
