@@ -42,6 +42,8 @@ public class CmsInfoController {
 	private static final Long CONTACT_ID = 300L;
 	private static final String[] CategoryStrings = { "新闻资讯", "政策解读", "技术前沿",
 			"试点信息", "认证信息", "中心简介", "组织架构", "联系我们" };
+	private static final String[] CategoryStringsE = { "news", "policy", "tech",
+			"pilot", "identy", "intro", "org", "contact" };
 	private static final Map<String, Integer> CATEGORINDEX_MAP = new HashMap<String, Integer>();
 	private Logger logger = Logger.getLogger(this.getClass());
 
@@ -205,6 +207,8 @@ public class CmsInfoController {
 				pageSize = 10;
 			}
 		}
+		
+		showPages = showPages * pageSize;
 
 		String keyword = request.getParameter("keyw");
 
