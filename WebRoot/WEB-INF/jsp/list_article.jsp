@@ -40,7 +40,7 @@ function sendAjax(page,rows,ct){
 			$(".list_article ul").empty();
 			$.each(message.rows, function(i, item){
 				var html = '<li>';
-				 html += '<a href="/g" target="_blank">' + item['title'] + '</a>';
+				 html += '<a href="g/'+message.cate+'/'+item['aid']+'" target="_blank">' + item['title'] + '</a>';
 				 html += '<span>' + item['create_time'] + '</span>';
 				 html += '</li>';
 				 $('.list_article ul').append(html);     
