@@ -1,6 +1,14 @@
-<html lang="zh-CN">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
-<meta charset="utf-8" />
+<base href="<%=basePath%>">
+
 <title>军民融合综合评估中心</title>
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <link rel="stylesheet" type="text/css" href="css/page.css" />
@@ -11,6 +19,26 @@
 <script type="text/javascript">
 $(function(){
 	/*jQuery处理函数*/
+	$.ajax(
+	{
+		url: "info/list",
+		cache:false,
+		type:'get',
+		contentType: "application/json; charset=utf-8", 
+		data:{
+			page:1,
+			rows:20,
+			category:1
+		},
+		dataType: "text",
+		success: function(message, status){
+			message = $.parseJSON(message);
+			
+		},
+		error:function()
+		{
+		}
+	});
 	
 	$('#pp').pagination({	/*创建翻页*/
 		total:2000,
