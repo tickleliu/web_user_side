@@ -14,6 +14,7 @@ img,a img {
 }
 a {
 	text-decoration:none;
+	text-overflow:ellipsis;
 }
 a:hover {
 	text-decoration:underline;
@@ -525,7 +526,10 @@ body .w1000{
 .right .news_list #slideWrap a.title{
 	font-size:14px;
 	color:#333;
-	line-height:200%;
+	display:block;
+	line-height:30px;
+	height:30px;
+	overflow:hidden;
 }
 
 .right .news_list #slideWrap a.content{
