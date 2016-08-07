@@ -53,8 +53,13 @@ $(function(){
 </head>
 <!--头部结束-->
 
-<iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="508px" allowtransparency="true"></iframe>
+<iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
 <body class="articleview">
+	<div class="navImg">	<!--导航菜单下的图片-->
+		<div class="w1000">
+			<img src="images/banner/news.jpg"/>
+		</div>
+	</div>
 	<div class="mainbody w1000"> <!--主页内容部分-->
 		<!--页面左侧-->
 		<div class="left">
