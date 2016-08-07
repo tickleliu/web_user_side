@@ -336,6 +336,7 @@ body .w1000{
 }
 
 .center .rzpx_list_3 li{
+	width:100%;
 	margin-left:10px;
 	float:left;
 	background:url("../images/icon111.jpg") no-repeat 0 center;
@@ -490,8 +491,10 @@ body .w1000{
 }
 
 .right .news_list #slideWrap ul.slide li .news_img a img{
-	margin:0 auto;
-	width:260px;
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto; 
 }
 
 .right .news_list #slideWrap ul.num{
@@ -568,6 +571,7 @@ body .w1000{
 	height:150px;
 	width:150px;
 	float:left;
+	overflow:hidden;
 }
 
 .right .tech_list .topNews{
