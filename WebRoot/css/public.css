@@ -34,43 +34,23 @@ body .w1000{
 .top {
 	width:100%;
 	height:184px;
-	background:#dbdbdb;
+	background:url("../images/background.png") no-repeat center center;
+	background-size:1200px 184px;
 }
-.top #logoImg{ 
-    width:114px;  
+
+.top #logoImg{  
     height:114px;  
     padding:35px 0;
 	float:left;
 }
 
 .top #logoImg img{
-	width:114px;
+	max-width:700px;
 	height:114px;
-	background:#fff;
-}
-
-.top #logoTitle{
-	float:left;
-	margin-left:20px;
-	padding-top:50px;
-}
-
-.top #logoTitle #chn{
-	color:#9b0000;
-	font:bold;
-	font-size:30px;
-}
-
-.top #logoTitle #eng{
-	color:blue;
-	font:bold;
-	font-size:16px;
-	margin-top:20px;
 }
 
 .top #toolbar{
 	float:right;
-	margin-left:20px;
 	padding-top:70px;
 }
 
@@ -84,9 +64,9 @@ body .w1000{
 .top #toolbar span.search_btn{
 	display:block;
 	height:30px;
-    width: 40px;
-	background:url("../images/icon_search.png") no-repeat 0 center;
-	background-size:30px 30px;
+    width: 35px;
+	background:url("../images/icon_search.png") no-repeat center center;
+	background-size:25px 25px;
 	float:left;
 }
 
@@ -100,11 +80,9 @@ body .w1000{
 	font-size:14px;
 	height:30px;
 	line-height:30px;
-	margin:0 10px;
+	margin:0 5px;
 	color:blue;
 }
-
-
 
 
 .mainNav{
@@ -150,9 +128,10 @@ body .w1000{
 {
 	width:206px;
 	margin-right:30px;
-	background:#dbdbdb;
 	padding:30px 0 24px 0px;
 	float:left;
+	background:url("../images/left_bg.jpg") no-repeat center center;
+	overflow:hidden;
 }
 
 .left .leftNav{
@@ -175,12 +154,32 @@ body .w1000{
 	
 .left .leftNav li a span{
 	float:left;
-	margin-left:15px;
-	margin-top:10px;
-    height:30px;
+	margin:5px 8px 0 10px;
+    height:40px;
     width: 40px;
-	background:url("../images/icon111.jpg") no-repeat;
-	background-size:30px 30px;
+	background-repeat: no-repeat;
+}
+
+.left .leftNav li #left_1 span{
+	background:url("../images/icons.png")  no-repeat scroll 0 0;
+}
+.left .leftNav li #left_2 span{
+	background:url("../images/icons.png")  no-repeat scroll -40px 0;
+}
+.left .leftNav li #left_3 span{
+	background:url("../images/icons.png")  no-repeat scroll -80px 0;
+}
+.left .leftNav li #left_4 span{
+	background:url("../images/icons.png")  no-repeat scroll 0 0;
+}
+.left .leftNav li #left_5 span{
+	background:url("../images/icons.png")  no-repeat scroll -40px 0;
+}
+.left .leftNav li #left_6 span{
+	background:url("../images/icons.png")  no-repeat scroll -120px 0;
+}
+.left .leftNav li #left_7 span{
+	background:url("../images/icons.png")  no-repeat scroll -160px 0;
 }
 
 .left #QRcode{
@@ -237,9 +236,10 @@ body .w1000{
 
 .center .rzpx_list_1 a span{
 	float:left;
-	padding-left: 58px;
 	display:block;
 	height:38px;
+	width:40px;
+	margin-right:15px;
 }
 
 .center .rzpx_list_1 #rzpx_1{
@@ -270,28 +270,22 @@ body .w1000{
 }
 
 .center .rzpx_list_1 #rzpx_1 span{
-	background: url("../images/icon111.jpg") no-repeat;
-	background-size:38px 38px;
+	background: url("../images/icons.png") no-repeat scroll -200px 0;
 }
 .center .rzpx_list_1 #rzpx_2 span{
-	background: url("../images/icon111.jpg") no-repeat;
-	background-size:38px 38px;
+	background: url("../images/icons.png") no-repeat scroll -240px 0;
 }
 .center .rzpx_list_1 #rzpx_3 span{
-	background: url("../images/icon111.jpg") no-repeat;
-	background-size:38px 38px;
+	background: url("../images/icons.png") no-repeat scroll -280px 0;
 }
 .center .rzpx_list_1 #rzpx_4 span{
-	background: url("../images/icon111.jpg") no-repeat;
-	background-size:38px 38px;
+	background: url("../images/icons.png") no-repeat scroll -320px 0;
 }
 .center .rzpx_list_1 #rzpx_5 span{
-	background: url("../images/icon111.jpg") no-repeat;
-	background-size:38px 38px;
+	background: url("../images/icons.png") no-repeat scroll -360px 0;
 }
 .center .rzpx_list_1 #rzpx_6 span{
-	background: url("../images/icon111.jpg") no-repeat;
-	background-size:38px 38px;
+	background: url("../images/icons.png") no-repeat scroll -400px 0;
 }
 
 .center .rzpx_list_2{
@@ -299,36 +293,45 @@ body .w1000{
 	border-bottom:1px solid #dbdbdb;
 }
 
-.center .rzpx_list_2 li{
-	float:left;
-	width:72px;
-	padding:10px 10px 10px 10px;
+.center .rzpx_list_2 .icons{
+	width:100%;
+	height:50px;
+}
+.center .rzpx_list_2 .titles{
+	
 }
 
-.center .rzpx_list_2 li a{
+.center .rzpx_list_2 .icons a{
+	margin:8px 26px 0px 26px;
+	width:40px;
+	height:40px;
+	line-height:50px;
+	display:block;
+	float:left;
+}
+
+.center .rzpx_list_2 .titles a{
 	color:#333;
     font-size:14px;
-    padding-top: 40px;
 	height:32px;
+	width:92px;
 	line-height:32px;
-	display:block;
 	text-align:center;
+	display:block;
+	float:left;
 }
 
 .center .rzpx_list_2 #rzpx_7
 { 
-	background:url("../images/icon111.jpg") no-repeat center 0;
-	background-size:40px 40px;
+	background:url("../images/icons.png") no-repeat scroll -560px 0;
 } 
 .center .rzpx_list_2 #rzpx_8
 { 
-	background:url("../images/icon111.jpg") no-repeat center 0;
-	background-size:40px 40px;
+	background:url("../images/icons.png") no-repeat scroll -600px 0;
 } 
 .center .rzpx_list_2 #rzpx_9
 { 
-	background:url("../images/icon111.jpg") no-repeat center 0;
-	background-size:40px 40px;
+	background:url("../images/icons.png") no-repeat scroll -640px 0;
 } 
 
 .center .rzpx_list_3{
@@ -638,10 +641,32 @@ body .w1000{
 	margin-top:10px;
 }
 
-.right .policy_list .imgNews{
-	height:80px;
-	width:110px;
+.right .policy_list .icons{
+	height:82px;
+	width:115px;
 	float:left;
+	background-color:#dbdbdb;
+}
+
+.right .policy_list .icons a{
+	font-size:14px;
+	color:#333;
+	display:block;
+	width:100%;
+	height:100%;
+	text-align:center;
+	padding-top:55px;
+}
+
+.right .policy_list .icons span{
+	
+}
+
+.right .policy_list #policy_1 a{
+	background: url("../images/icons.png") no-repeat scroll 0px -40px;
+}
+.right .policy_list #policy_2 a{
+	background: url("../images/icons.png") no-repeat scroll -112px -40px;
 }
 
 .right .policy_list .topNews{
