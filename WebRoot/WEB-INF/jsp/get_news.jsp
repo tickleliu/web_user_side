@@ -37,10 +37,11 @@ $(function(){
 			$(".article_top .title").html(message.title);
 			$(".title_module .title").html(message.category);
 			$(".author").html(message.author);
-			$(".time").html(message.create_time);
+			$(".time").html('时间：' + message.create_time);
 			$(".article_body").html(message.content);
-			$(".place a:nth-child(4)").html(message.category);
-			
+			$(".place a:nth-child(3)").html(message.category);
+			$(".banner_text span:nth-child(1)").html(message.category);
+			$(".banner_text span:nth-child(2)").html(message.cate);	/*目前缺*/
 			$("head title").html(message.title);	/*修改页面标题*/
 		},
 		error:function()
@@ -55,9 +56,13 @@ $(function(){
 
 <iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
 <body class="articleview">
-	<div class="navImg">	<!--导航菜单下的图片-->
-		<div class="w1000">
-			<img src="images/banner/news.jpg"/>
+	<div class="banner">	<!--导航菜单下的图片-->
+		<div class="banner_img">
+			<img src="images/banner/${banner_image}.jpg"/>
+			<div class="banner_text" style="">
+				<span class="title_chn">标题</span>
+				<span class="title_eng">Title</span>
+			</div>
 		</div>
 	</div>
 	<div class="mainbody w1000"> <!--主页内容部分-->
@@ -83,28 +88,68 @@ $(function(){
 					</li>
 				</ul>
 			</div>
-			<div id="QRcode">	<!--二维码-->
-				<a><img src="images/app.png"/></a>
-			</div>
 		</div>
 		
-		<!--右侧信息栏-->
-		<div class="right">	
+		<!--文章信息栏-->
+		<div class="center">	
 			<div class="title_module"> <!--板块标题-->
-				<a class="title" href="#">法律法规</a>
+				<a class="title" href="#"> </a>
 				<div class="place">
-					<strong>当前位置:</strong> <a href='#'>主页</a> > <a href='#'>德育之窗</a> > <a href='#'>法律法规</a>
+					<strong>当前位置:</strong> <a href='#'>主页</a> > <a href='#'> </a>
 				</div>
 			</div>
 			<div class="article_top"> <!--文章标题、作者、发表时间-->
 				<p class="title" href="#" target="_blank">正在等待数据库返回...</p>
 				<div class="article_info">
-					作者：<a class="author">某某某</a> <a class="time">8888年8月8日</a>
+					作者：<span class="author"> </span> <span class="time"> </span>
 				</div>
 			</div>
 			
 			<div class="article_body"> <!--文章正文-->
 				<p>正在等待数据库返回...</p>
+			</div>
+		</div>
+		
+		<div class="right"> 
+			<ul class="leftNav">  <!--右侧导航菜单-->
+				<li>
+					<a id="left_1" href="#" target="_blank">
+						<span></span>区域试点申请
+					</a>
+				</li>
+				<li>
+					<a id="left_2" href="#" target="_blank">
+						<span></span>企业试点申请
+					</a>
+				</li>
+				<li>
+					<a id="left_3" href="#" target="_blank">
+						<span></span>联盟加入申请
+					</a>
+				</li>
+				<li>
+					<a id="left_4" href="#" target="_blank">
+						<span></span>区域评估申请
+					</a>
+				</li>
+				<li>
+					<a id="left_5" href="#" target="_blank">
+						<span></span>企业评估申请
+					</a>
+				</li>
+				<li>
+					<a id="left_6" href="#" target="_blank">
+						<span></span>项目评估申请
+					</a>
+				</li>
+				<li>
+					<a id="left_7" href="#" target="_blank">
+						<span></span>技术评估申请
+					</a>
+				</li>
+			</ul>
+			<div id="QRcode">	<!--二维码-->
+				<a><img src="images/app.png"/></a>
 			</div>
 		</div>
 	</div>

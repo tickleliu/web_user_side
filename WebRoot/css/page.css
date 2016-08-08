@@ -30,19 +30,56 @@ body .w1000{
 	margin:0 auto;
 }
 
+.articleview .banner{
+	height:284px;
+	background:#dbdbdb;
+	overflow:hidden;
+}
+
+.articleview .banner .banner_img{
+	width:1000px;
+	height:100%;
+	background:#dbdbdb;
+	margin:0 auto;
+	position:relative;
+}
+
+.articleview .banner .banner_img .banner_text{
+	position:absolute; 
+	bottom:0px; 
+	width:100%; 
+	height:94px; 
+	background-color:rgba(0,0,0,0.6);
+}
+
+.articleview .banner .banner_img .banner_text .title_chn{
+	font-size:30px;
+	color:#fff;
+	display:block;
+	margin:10px 0 12px 20px;
+}
+
+.articleview .banner .banner_img .banner_text .title_eng{
+	font-size:12px;
+	color:#aaa;
+	display:block;
+	margin-left:20px;
+}
+
 .articleview .left
 {
 	width:186px;
-	padding:15px 10px 20px 10px;
+	height:680px;
+	padding:0px 10px;
 	float:left;
-	margin-right:10px;
 }
 
 .articleview .left .leftNav{
 	background-color:#fff;
 	padding:5px 10px;
 	margin-left:0px;
-	height:520px;
+	margin-top:15px;
+	height:460px;
 }
 
 .articleview .left .leftNav .title{
@@ -80,71 +117,72 @@ body .w1000{
 	width: 20px;
 }
 
-.articleview .right{
-	width:765px;
+.articleview .center{
+	width:520px;
+	margin-right:30px;
 }
 
-.articleview .right .title_module{
+.articleview .center .title_module{
 	height:50px;
 	margin-top:5px;
 	border-bottom:2px dashed #999;
 }
 
-.articleview .right .title_module a{
+.articleview .center .title_module a{
 	line-height:50px;
 }
 
-.articleview .right .title_module .place{
+.articleview .center .title_module .place{
 	float:right;
 }
 
-.articleview .right .article_top{
+.articleview .center .article_top{
 	border-bottom:1px dashed #999;
 }
 
-.articleview .right .article_top .title{
+.articleview .center .article_top .title{
 	font-size:24px;
 	color:#333;
 	margin:20px 0 16px 0;
 }
 
-.articleview .right .article_top .title{
+.articleview .center .article_top .title{
 	font-size:24px;
 	color:#333;
 	margin:20px 0 16px 0;
 }
 
-.articleview .right .article_top .article_info{
+.articleview .center .article_top .article_info{
 	margin-bottom:15px;
 }
 
-.articleview .right .article_top .article_info .time{
+.articleview .center .article_top .article_info .time{
 	margin-left:20px;
 }
 
-.articleview .right  .article_body{
+.articleview .center  .article_body{
 	margin-top:15px
 }
 
-.articleview .right  .article_body p,a{
+.articleview .center  .article_body p,a{
 	color:#666;
 	line-height: 25px;
 }
 
-.articleview .right  .list_article{
+.articleview .center  .list_article{
 	margin-top:15px;
 	padding-left:10px;
 }
 
-.articleview .right  .list_article li{
-	margin:10px 0;
+.articleview .center  .list_article li{
+	margin:8px 0;
 	float:left;
 	background:url("../images/icon111.jpg") no-repeat 0 center;
 	background-size:3px 3px;
 	width:100%;
 }
 
-.articleview .right  .list_article li a{
+.articleview .center  .list_article li a{
     padding-left: 12px;
 	display:block;
 	float:left;
@@ -152,9 +190,75 @@ body .w1000{
 	line-height:12px;
 }
 
-.articleview .right  .list_article li span{
+.articleview .center  .list_article li span{
 	text-align:center;
 	float:right;
 	line-height:12px;
 }
 
+.articleview .right
+{
+	width:206px;
+	padding:30px 0 24px 0px;
+	float:right;
+	background:url("../images/left_bg.jpg") no-repeat 0 center;
+	overflow:hidden;
+}
+
+.articleview .right .leftNav{
+	margin-left:23px;
+}
+
+.articleview .right .leftNav li{
+	margin-bottom:16px;
+	background-color:#fff;
+	width:160px;
+	height:50px;
+}
+
+.articleview .right .leftNav li a{
+	display: block;
+    font-size: 14px;
+    line-height: 50px;
+    color:#9b0000;
+}
+	
+.articleview .right .leftNav li a span{
+	float:left;
+	margin:5px 8px 0 10px;
+    height:40px;
+    width: 40px;
+	background-repeat: no-repeat;
+}
+
+.articleview .right .leftNav li #left_1 span{
+	background:url("../images/icons.png")  no-repeat scroll 0 0;
+}
+.articleview .right .leftNav li #left_2 span{
+	background:url("../images/icons.png")  no-repeat scroll -40px 0;
+}
+.articleview .right .leftNav li #left_3 span{
+	background:url("../images/icons.png")  no-repeat scroll -80px 0;
+}
+.articleview .right .leftNav li #left_4 span{
+	background:url("../images/icons.png")  no-repeat scroll 0 0;
+}
+.articleview .right .leftNav li #left_5 span{
+	background:url("../images/icons.png")  no-repeat scroll -40px 0;
+}
+.articleview .right .leftNav li #left_6 span{
+	background:url("../images/icons.png")  no-repeat scroll -120px 0;
+}
+.articleview .right .leftNav li #left_7 span{
+	background:url("../images/icons.png")  no-repeat scroll -160px 0;
+}
+
+.articleview .right #QRcode{
+	margin-top:60px;
+	margin-left:43px;
+	height:120px;
+}
+.articleview .right #QRcode img{
+	width:120px;
+	height:120px;
+}

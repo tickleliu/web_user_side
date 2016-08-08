@@ -45,25 +45,35 @@ public class CmsInfoController {
 	private static final String[] CategoryStringsE = { "news", "policy", "tech",
 			"pilot", "identy", "intro", "org", "contact" };
 	private static final Map<String, Integer> CATEGORINDEX_MAP = new HashMap<String, Integer>();
+	private static final Map<Integer, String> CATEGORINDEX_MAP_R = new HashMap<Integer, String>();
+
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	static {
 		int i = 0;
 		CATEGORINDEX_MAP.put("news", i);
+		CATEGORINDEX_MAP_R.put(i, "news");
 		i++;
 		CATEGORINDEX_MAP.put("policy", i);
+		CATEGORINDEX_MAP_R.put(i, "policy");
 		i++;
 		CATEGORINDEX_MAP.put("tech", i);
+		CATEGORINDEX_MAP_R.put(i, "tech");
 		i++;
 		CATEGORINDEX_MAP.put("pilot", i);
+		CATEGORINDEX_MAP_R.put(i, "pilot");
 		i++;
 		CATEGORINDEX_MAP.put("identy", i);
+		CATEGORINDEX_MAP_R.put(i, "identy");
 		i++;
 		CATEGORINDEX_MAP.put("intro", i);
+		CATEGORINDEX_MAP_R.put(i, "intro");
 		i++;
 		CATEGORINDEX_MAP.put("org", i);
+		CATEGORINDEX_MAP_R.put(i, "org");
 		i++;
 		CATEGORINDEX_MAP.put("contact", i);
+		CATEGORINDEX_MAP_R.put(i, "contact");
 		i++;
 	}
 
@@ -76,6 +86,7 @@ public class CmsInfoController {
 			HttpServletResponse response, Model model) {
 		model.addAttribute("type", type);
 		model.addAttribute("aid", aid);
+		model.addAttribute("banner_image", type);
 		return "get_news";
 	}
 
@@ -125,11 +136,13 @@ public class CmsInfoController {
 		return resultObject.toString();
 	}
 
-	@RequestMapping(value = "/info/list")
-	public String showInfo(HttpServletRequest request,
+	@RequestMapping(value = "/info/list/{type}")
+	public String showInfo(@PathVariable String type, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		model.addAttribute("categories", CategoryStrings);
-
+		Integer cateIndex = CATEGORINDEX_MAP.get(type);
+		model.addAttribute("cateIndex", cateIndex + 1);
+		model.addAttribute("banner_image", type);
 		return "list_article";
 	}
 

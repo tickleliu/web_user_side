@@ -34,8 +34,8 @@ body .w1000{
 .top {
 	width:100%;
 	height:184px;
-	background:url("../images/background.png") no-repeat center center;
-	background-size:1200px 184px;
+	background:url("../images/title_bg.jpg") no-repeat center right;
+	background-size:600px 184px;
 }
 
 .top #logoImg{  
@@ -130,7 +130,7 @@ body .w1000{
 	margin-right:30px;
 	padding:30px 0 24px 0px;
 	float:left;
-	background:url("../images/left_bg.jpg") no-repeat center center;
+	background:url("../images/left_bg.jpg") no-repeat 0 center;
 	overflow:hidden;
 }
 
