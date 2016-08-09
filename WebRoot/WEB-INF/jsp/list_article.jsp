@@ -51,6 +51,8 @@ function sendAjax(page,rows,ct){
 				 html += '</li>';
 				 $('.list_article ul').append(html);     
 		　　}); 
+		
+			$("#"+message.cate).addClass("current"); 	/*给当前栏目增加红色背景*/
 		},
 		error:function()
 		{
@@ -89,22 +91,30 @@ $(function(){
 		<!--页面左侧-->
 		<div class="left">
 			<div class="leftNav">
-				<a class="title" href="#" target="_blank">德育之窗</a>
 				<ul>  	<!--左侧导航菜单-->
-					<li>
-						<a href="#" target="_blank"><span></span>政策法规</a>
+					<li id="intro">
+						<a href="#" target="_blank"><span></span>中心概况</a>
 					</li>
-					<li>
-						<a href="#" target="_blank"><span></span>政策法规</a>
+					<li id="news">
+						<a href="info/list/news" target="_blank"><span></span>新闻资讯</a>
 					</li>
-					<li>
-						<a href="#" target="_blank"><span></span>政策法规</a>
+					<li id="org">
+						<a href="#" target="_blank"><span></span>组织结构</a>
 					</li>
-					<li>
-						<a href="#" target="_blank"><span></span>政策法规</a>
+					<li id="identy">
+						<a href="info/list/identy" target="_blank"><span></span>试点信息</a>
 					</li>
-					<li>
-						<a href="#" target="_blank"><span></span>政策法规</a>
+					<li id="tech">
+						<a href="info/list/tech" target="_blank"><span></span>技术前沿</a>
+					</li>
+					<li id="policy">
+						<a href="info/list/policy" target="_blank"><span></span>政策解读</a>
+					</li>
+					<li id="class">
+						<a href="#" target="_blank"><span></span>课程信息</a>
+					</li>
+					<li id="contact">
+						<a href="#" target="_blank"><span></span>联系我们</a>
 					</li>
 				</ul>
 			</div>

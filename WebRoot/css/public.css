@@ -99,7 +99,7 @@ body .w1000{
 }
 .mainNav ul.nav li{
 	float: left;
-	width:111px;
+	width:100px;
 }
 
 .mainNav ul.nav > li > a {
@@ -527,13 +527,24 @@ body .w1000{
 }
 
 .right .news_list #slideWrap a.title{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
 	font-size:14px;
 	color:#333;
 	display:block;
 	line-height:25px;
-	height:25px;
-	overflow:hidden;
+	height:30px;
 }
+
+.right .news_list #slideWrap a.content{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	display:block;
+	height:130px;
+	width:188px;
+}
+
 
 .right .news_list #slideWrap a.content p{
 	font-size:12px;
@@ -590,16 +601,23 @@ body .w1000{
 }
 
 .right .tech_list .topNews li{
+	display:block;
 	float:left;
 	background:url("../images/icon111.jpg") no-repeat 0 center;
 	background-size:3px 3px;
 	width:290px;
+	overflow:hiddden;
 }
 
 .right .tech_list .topNews li a{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
     padding-left: 12px;
 	line-height:25px;
-	display:block;
+	height:25px;
+	width:235px;
+	display:inlineblock;
 	float:left;
 	color:#333;
 }
@@ -684,9 +702,14 @@ body .w1000{
 }
 
 .right .policy_list .topNews li a{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
     padding-left: 12px;
 	line-height:25px;
-	display:block;
+	height:25px;
+	width:270px;
+	display:inlineblock;
 	float:left;
 	color:#333;
 }

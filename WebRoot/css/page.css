@@ -82,16 +82,19 @@ body .w1000{
 	height:460px;
 }
 
-.articleview .left .leftNav .title{
-	display:block;
-	line-height:40px;
-}
-
 .articleview .left .leftNav li{
 	margin-bottom:0px;
 	width:160px;
 	height:40px;
 	border-bottom:1px solid #dbdbdb;
+}
+
+.articleview .left .leftNav li.current{
+	background-color:#a90100;
+}
+
+.articleview .left .leftNav li.current a{
+	color:#fff;
 }
 
 .articleview .left .leftNav li:hover{
