@@ -132,6 +132,7 @@ public class CmsInfoController {
 				.put("create_time", DateFormatUtils.format(
 						article.getCreate_time(), "yyyy年MM月dd日"));
 		resultObject.put("category", article.getCate());
+		resultObject.put("cate", type);
 
 		return resultObject.toString();
 	}
