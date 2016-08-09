@@ -9,10 +9,14 @@
 function resize(element, maxWidth, maxHeight){ 
 	if(element.width > maxWidth || element.height > maxHeight){ 
 		if(element.width / element.height > maxWidth / maxHeight){ 
+			var offset=0.5*(element.width*(maxHeight/element.height)-maxWidth);
 			element.height = maxHeight;
+			$(element).css("margin-left",'-' + offset + 'px');
 		}
 		else{ 
+			var offset=0.5*(element.height*(maxWidth/element.width)-maxHeight);
 			element.width = maxWidth;  
+			$(element).css('margin-top','-' + offset + 'px');
 		} 
 	} 
 };

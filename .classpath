@@ -45,7 +45,5 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-data-commons-core-1.0.0.RC1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-data-document-core-1.0.0.M2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/think/Desktop/pinggu_web/web_admin_side/WebRoot/WEB-INF/lib/commons-fileupload-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/think/Desktop/pinggu_web/web_admin_side/WebRoot/WEB-INF/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

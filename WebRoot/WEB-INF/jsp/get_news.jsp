@@ -52,6 +52,17 @@ $(function(){
 		}
 	});
 });
+
+$(function() { 
+    var elm = $('.right'); 
+    var startPos = $(elm).offset().top; 
+    $.event.add(window, "scroll", function() { 
+        var p = $(window).scrollTop(); 
+        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
+        $(elm).css('top',((p) > startPos) ? '0px' : '');
+		$(elm).css('right',((p) > startPos) ? '0px' : ''); 		
+    });
+});
 </script>
 </head>
 <!--头部结束-->
