@@ -93,28 +93,28 @@ $(function(){
 			<div class="leftNav">
 				<ul>  	<!--左侧导航菜单-->
 					<li id="intro">
-						<a href="#" target="_blank"><span></span>中心概况</a>
+						<a href="#"><span></span>中心概况</a>
 					</li>
 					<li id="news">
-						<a href="info/list/news" target="_blank"><span></span>新闻资讯</a>
+						<a href="info/list/news"><span></span>新闻资讯</a>
 					</li>
 					<li id="org">
-						<a href="#" target="_blank"><span></span>组织结构</a>
+						<a href="#"><span></span>组织结构</a>
 					</li>
 					<li id="identy">
-						<a href="info/list/identy" target="_blank"><span></span>试点信息</a>
+						<a href="info/list/identy"><span></span>试点信息</a>
 					</li>
 					<li id="tech">
-						<a href="info/list/tech" target="_blank"><span></span>技术前沿</a>
+						<a href="info/list/tech"><span></span>技术前沿</a>
 					</li>
 					<li id="policy">
-						<a href="info/list/policy" target="_blank"><span></span>政策解读</a>
+						<a href="info/list/policy"><span></span>政策解读</a>
 					</li>
 					<li id="class">
-						<a href="#" target="_blank"><span></span>课程信息</a>
+						<a href="#"><span></span>课程信息</a>
 					</li>
 					<li id="contact">
-						<a href="#" target="_blank"><span></span>联系我们</a>
+						<a href="#"><span></span>联系我们</a>
 					</li>
 				</ul>
 			</div>
