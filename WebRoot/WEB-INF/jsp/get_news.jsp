@@ -4,7 +4,9 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <html>
 <head>
 <base href="<%=basePath%>">
@@ -52,15 +54,37 @@ $(function(){
 		}
 	});
 });
-
+/* 右侧导航栏浮动*/
 $(function() { 
     var elm = $('.right'); 
-    var startPos = $(elm).offset().top; 
+    var startPos = $(elm).offset().top; /*滑动至右侧导航栏*/
+	var endPos = document.body.scrollHeight - $('#footer').height(); /*滑动至屏幕底部*/
+	var offset = ($(document.body).width())/2-($('.mainbody').width())/2;
+	/*alert(window.scrollHeight);
+	alert(window.innerHeight);
+	alert(window.offsetHeight);
+	alert($('#head').outerHeight(true));
+	alert($('#footer').outerHeight(true));
+	alert(document.body.scrollHeight);
+	alert('endPos=' + endPos);*/
+	
     $.event.add(window, "scroll", function() { 
         var p = $(window).scrollTop(); 
-        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static'); 
-        $(elm).css('top',((p) > startPos) ? '0px' : '');
-		$(elm).css('right',((p) > startPos) ? '0px' : ''); 		
+		if ((p)>startPos){
+			$(elm).css('position', 'fixed'); 
+			$(elm).css('right', offset + 'px');
+			if ((p)>endPos){
+				$(elm).css('bottom','150px');
+				$(elm).css('top','');
+			}
+			else{
+				$(elm).css('top','0px');
+				$(elm).css('bottom','');
+			}
+		}
+		else{
+			$(elm).css('position', 'static'); 
+		}
     });
 });
 </script>
@@ -68,7 +92,7 @@ $(function() {
 <!--头部结束-->
 
 <iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
-<body class="articleview">
+<body class="articleview" id="articleview">
 	<div class="banner">	<!--导航菜单下的图片-->
 		<div class="banner_img">
 			<img src="images/banner/${banner_image}.jpg"/>
@@ -131,7 +155,7 @@ $(function() {
 			</div>
 		</div>
 		
-		<div class="right"> 
+		<div class="right">
 			<ul class="leftNav">  <!--右侧导航菜单-->
 				<li>
 					<a id="left_1" href="#" target="_blank">

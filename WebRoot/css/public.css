@@ -221,8 +221,7 @@ body .w1000{
 }
 
 .center .rzpx_list_1{
-	height:185px;
-	border-bottom:1px solid #dbdbdb;
+	height:165px;
 }
 
 .center .rzpx_list_1 a{
@@ -243,29 +242,20 @@ body .w1000{
 }
 
 .center .rzpx_list_1 #rzpx_1{
-	margin-top:10px;
+	margin-top:30px;
 }
 
 .center .rzpx_list_1 #rzpx_2{
-	margin-top:10px;
+	margin-top:30px;
 	margin-left:10px;
 }
 
 .center .rzpx_list_1 #rzpx_3{
-	margin-top:20px;
+	margin-top:30px;
 }
 
 .center .rzpx_list_1 #rzpx_4{
-	margin-top:20px;
-	margin-left:10px;
-}
-
-.center .rzpx_list_1 #rzpx_5{
-	margin-top:20px;
-}
-
-.center .rzpx_list_1 #rzpx_6{
-	margin-top:20px;
+	margin-top:30px;
 	margin-left:10px;
 }
 
@@ -280,12 +270,6 @@ body .w1000{
 }
 .center .rzpx_list_1 #rzpx_4 span{
 	background: url("../images/icons.png") no-repeat scroll -320px 0;
-}
-.center .rzpx_list_1 #rzpx_5 span{
-	background: url("../images/icons.png") no-repeat scroll -360px 0;
-}
-.center .rzpx_list_1 #rzpx_6 span{
-	background: url("../images/icons.png") no-repeat scroll -400px 0;
 }
 
 .center .rzpx_list_2{
@@ -335,8 +319,10 @@ body .w1000{
 } 
 
 .center .rzpx_list_3{
-	height:144px;
-	padding-top:10px;
+	height:134px;
+	padding-top:7px;
+	border-bottom:1px solid #dbdbdb;
+	margin-bottom:10px;
 }
 
 .center .rzpx_list_3 li{
@@ -349,8 +335,8 @@ body .w1000{
 
 .center .rzpx_list_3 li a{
     padding-left: 15px;
-	height:27px;
-	line-height:27px;
+	height:25px;
+	line-height:25px;
 	display:block;
 	color:#333;
 }
@@ -400,19 +386,19 @@ body .w1000{
 { 
 	background:url("../images/icon111.jpg") no-repeat;
 	background-size:40px 40px;
-	margin-top:10px;
+	margin-top:23px;
 }
 .center .info_list #info_2
 { 
 	background:url("../images/icon111.jpg") no-repeat;
 	background-size:40px 40px;
-	margin-top:20px;
+	margin-top:23px;
 }
 .center .info_list #info_3
 { 
 	background:url("../images/icon111.jpg") no-repeat;
 	background-size:40px 40px;
-	margin-top:20px;
+	margin-top:23px;
 }
 
 	
@@ -452,7 +438,7 @@ body .w1000{
 	height:160px;
 	width:458px;
 	margin-top:10px;
-	margin-bottom:20px;
+	margin-bottom:15px;
 	background-color:#f4f4f4;
 	padding-right:5px;
 }
@@ -642,8 +628,8 @@ body .w1000{
 }
 
 .right .policy_list{
-	height:90px;
-	margin-top:10px;
+	height:89px;
+	margin-top:8px;
 }
 
 .right .policy_list .icons{
