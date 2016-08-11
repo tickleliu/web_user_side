@@ -1,9 +1,12 @@
 package com.easycms.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -11,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.easycms.common.CaptchaServlet;
+import com.easycms.common.CaptchaUtil;
 import com.easycms.common.MD5;
 import com.easycms.common.Pager;
 import com.easycms.entity.CmsUser;
@@ -24,7 +29,7 @@ import com.easycms.service.CmsUserGroupService;
 import com.easycms.service.CmsUserService;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/u")
 public class CmsUserController {
 	private static final Logger logger = Logger.getLogger(CmsUserController.class);
 	@Resource(name = "cmsUserServiceImpl")
@@ -211,5 +216,16 @@ public class CmsUserController {
 	@RequestMapping("/forgot.do")
 	public String forgotOperating(HttpServletRequest req, ModelMap model){
 		return null;
+	}
+	
+	@RequestMapping("/key")
+	@ResponseBody
+	public void getKeyImage(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			CaptchaUtil.outputCaptcha(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
