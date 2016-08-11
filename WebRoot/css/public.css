@@ -76,7 +76,11 @@ body .w1000{
 	height:30px;
 }
 
-.top #toolbar a{
+.top #toolbar .user{
+	float:left;
+}
+
+.top #toolbar .user a{
 	font-size:14px;
 	height:30px;
 	line-height:30px;
@@ -286,7 +290,7 @@ body .w1000{
 }
 
 .center .rzpx_list_2 .icons a{
-	margin:8px 26px 0px 26px;
+	margin:8px 14px 0px 14px;
 	width:40px;
 	height:40px;
 	line-height:50px;
@@ -298,13 +302,21 @@ body .w1000{
 	color:#333;
     font-size:14px;
 	height:32px;
-	width:92px;
+	width:68px;
 	line-height:32px;
 	text-align:center;
 	display:block;
 	float:left;
 }
 
+.center .rzpx_list_2 #rzpx_5
+{ 
+	background:url("../images/icons.png") no-repeat scroll -480px 0;
+} 
+.center .rzpx_list_2 #rzpx_6
+{ 
+	background:url("../images/icons.png") no-repeat scroll -520px 0;
+} 
 .center .rzpx_list_2 #rzpx_7
 { 
 	background:url("../images/icons.png") no-repeat scroll -560px 0;
@@ -312,10 +324,6 @@ body .w1000{
 .center .rzpx_list_2 #rzpx_8
 { 
 	background:url("../images/icons.png") no-repeat scroll -600px 0;
-} 
-.center .rzpx_list_2 #rzpx_9
-{ 
-	background:url("../images/icons.png") no-repeat scroll -640px 0;
 } 
 
 .center .rzpx_list_3{

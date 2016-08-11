@@ -6,6 +6,12 @@
 <script type="text/javascript">
 $(function(){
 	/*jQuery处理函数*/
+	$('a.login').click(function(){
+		location.href ="login.html";
+	});
+	$('a.register').click(function(){
+		location.href ="register.html";
+	});
 });
 </script>
 </head>
@@ -20,8 +26,10 @@ $(function(){
 					<span class="search_btn"></span>
 					<input class="keywords" value="搜索..." onfocus="if(this.value=='搜索...'){this.value='';}" onblur="if(this.value==''){this.value='搜索...';}"></input>
 				</div>
-				<a class="register" href="register.html" target="_blank">注册</a>
-				<a class="login" href="#">登录</a>
+				<div class="user">
+					<a class="login" href="login.html">登录</a>
+					<a class="register" href="register.html">注册</a>
+				</div>
 			</div>
 		</div>
 	</div>
