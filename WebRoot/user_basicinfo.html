@@ -1,7 +1,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<title>用户注册页面</title>
+<title>用户信息录入</title>
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <link rel="stylesheet" type="text/css" href="css/page.css" />
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
@@ -9,7 +9,7 @@
 <script type="text/javascript">
 
 // 将form中的值转换为键值对：
-// 如：{Name:'摘取天上星',position:'IT技术'}
+// 如：{Name:'Lisa',position:'IT技术'}
 // ps:注意将同名的放在一个数组里
 function getFormJson(form) {
 	var o = {};
@@ -28,8 +28,26 @@ function getFormJson(form) {
 	return o;
 };
 
+$(document).ready(function(){
+	//重新载入时默认为政府用户
+	$("#usertype").val('gov');
+});
+
 $(function(){
 	/*jQuery处理函数*/
+	$("#usertype").change(function(){
+		$(".user").css("display","none");
+		$(".user#" + $("#usertype").val()).css("display","block");
+	});
+	
+	$("#sex_man").click(function(){
+		$("#sex_womman").removeClass("selected");
+		$(this).addClass("selected");
+	});
+	$("#sex_womman").click(function(){
+		$("#sex_man").removeClass("selected");
+		$(this).addClass("selected");
+	});
 
 	$("#next").click(function(){
 		var data=getFormJson("#ff");
@@ -65,18 +83,267 @@ $(function(){
 <iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
 <body>
 	<div class="mainbody w1000"> <!--主页内容部分-->
-		<div class="register">
+		<div class="userinput">
 			<div class="title">
 				<span>2.填写基本信息</span>
 			</div>
-			<div class="info_input">
+			<div class="infoBox">
 				<form id="ff" method="post">
-					<div class="one_row">
-						<label for="username">真实姓名:</label>
-						<input type="text" name="username" placeholder="填写用户真实姓名" required="required"></input>
+					<div class="one_row"><!--选择用户类型-->
+						<label for="usertype">请选择注册类型:</label>
+						<select name='usertype' id='usertype'>
+							<option value='gov' selected="selected">政府用户</option>
+							<option value='org'>机构用户</option>
+							<option value='per'>个人用户</option>
+							<option value='com'>企业用户</option>
+						</select>
+					</div>
+					
+					<!--政府用户-->
+					<div class="user" id="gov">
+						<div class="one_row">
+							<label for="gov_name">单位名称:</label>
+							<input type="text" name="gov_name" placeholder="填写单位名称" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="gov_province">所属省份:</label>
+							<select name='gov_province' id='gov_province'>
+								<option value="" selected="true" disabled="true">下拉选择所属省份</option>
+								<option value=0>北京</option>
+								<option value=1>湖北</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="gov_level">行政级别:</label>
+							<select name='gov_level' id='gov_level'>
+								<option value="" selected="true" disabled="true">下拉选择行政级别</option>
+								<option value=0>省部级</option>
+								<option value=1>厅级</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="gov_contact_name">联络员姓名:</label>
+							<input type="text" name="gov_contact_name" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="gov_contact_position">联络员职务:</label>
+							<input type="text" name="gov_contact_position" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="gov_contact_phone">联系电话:</label>
+							<input type="text" name="gov_contact_phone" required="required"></input>
+						</div>
+					</div>
+					
+					<!--机构用户-->
+					<div class="user" id="org" style="display:none;">
+						<div class="one_row">
+							<label for="org_name">机构名称:</label>
+							<input type="text" name="org_name" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_type">机构性质:</label>
+							<input type="text" name="org_type" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_legal">法人代表:</label>
+							<input type="text" name="org_legal" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_position">所在地区:</label>
+							<select name='org_position' id='province'>
+								<option value="" selected="true" disabled="true">下拉选择所属省份</option>
+								<option value=0>北京</option>
+								<option value=1>湖北</option>
+							</select>
+							<select name='org_position' id='city'>
+								<option value="" selected="true" disabled="true">下拉选择所属城市</option>
+								<option value=0>北京</option>
+								<option value=1>武汉</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="org_address">通信地址:</label>
+							<input type="text" name="org_address" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_mailcode">邮编:</label>
+							<input type="text" name="org_mailcode" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_type">所属行业领域:</label>
+							<select name='org_type' id='org_type'>
+								<option value="" selected="true" disabled="true">下拉选择行业领域</option>
+								<option value=0>重工业</option>
+								<option value=1>信息科技</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="org_area">业务范围:</label>
+							<input type="text" name="org_area" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_url">机构网址:</label>
+							<input type="text" name="org_url"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_contact_name">联系人姓名:</label>
+							<input type="text" name="org_contact_name" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_contact_position">联系人职务:</label>
+							<input type="text" name="org_contact_position" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_contact_phone">联系电话:</label>
+							<input type="text" name="org_contact_phone" required="required"></input>
+						</div>
+						<div class="one_row">
+							<span style="display:block;width:100%;height:40px;line-height:40px;text-align:center;font-size:20px;color:#333;">资质情况<span>
+						</div>
+						<div class="one_row">
+							<label for="org_qualified_name">资质名称:</label>
+							<input type="text" name="org_qualified_name" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_qualified_level">资质等级:</label>
+							<input type="text" name="org_qualified_level" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_qualified_time">注册时间:</label>
+							<input type="text" name="org_qualified_time" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="org_qualified_life">有效期限:</label>
+							<input type="text" name="org_qualified_life" required="required"></input>
+						</div>
+					</div>
+					
+					<!--个人用户-->
+					<div class="user" id="per" style="display:none;">
+						<div class="one_row">
+							<label for="per_name">姓名:</label>
+							<input type="text" name="per_name" placeholder="填写用户真实姓名" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="per_ID_NO">身份证号:</label>
+							<input type="text" name="per_ID_NO" placeholder="填写21位居民身份证号" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="per_sex">性别:</label>
+							<div class="sex">
+								<a id="sex_man" class="selected"><span></span>男</a>
+								<a id="sex_womman"><span></span>女</a>
+							</div>
+						</div>
+						<div class="one_row">
+							<label for="per_study">文化程度:</label>
+							<input type="text" name="per_study" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="per_major">所学专业:</label>
+							<input type="text" name="per_major" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="per_company">工作单位:</label>
+							<input type="text" name="per_company" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="per_job">职务:</label>
+							<input type="text" name="per_job" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="per_phone">联系电话:</label>
+							<input type="text" name="per_phone" required="required"></input>
+						</div>
+					</div>
+					
+					<!--企业用户-->
+					<div class="user" id="com" style="display:none;">
+						<div class="one_row">
+							<label for="com_name">企业名称:</label>
+							<input type="text" name="com_name" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_license">工商营业执照号:</label>
+							<input type="text" name="com_license" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_money">注册资金(万元):</label>
+							<input type="text" name="com_money" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_legal">法人代表:</label>
+							<input type="text" name="com_legal" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_position">所在地区:</label>
+							<select name='com_position' id='province'>
+								<option value="" selected="true" disabled="true">下拉选择所属省份</option>
+								<option value=0>北京</option>
+								<option value=1>湖北</option>
+							</select>
+							<select name='com_position' id='city'>
+								<option value="" selected="true" disabled="true">下拉选择所属城市</option>
+								<option value=0>北京</option>
+								<option value=1>武汉</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="com_address">通信地址:</label>
+							<input type="text" name="com_address" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_mailcode">邮编:</label>
+							<input type="text" name="com_mailcode" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_type">企业类型:</label>
+							<select name='com_type'>
+								<option value="" selected="true" disabled="true">下拉选择企业类型</option>
+								<option value=0>军工</option>
+								<option value=1>互联网</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="com_property">企业性质:</label>
+							<select name='com_property'>
+								<option value="" selected="true" disabled="true">下拉选择企业性质</option>
+								<option value=0>国企</option>
+								<option value=1>私企</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="com_area">所属行业领域:</label>
+							<select name='com_area'>
+								<option value="" selected="true" disabled="true">下拉选择企业所属领域</option>
+								<option value=0>军工</option>
+								<option value=1>互联网</option>
+							</select>
+						</div>
+						<div class="one_row">
+							<label for="com_url">企业网址:</label>
+							<input type="text" name="com_url" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_contact_name">联系人姓名:</label>
+							<input type="text" name="com_contact_name" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_contact_job">联系人职务:</label>
+							<input type="text" name="com_contact_job" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_contact_phone">联系人职务:</label>
+							<input type="text" name="com_contact_phone" required="required"></input>
+						</div>
+						<div class="one_row">
+							<label for="com_main">主营业务:</label>
+							<input type="text" name="com_main" required="required"></input>
+						</div>
 					</div>
 				</form>
-				<input id="next" type="submit" value="下一步"></input>
+				<input id="next" type="button" value="完成"></input>
 			</div>
 		</div>
 	</div>

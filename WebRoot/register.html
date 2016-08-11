@@ -31,9 +31,16 @@ function getFormJson(form) {
 
 $(function(){
 	/*jQuery处理函数*/
+	//动态刷新验证码
+	$("span#imagecode").click(function(){
+		var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
+		$(this).html(html);
+	});
+	
+	
+	//验证表单内容，并将邮箱和密码写入cookie
 	var COOKIE_NAME = 'userinfo';
 	$.cookie(COOKIE_NAME);
-	
 	$("#next").click(function(){
 		var data=getFormJson("#ff");
 		var ok_email=true;
@@ -100,7 +107,7 @@ $(function(){
 			<div class="title">
 				<span>1.邮箱注册</span>
 			</div>
-			<div class="info_input">
+			<div class="infoBox">
 				<form id="ff" method="post">
 					<div class="one_row">
 						<label for="email">邮箱地址:</label>
@@ -117,7 +124,7 @@ $(function(){
 					<div class="one_row">
 						<label for="imagecode">验证码:</label>
 						<input id="imagecode" type="text" name="imagecode" placeholder="请输入右侧验证码" required="required" maxlength="4"></input>
-						<span id="imagecode">验证码</span>
+						<span id="imagecode"><img src="u/key"></span>
 					</div>
 				</form>
 				<input id="next" type="button" value="下一步"></input>
