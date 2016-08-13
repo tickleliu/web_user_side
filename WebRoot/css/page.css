@@ -304,10 +304,10 @@ body .w1000{
 }
 
 .userinput .infoBox{
-	padding:0 30px;
+	padding:20px 30px;
 }
 
-.userinput #ff label{
+.userinput .one_row label{
 	display:block;
 	float:left;
 	width:110px;
@@ -318,32 +318,34 @@ body .w1000{
 	color:#333;
 	font-size:14px;
 }
-.userinput #ff input{
+.userinput .ff input{
 	display:block;
 	float:left;
 	color:#333;
 	height:40px;
 	width:300px;
+	border:1px solid #ddd;
+	border-radius:5px;
 }
 
-.userinput #ff input#imagecode{
+.userinput .ff input#key{
 	width:130px;
 	margin-right:20px;
 }
 
-.userinput #ff span#imagecode{
+.userinput .ff span#key{
 	height:40px;
 	display:block;
 	float:left;
 	margin:0 auto;
 }
 
-.userinput #ff .one_row{
+.userinput .ff .one_row{
 	margin:20px 0px;
 	height:40px;
 	width:100%;
 }
-.userinput  #next{
+.userinput  #next,.ok_btn{
 	height:50px;
 	width:100%;
 	margin:10px auto;
@@ -365,6 +367,8 @@ body .w1000{
 .userinput  select{
 	height:40px;
 	width:300px;
+	border:1px solid #ddd;
+	border-radius:5px;
 }
 .userinput  select#province{
 	height:40px;
@@ -411,6 +415,7 @@ body .w1000{
 	background-size:25px 25px;
 	margin:0 10px 0 15px;
 }
+
 
 
 

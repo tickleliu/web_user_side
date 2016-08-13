@@ -4,9 +4,14 @@
 <title>用户注册页面</title>
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <link rel="stylesheet" type="text/css" href="css/page.css" />
+<link rel="stylesheet" type="text/css" href="jeasyui/themes/cupertino/easyui.css">
+<link rel="stylesheet" type="text/css" href="jeasyui/themes/icon.css">
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/jQuery.md5.js"></script>
+<script type="text/javascript" src="jeasyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jeasyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jQuery.validatebox.js"></script>
 <script type="text/javascript">
 
 // 将form中的值转换为键值对：
@@ -27,7 +32,7 @@ function getFormJson(form) {
 		}
 	});
 	return o;
-};
+};    
 
 $(function(){
 	/*jQuery处理函数*/
@@ -43,49 +48,24 @@ $(function(){
 	$.cookie(COOKIE_NAME);
 	$("#next").click(function(){
 		var data=getFormJson("#ff");
-		var ok_email=true;
-		var ok_password=true;
-		var ok_imagecode=true;
-		
-		ok_email = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(data.email);
-		if(! ok_email){
-			alert('请输入正确的邮箱格式');
-			return false;
-		}
-		ok_password = data.password.length>5;
-		if(! ok_password){
-			alert('密码长度小于6字符');
-			return false;
-		}
-		ok_password = /^[a-zA-Z0-9_ ]{1,}$/.test(data.password);
-		if(! ok_password){
-			alert('密码只允许英文字母、数字及下划线');
-			return false;
-		}
-		ok_password = (data.password==data.repassword);
-		if(! ok_password){
-			alert('两次密码输入不一致！');
-			return false;
-		}
-		ok_imagecode = data.imagecode.length==4;
-		if(! ok_imagecode){
-			alert('请重新输入验证码');
-			return false;
+		if(data.key.length!=4){
+			alert('请输入长度为4的验证码！');
+			return;
 		}
 		
-		$.cookie("email",data.email); 			// 写入cookie
+		$.cookie("username",data.username); 			// 写入cookie
 		$.cookie("password",$.md5(data.password));
 				
 		$.ajax({
 			type: "POST",
 			url:"#",	//发送给后台，检查邮箱和验证码
 			data:{
-				email:data.email,
-				imagecode:data.imagecode
-			},	//发送用户邮箱和密码
+				username:data.username,
+				key:data.key
+			},	//发送用户名和验证码
 			async: false,
 			beforeSend:function(jqXHR,settings){
-				
+				return $("#ff").form('validate');
 			},
 			error: function(request) {
 				alert("注册失败");
@@ -105,29 +85,29 @@ $(function(){
 	<div class="mainbody w1000"> <!--主页内容部分-->
 		<div class="userinput">
 			<div class="title">
-				<span>1.邮箱注册</span>
+				<span>1.欢迎注册</span>
 			</div>
 			<div class="infoBox">
-				<form id="ff" method="post">
+				<form id="ff" class="ff" method="post">
 					<div class="one_row">
-						<label for="email">邮箱地址:</label>
-						<input type="text" name="email" required="required"></input>
+						<label for="username">用户名:</label>
+						<input type="text" name="username" class="easyui-validatebox" data-options="required:true,validType:['loginName','length[6,20]']"></input>
 					</div>
 					<div class="one_row">
 						<label for="password">密码:</label>
-						<input id="password" type="password" name="password" placeholder="密码应由6-20位字符" required="required" maxlength="20"></input>
+						<input id="password" type="password" name="password" placeholder="密码应由6-20位字符" class="easyui-validatebox" data-options="required:true,validType:['length[6,20]']"></input>
 					</div>
 					<div class="one_row">
 						<label for="repassword">确认密码:</label>
-						<input id="repassword" type="password" name="repassword" placeholder="请再次输入用户密码" required="required" maxlength="20"></input>
+						<input id="repassword" type="password" name="repassword" placeholder="请再次输入用户密码" class="easyui-validatebox" validType="equalTo['#password']"></input>
 					</div>
 					<div class="one_row">
-						<label for="imagecode">验证码:</label>
-						<input id="imagecode" type="text" name="imagecode" placeholder="请输入右侧验证码" required="required" maxlength="4"></input>
-						<span id="imagecode"><img src="u/key"></span>
+						<label for="key">验证码:</label>
+						<input id="key" type="text" name="key" placeholder="请输入右侧验证码" class="easyui-validatebox"></input>
+						<span id="key"><img src="u/key"></span>
 					</div>
 				</form>
-				<input id="next" type="button" value="下一步"></input>
+				<input id="next" type="submit" value="下一步"></input>
 			</div>
 		</div>
 	</div>
