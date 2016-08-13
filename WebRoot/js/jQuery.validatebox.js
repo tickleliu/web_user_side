@@ -1,5 +1,5 @@
 
-$.extend($.fn.validatebox.defaults.rules, {    
+$.extend($.fn.validatebox.defaults.rules, {  
 	CHS: {     
 		validator: function (value, param) {     return /^[\u0391-\uFFE5]+$/.test(value);     },     
 		message: '请输入汉字'   },    
@@ -19,10 +19,11 @@ $.extend($.fn.validatebox.defaults.rules, {
 		validator: function (value, param) {     return /^(?:13\d|15\d|18\d)-?\d{5}(\d{3}|\*{3})$/.test(value);     },     
 		message: '手机号码不正确'   },    
 	tel:{     
-		validator:function(value,param){     return /^\d{3}-\d{8}|\d{4}-\{7,8}|\d{11}/.test(value);     },     
+		validator:function(value,param){     return /\d{3}-\d{8}|\d{4}-\{7,8}/.test(value);     },     
 		message:'电话号码不正确'   },    
 	mobileAndTel: {     
-		validator: function (value, param) {     return /\d{3}-\d{8}|\d{4}-\{7,8}/.test(value);     },     message: '请正确输入电话号码'   },    
+		validator: function (value, param) {     return /\d{3}-\d{8}|\d{4}-\{7,8}|\d{11}/.test(value);     },     
+		message: '请正确输入手机号或区号-座机号'   },    
 	number: {     
 		validator: function (value, param) {     return /^[0-9]+.?[0-9]*$/.test(value);     },     
 		message: '请输入数字'   },    

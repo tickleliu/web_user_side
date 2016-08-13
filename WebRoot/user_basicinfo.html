@@ -80,7 +80,9 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(data) {
+				$.cookie("loginStatus",true);
 				alert("注册成功");
+				location.href ="index.html";
 			}
 		});
 	});
@@ -106,7 +108,9 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(data) {
-				alert("注册成功");
+				$.cookie("loginStatus",true);
+				alert("注册成功了");
+				location.href ="index.html";
 			}
 		});
 	});
