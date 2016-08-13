@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easycms.entity.user.CmsOrgUserAttachment">
+    <!-- 插入操作 -->
+	<insert id="add" parameterType="orgUserAttachment">
+	    insert into org_attachment(attach_id, uid, path, title) values(#{attach_id}, #{uid}, #{path}, #{title})
+	</insert>
+	
+	<resultMap type="orgUserAttachment" id="orgUserAttachmentMap">
+	<id property="attach_id" column="attach_id" />
+	<result property="uid" column="uid" />
+	<result property="path" column="path"></result>
+	<result property="title" column="title"></result>
+	</resultMap>
+	
+	<select id="findById" resultMap="orgUserAttachmentMap" parameterType="long">
+	  select 
+	  	*
+	  from 
+	  	org_attachment
+	  where 
+	  	attach_id=#{id}
+	</select>
+	
+	<update id="update" parameterType="orgUserAttachment">
+	  update org_attachment set uid=#{uid}, path=#{path}, title=#{title} where attach_id=#{attach_id}
+	</update>
+	
+	<select id="findByKey" resultType="orgUserAttachment" parameterType="map">
+	  select * from org_attachment 
+	  <where>
+	    <if test="uid !=null and uid != ''">
+	         uid = #{uid}
+	    </if>
+	  </where>
+	  order by attach_id desc limit #{showPages},#{pageSize} 
+	</select>
+
+	<select id="findByKeyTotal" resultType="int" parameterType="map">
+	  select count(*) from org_attachment 
+	  <where>
+	    <if test="uid !=null and uid != ''">
+	         uid = #{uid}
+	    </if>
+	  </where>
+	</select>
+	
+	<!-- 删除操作 -->
+	<delete id="delete" parameterType="long">
+	  delete from org_attachment where attach_id=#{id}
+	</delete>
+</mapper>    

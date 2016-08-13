@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easycms.entity.user.CmsOrgUser">
+    <!-- 插入操作 -->
+	<insert id="add" parameterType="orgUser">
+	    insert into org_basic_info(uid, enterprise_name, license_number, registered_capital, legal_representative, region, address, zip_code, enterprise_type, enterprise_nature, industry_fields, web_site, contact_name, contact_position, phone, email, main_business, resume) 
+	    values(#{uid}, #{enterprise_name}, #{license_number}, #{registered_capital}, #{legal_representative}, #{region}, #{address}, #{zip_code}, #{enterprise_type}, #{enterprise_nature}, #{industry_fields}, #{web_site}, #{contact_name}, #{contact_position}, #{phone}, #{email}, #{main_business}, #{resume})
+	</insert>
+	
+	<resultMap type="orgUser" id="orgUserMap">
+	<id property="uid" column="uid" />
+	<result property="enterprise_name" column="enterprise_name" ></result>
+	<result property="license_number" column="license_number" ></result>
+	<result property="registered_capital" column="registered_capital" ></result>
+	<result property="legal_representative" column="legal_representative" ></result>
+	<result property="region" column="region" ></result>
+	<result property="address" column="address" ></result>
+	<result property="zip_code" column="zip_code" ></result>
+	<result property="enterprise_type" column="enterprise_type" ></result>
+	<result property="enterprise_nature" column="enterprise_nature" ></result>
+	<result property="industry_fields" column="industry_fields" ></result>
+	<result property="web_site" column="web_site" ></result>
+	<result property="contact_name" column="contact_name" ></result>
+	<result property="contact_position" column="contact_position" ></result>
+	<result property="phone" column="phone" ></result>
+	<result property="email" column="email" ></result>
+	<result property="main_business" column="main_business" ></result>
+	<result property="resume" column="resume" ></result>
+	</resultMap>
+	
+	<select id="findById" resultMap="orgUserMap" parameterType="long">
+	  select 
+	  	*
+	  from 
+	  	org_basic_info
+	  where 
+	  	uid=#{id}
+	</select>
+	
+	<update id="update" parameterType="orgUser">
+	  update org_basic_info set enterprise_name=#{enterprise_name}, license_number=#{license_number}, registered_capital=#{registered_capital}, legal_representative=#{legal_representative}, region=#{region}, address=#{address}, zip_code#{zip_code}, enterprise_type=#{enterprise_type}, enterprise_nature=#{enterprise_nature}, industry_fields=#{industry_fields}, web_site=#{web_site}, contact_name=#{contact_name}, contact_position=#{contact_position}, phone=#{phone}, email=#{email}, main_business=#{main_business}, resume=#{resume} where uid=#{uid}
+	</update>
+	
+	<select id="findByKey" resultType="orgUser" parameterType="map">
+	  select * from org_basic_info 
+	  <where>	    
+	    <if test="uid !=null and uid != ''">
+	         uid = #{uid}
+	    </if>
+	    <if test="enterprise_name !=null">
+	        <foreach collection="enterprise_name" item="key"
+	        open="" separator="" close="">
+	        	and enterprise_name like concat("%",#{key},"%")
+	        </foreach>
+	    </if>
+	    <if test="license_number !=null and license_number != ''">
+	         and license_number = #{license_number}
+	    </if>
+	    <if test="region !=null and region != ''">
+	         and region like concat("%",#{region},"%")
+	    </if>	    
+	    <if test="registered_capital_beyond != null and registered_capital_beyond != ''">
+	         and registered_capital &gt;= #{registered_capital_beyond, jdbcType=BIGINT}
+	    </if>
+	    <if test="registered_capital_below != null and registered_capital_below != ''">
+	         and registered_capital &lt;= #{registered_capital_below, jdbcType=BIGINT}
+	    </if>
+	    <if test="enterprise_type !=null and enterprise_type != ''">
+	         and enterprise_type = #{enterprise_type}
+	    </if>
+	    <if test="industry_fields !=null">	        
+	         <foreach collection="industry_fields" item="key"
+	        open="" separator="" close="">
+	        	and industry_fields like concat("%",#{key},"%")
+	        </foreach>
+	    </if>
+	    <if test="contact_name !=null and contact_name != ''">
+	         and contact_name = #{contact_name}
+	    </if>
+	    <if test="phone !=null and phone != ''">
+	         and phone = #{phone}
+	    </if>
+	    <if test="email !=null and email != ''">
+	         and email = #{email}
+	    </if>
+	    <if test="main_business !=null">
+	         <foreach collection="main_business" item="key"
+	        open="" separator="" close="">
+	        	and main_business like concat("%",#{key},"%")
+	        </foreach>
+	    </if>
+	  </where>
+	  order by uid desc limit #{showPages},#{pageSize} 
+	</select>
+
+	<select id="findByKeyTotal" resultType="int" parameterType="map">
+	  select count(*) from org_basic_info
+	  <where>
+	    <if test="uid !=null and uid != ''">
+	         uid = #{uid}
+	    </if>
+	    <if test="enterprise_name !=null and enterprise_name != ''">
+	         <foreach collection="enterprise_name" item="key"
+	        open="" separator="" close="">
+	        	and enterprise_name like concat("%",#{key},"%")
+	        </foreach>
+	    </if>
+	    <if test="license_number !=null and license_number != ''">
+	         and license_number = #{license_number}
+	    </if>
+	    <if test="region !=null and region != ''">
+	         and region like concat("%",#{region},"%")
+	    </if>
+	    <if test="license_number !=null and license_number != ''">
+	         and license_number = #{license_number}
+	    </if>
+	    <if test="registered_capital_beyond != null and registered_capital_beyond != ''">
+	         and registered_capital &gt;= #{registered_capital_beyond} 
+	    </if>
+	    <if test="registered_capital_below != null and registered_capital_below != ''">
+	         and registered_capital &lt;= #{registered_capital_below} 
+	    </if>
+	    <if test="enterprise_type !=null and enterprise_type != ''">
+	         and enterprise_type = #{enterprise_type}
+	    </if>
+	    <if test="industry_fields !=null and industry_fields != ''">
+	         and industry_fields like concat("%",#{industry_fields},"%")
+	    </if>
+	    <if test="contact_name !=null and contact_name != ''">
+	         and contact_name = #{contact_name}
+	    </if>
+	    <if test="phone !=null and phone != ''">
+	         and phone = #{phone}
+	    </if>
+	    <if test="email !=null and email != ''">
+	         and email = #{email}
+	    </if>
+	    <if test="main_business !=null and main_business != ''">
+	         <foreach collection="main_business" item="key"
+	        open="" separator="" close="">
+	        	and main_business like concat("%",#{key},"%")
+	        </foreach>
+	    </if>
+	  </where>
+	</select>
+	
+	<!-- 删除操作 -->
+	<delete id="delete" parameterType="long">
+	  delete from org_basic_info where uid=#{id}
+	</delete>
+</mapper>    

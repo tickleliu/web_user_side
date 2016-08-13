@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.easycms.entity.user.CmsOrgLegProject">
+    <!-- 插入操作 -->
+	<insert id="add" parameterType="orgLegProject">
+	    insert into org_leg_proj(project_id, uid, start_time, end_time, title, intro) values(#{project_id}, #{uid}, #{start_time, jdbcType=DATE, javaType=java.util.Date}, #{end_time, jdbcType=DATE, javaType=java.util.Date}, #{title}, #{intro})
+	</insert>
+	
+	<resultMap type="orgLegProject" id="orgLegProjectMap">
+	<id property="project_id" column="project_id" />
+	<result property="uid" column="uid" />
+	<result property="start_time" column="start_time" javaType="java.util.Date" jdbcType="DATE"></result>
+	<result property="end_time" column="end_time" javaType="java.util.Date" jdbcType="DATE"></result>
+	<result property="title" column="title"></result>
+	<result property="intro" column="intro"></result>
+	</resultMap>
+	
+	<select id="findById" resultMap="orgLegProjectMap" parameterType="long">
+	  select 
+	  	*
+	  from 
+	  	org_leg_proj
+	  where 
+	  	project_id=#{id}
+	</select>
+	
+	<update id="update" parameterType="orgLegProject">
+	  update org_leg_proj set uid=#{uid}, start_time=#{start_time, jdbcType=DATE, javaType=java.util.Date}, end_time=#{end_time, jdbcType=DATE, javaType=java.util.Date}, title=#{title}, intro=#{intro} where project_id=#{project_id}
+	</update>
+	
+	<select id="findByKey" resultType="orgLegProject" parameterType="map">
+	  select * from org_leg_proj 
+	  <where>
+	    <if test="uid !=null and uid != ''">
+	         uid = #{uid}
+	    </if>
+	  </where>
+	  order by project_id desc limit #{showPages},#{pageSize} 
+	</select>
+
+	<select id="findByKeyTotal" resultType="int" parameterType="map">
+	  select count(*) from org_leg_proj 
+	  <where>
+	    <if test="uid !=null and uid != ''">
+	         uid = #{uid}
+	    </if>
+	  </where>
+	</select>
+	
+	<!-- 删除操作 -->
+	<delete id="delete" parameterType="long">
+	  delete from org_leg_proj where project_id=#{id}
+	</delete>
+</mapper>    
