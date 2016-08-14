@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.easycms.common.CaptchaUtil;
+import com.easycms.entity.user.CmsUserLoginInfo;
 
 @Controller
 @RequestMapping("/u")
@@ -27,14 +28,16 @@ public class CmsUserController1 {
 			HttpServletResponse response) {
 		HttpSession session = request.getSession(true);
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 		String keyCode = request.getParameter("key");
-		System.out.println(username);
-		System.out.println(password);
-		System.out.println(keyCode);
+
+
+		session.setAttribute("register_status", "fail");
+
 		JSONObject jsonObject = new JSONObject();
 		if (keyCode != null) {
 			String keyCodeSession = (String) session.getAttribute("key_code");
+			System.out.println("session" + keyCodeSession);
+			System.out.println("param" + keyCode);
 			if (keyCodeSession != null
 					&& keyCodeSession.toLowerCase().equals(
 							keyCode.toLowerCase())) {
@@ -55,6 +58,7 @@ public class CmsUserController1 {
 		}
 
 		jsonObject.put("result", "success");
+		session.setAttribute("register_status", "success");
 		return jsonObject.toString();
 	}
 
@@ -65,8 +69,8 @@ public class CmsUserController1 {
 		try {
 			HttpSession session = request.getSession(true);
 			String keyCodeString = CaptchaUtil.outputCaptcha(request, response);
-			System.out.println(keyCodeString);
 			session.setAttribute("key_code", keyCodeString);
+			System.out.println("register:" + keyCodeString);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

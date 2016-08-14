@@ -68,7 +68,6 @@ public class CaptchaUtil {
 	        response.setContentType("image/jpeg");
 
 	        String randomString = getRandomString();
-	        request.getSession(true).setAttribute("keyString", randomString);
 
 	        int width = 150;
 	        int height = 40;

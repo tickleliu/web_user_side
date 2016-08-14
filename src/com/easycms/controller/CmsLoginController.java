@@ -26,20 +26,20 @@ public class CmsLoginController {
 	@RequestMapping(value = "register")
 	public String toRegisterPage(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
+			HttpSession session = request.getSession(true);
+		session.setAttribute("register_status", "fail");
 		return "login/register";
 	}
 
 	@RequestMapping(value = "register/detail")
 	public String toUsesrBasicInfoPage(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
-		HttpSession session = request.getSession();
-		if (session != null) {
-			Object uid = session.getAttribute("uid");
-			if (uid != null) {
-				return "login/user_basicinfo";
-			}
+		HttpSession session = request.getSession(true);
+		String status = (String) session.getAttribute("register_status");
+		if (status != null && status.equals("success")) {
+			return "login/user_basicinfo";
 		}
-		return "login/register";
+		return "redirect:http://localhost:8000/o/l/register";
 
 	}
 
@@ -50,9 +50,6 @@ public class CmsLoginController {
 		JSONObject jsonObject = new JSONObject();
 		Cookie[] cookies = request.getCookies();
 		HttpSession session = request.getSession(true);
-		if (session.getAttribute("key_code") != null) {
-			System.out.println("register：" + session.getAttribute("key_code"));
-		}
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals("login")) {
 				if (cookie.getValue().equals("success")) {
