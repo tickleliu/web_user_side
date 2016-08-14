@@ -43,6 +43,12 @@ function getFormJson(form) {
 	return o;
 };    
 
+$(document).ready(function(){
+	//获取验证码
+	var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
+	$("span#key").html(html);
+});  
+
 $(function(){
 	/*jQuery处理函数*/
 	//动态刷新验证码
