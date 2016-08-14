@@ -6,10 +6,9 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
-import bsh.This;
 
 public class WebConfig {
-	private Logger logger = Logger.getLogger(This.class);
+	private Logger logger = Logger.getLogger(WebConfig.class);
 	public String getFtlTemplatePath() {
 		return ftlTemplatePath;
 	}

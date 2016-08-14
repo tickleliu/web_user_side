@@ -84,6 +84,10 @@ public class CmsLoginController {
 					cookie.setMaxAge(24 * 60 * 60 * 30);
 					cookie.setPath("/");
 					response.addCookie(cookie);
+				} else {
+					Cookie cookie = new Cookie("login", "success");
+					cookie.setPath("/");
+					response.addCookie(cookie);
 				}
 				jsonObject.put("result", "success");
 				return jsonObject.toString();
