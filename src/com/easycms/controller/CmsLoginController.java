@@ -44,20 +44,24 @@ public class CmsLoginController {
 	}
 
 	@RequestMapping(value = "dologin")
+	@ResponseBody
 	public String login(HttpServletRequest request,
 			HttpServletResponse response, Model model) throws IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		JSONObject jsonObject = new JSONObject();
 		if (username != null && password != null) {
 			if (username.equals(password)) {
 				Cookie cookie = new Cookie("login", "success");
-				cookie.setDomain("http://localhost:8000");
-				cookie.setPath("http://localhost:8000");
+				cookie.setMaxAge(24 * 60 * 60);
+				cookie.setPath("/");
 				response.addCookie(cookie);
-				return "redirect:http://localhost:8000/o/";
+				jsonObject.put("result", "success");
+				return jsonObject.toString();
 			}
 		}
-		return "redirect:http://www.163.com";
+		jsonObject.put("result", "fail");
+		return jsonObject.toString();
 	}
 
 	@RequestMapping(value = "status")
