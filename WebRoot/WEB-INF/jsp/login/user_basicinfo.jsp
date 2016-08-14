@@ -78,7 +78,7 @@ $(function(){
 		console.log(data);//调试信息
 		$.ajax({
 			type: "POST",
-			url:"#",	//数据发送至后台
+			url:"u/register",	//数据发送至后台
 			data:data,
 			async: false,
 			beforeSend:function(){
@@ -88,11 +88,15 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(data) {
+				$.cookie('username', null); 
+				$.cookie('password', null); 
+				
 				result=$.parseJSON(result);
 				if(result.result=='success'){
-					$.cookie("loginStatus",true);
-					alert("注册成功");
 					location.href ="index.html";	
+				}else if(result.result=='fail'){
+					alert("注册失败");
+					location.href ="l/register";
 				}
 			}
 		});
@@ -109,7 +113,7 @@ $(function(){
 		console.log(data);//调试信息
 		$.ajax({
 			type: "POST",
-			url:"#",	//数据发送至后台
+			url:"u/register",	//数据发送至后台
 			data:data,
 			async: false,
 			beforeSend:function(){
@@ -119,11 +123,16 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(data) {
+				$.cookie('username', null); 
+				$.cookie('password', null); 
+				$.cookie('sex', null); 
+				
 				result=$.parseJSON(result);
 				if(result.result=='success'){
-					$.cookie("loginStatus",true);
-					alert("注册成功了");
 					location.href ="index.html";
+				}else if(result.result=='fail'){
+					alert("注册失败");
+					location.href ="l/register";
 				}
 			}
 		});

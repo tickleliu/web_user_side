@@ -80,6 +80,7 @@ public class CmsUserController1 {
 			String keyCodeString = CaptchaUtil.outputCaptcha(id, request, response);
 			session.setAttribute("key_code", keyCodeString);
 			System.out.println("register:" + keyCodeString);
+			System.out.println("id:" + id);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
