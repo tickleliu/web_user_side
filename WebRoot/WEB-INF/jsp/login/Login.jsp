@@ -52,10 +52,6 @@ $(function(){
 	
 	$("#login").click(function(){
 		var data=getFormJson("#ff");
-		if($.cookie("userinfo")==null){
-			$.cookie("userinfo");
-		}
-		$.cookie("username",data.username);	
 		
 		$.ajax({
 			type: "POST",
@@ -68,10 +64,15 @@ $(function(){
 			error: function(request) {
 				alert("登陆失败，请重试");
 			},
-			success: function(data) {
-				$.cookie("loginStatus",true);
-				alert("登陆成功");
-				location.href ="index.html";
+			success: function(result) {
+				result=$.parseJSON(result);
+				if(result.result=='success'){
+					alert("登陆成功");
+					location.href ="index.html";
+				}
+				else{
+					alert("登陆失败，请重试");
+				}
 			}
 		});
 	});
@@ -87,23 +88,33 @@ $(function(){
 			<div class="title">
 				<span>欢迎登陆</span>
 			</div>
-			<div class="info_input">
+			<div class="infoBox">
 				<form id="ff" class="ff" method="post">
 					<div class="one_row">
 						<label for="username">用户名:</label>
-						<input type="text" name="username" class="easyui-validatebox" data-options="required:true,validType:['loginName','length[6,20]']"></input>
+						<input type="text" name="username" class="easyui-validatebox" data-options="validType:['loginName','length[6,20]']"></input>
 					</div>
 					<div class="one_row">
 						<label for="password">密码:</label>
-						<input id="password" type="password" name="password" placeholder="密码应由6-20位字符" class="easyui-validatebox" data-options="required:true,validType:['length[6,20]']"></input>
+						<input id="password" type="password" name="password" placeholder="密码为6-20位字符" class="easyui-validatebox" data-options="validType:['length[6,20]']"></input>
 					</div>
-					<div class="one_row">
-						<label for="key">验证码:</label>
-						<input id="key" type="text" name="key" placeholder="请输入右侧验证码" class="easyui-validatebox"></input>
-						<span id="key"><img src="u/key"></span>
+					<div class="rember_me">
+						<label for="rember_me">保持在线:</label>
+						<select name='rember_me' class="easyui-validatebox" data-options="required:true">
+							<option value="0" selected="true">否</option>
+							<option value="1">1天</option>
+							<option value="2">1周</option>
+							<option value="3">1月</option>
+						</select>
+					</div>
+					
+					<div class="forget_password">
+						<a href="" style="display:block;width:100%;text-align:right;">忘记密码?</a>
 					</div>
 				</form>
-				<input id="login" type="button" value="登陆"></input>
+				<input class="ok_btn" type="submit" value="登陆"></input>
+				
+				
 			</div>
 		</div>
 	</div>
