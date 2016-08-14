@@ -88,9 +88,12 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(data) {
-				$.cookie("loginStatus",true);
-				alert("注册成功");
-				location.href ="index.html";
+				result=$.parseJSON(result);
+				if(result.result=='success'){
+					$.cookie("loginStatus",true);
+					alert("注册成功");
+					location.href ="index.html";	
+				}
 			}
 		});
 	});
@@ -116,9 +119,12 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(data) {
-				$.cookie("loginStatus",true);
-				alert("注册成功了");
-				location.href ="index.html";
+				result=$.parseJSON(result);
+				if(result.result=='success'){
+					$.cookie("loginStatus",true);
+					alert("注册成功了");
+					location.href ="index.html";
+				}
 			}
 		});
 	});
