@@ -48,7 +48,7 @@ $(function(){
 	//动态刷新验证码
 	$("span#key").click(function(){
 		var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
-		$(this).html(html);
+		$("span#key").html(html);
 	});
 	
 	
@@ -84,7 +84,7 @@ $(function(){
 				if(result.result=='key'){
 					alert("请重新输入验证码");
 					var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
-					$('#key').html(html);
+					$('span#key').html(html);
 				}
 				else if(result.result=='username'){
 					alert("用户名已存在，请重试");
