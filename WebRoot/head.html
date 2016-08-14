@@ -12,6 +12,7 @@ $(document).ready(function(){
 		async: false,
 		success: function(data) {
 			data=$.parseJSON(data);
+			$(".user").empty();
 			var html = '<a class="user_center" href="g?aid='+data.aid+'">' + data.username + '</a>';
 			$('.user').append(html);
 		}
