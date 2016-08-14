@@ -67,7 +67,7 @@ $(function(){
 				
 		$.ajax({
 			type:"POST",
-			url:"register/t?username=${username}",	//发送给后台，检查邮箱和验证码
+			url:"u/check",	//发送给后台，检查邮箱和验证码
 			data:{
 				username:data.username,
 				key:data.key
@@ -80,7 +80,7 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(data) {
-				location.href ="user_basicinfo.html";
+				location.href ="l/register/detail";
 			}
 		});
 	});
