@@ -43,13 +43,7 @@ function getFormJson(form) {
 };
 
 $(function(){
-	/*jQuery处理函数*/
 	//动态刷新验证码
-	$("span#key").click(function(){
-		var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
-		$(this).html(html);
-	});
-	
 	$(".ok_btn").click(function(){
 		var data=getFormJson("#ff");
 		
@@ -67,7 +61,6 @@ $(function(){
 			success: function(result) {
 				result=$.parseJSON(result);
 				if(result.result=='success'){
-					alert("登陆成功");
 					location.href ="index.html";
 				}
 				else{
