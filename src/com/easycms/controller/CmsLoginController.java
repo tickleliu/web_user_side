@@ -42,6 +42,25 @@ public class CmsLoginController {
 		return "login/register";
 
 	}
+	
+	@RequestMapping(value="cc")
+	@ResponseBody
+	public String checkCookie(HttpServletRequest request, HttpServletResponse response) {
+		JSONObject jsonObject = new JSONObject();
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+			if(cookie.getName().equals("login")) {
+				if(cookie.getValue().equals("success")) {
+					jsonObject.put("result", "success");
+					jsonObject.put("uid", "123");
+					jsonObject.put("username", "zhouw");
+					return jsonObject.toString();
+				}
+			}
+		}
+		jsonObject.put("result", "fail");
+		return jsonObject.toString();
+	}
 
 	@RequestMapping(value = "dologin")
 	@ResponseBody
