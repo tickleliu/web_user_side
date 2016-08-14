@@ -50,7 +50,7 @@ $(function(){
 		$(this).html(html);
 	});
 	
-	$("#login").click(function(){
+	$(".ok_btn").click(function(){
 		var data=getFormJson("#ff");
 		
 		$.ajax({
@@ -92,20 +92,15 @@ $(function(){
 				<form id="ff" class="ff" method="post">
 					<div class="one_row">
 						<label for="username">用户名:</label>
-						<input type="text" name="username" class="easyui-validatebox" data-options="validType:['loginName','length[6,20]']"></input>
+						<input type="text" name="username" class="easyui-validatebox" data-options="required:true,validType:['loginName','length[6,20]']"></input>
 					</div>
 					<div class="one_row">
 						<label for="password">密码:</label>
-						<input id="password" type="password" name="password" placeholder="密码为6-20位字符" class="easyui-validatebox" data-options="validType:['length[6,20]']"></input>
+						<input id="password" type="password" name="password" placeholder="密码为6-20位字符" class="easyui-validatebox" data-options="required:true,validType:['length[6,20]']"></input>
 					</div>
 					<div class="rember_me">
-						<label for="rember_me">保持在线:</label>
-						<select name='rember_me' class="easyui-validatebox" data-options="required:true">
-							<option value="0" selected="true">否</option>
-							<option value="1">1天</option>
-							<option value="2">1周</option>
-							<option value="3">1月</option>
-						</select>
+						<label for="rember_me">记住我:</label>
+						<input type="checkbox" name="rember_me">
 					</div>
 					
 					<div class="forget_password">
@@ -113,8 +108,6 @@ $(function(){
 					</div>
 				</form>
 				<input class="ok_btn" type="submit" value="登陆"></input>
-				
-				
 			</div>
 		</div>
 	</div>

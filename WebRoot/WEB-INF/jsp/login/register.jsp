@@ -100,15 +100,15 @@ $(function(){
 				<form id="ff" class="ff" method="post">
 					<div class="one_row">
 						<label for="username">用户名:</label>
-						<input type="text" name="username" class="easyui-validatebox" data-options="validType:['loginName','length[6,20]']"></input>
+						<input type="text" name="username" class="easyui-validatebox" data-options="required:true,validType:['loginName','length[6,20]']"></input>
 					</div>
 					<div class="one_row">
 						<label for="password">密码:</label>
-						<input id="password" type="password" name="password" placeholder="密码应由6-20位字符" class="easyui-validatebox" data-options="validType:['length[6,20]']"></input>
+						<input id="password" type="password" name="password" placeholder="密码应由6-20位字符" class="easyui-validatebox" data-options="required:true,validType:['length[6,20]']"></input>
 					</div>
 					<div class="one_row">
 						<label for="repassword">确认密码:</label>
-						<input id="repassword" type="password" name="repassword" placeholder="请再次输入用户密码" class="easyui-validatebox" validType="equalTo['#password']"></input>
+						<input id="repassword" type="password" name="repassword" placeholder="请再次输入用户密码" class="easyui-validatebox" required="true" validType="equalTo['#password']"></input>
 					</div>
 					<div class="one_row">
 						<label for="key">验证码:</label>
