@@ -42,15 +42,20 @@ public class CmsLoginController {
 		return "login/register";
 
 	}
-	
-	@RequestMapping(value="cc")
+
+	@RequestMapping(value = "cc")
 	@ResponseBody
-	public String checkCookie(HttpServletRequest request, HttpServletResponse response) {
+	public String checkCookie(HttpServletRequest request,
+			HttpServletResponse response) {
 		JSONObject jsonObject = new JSONObject();
 		Cookie[] cookies = request.getCookies();
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("key_code") != null) {
+			System.out.println("register：" + session.getAttribute("key_code"));
+		}
 		for (Cookie cookie : cookies) {
-			if(cookie.getName().equals("login")) {
-				if(cookie.getValue().equals("success")) {
+			if (cookie.getName().equals("login")) {
+				if (cookie.getValue().equals("success")) {
 					jsonObject.put("result", "success");
 					jsonObject.put("uid", "123");
 					jsonObject.put("username", "zhouw");
@@ -71,10 +76,15 @@ public class CmsLoginController {
 		JSONObject jsonObject = new JSONObject();
 		if (username != null && password != null) {
 			if (username.equals(password)) {
-				Cookie cookie = new Cookie("login", "success");
-				cookie.setMaxAge(24 * 60 * 60);
-				cookie.setPath("/");
-				response.addCookie(cookie);
+				String rememberMeString = request.getParameter("rember_me");
+				if (rememberMeString != null
+						&& (rememberMeString.equals("checked") || rememberMeString
+								.equals("on"))) {
+					Cookie cookie = new Cookie("login", "success");
+					cookie.setMaxAge(24 * 60 * 60 * 30);
+					cookie.setPath("/");
+					response.addCookie(cookie);
+				}
 				jsonObject.put("result", "success");
 				return jsonObject.toString();
 			}

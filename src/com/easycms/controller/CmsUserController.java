@@ -218,14 +218,5 @@ public class CmsUserController {
 		return null;
 	}
 	
-	@RequestMapping("/key")
-	@ResponseBody
-	public void getKeyImage(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			CaptchaUtil.outputCaptcha(request, response);
-		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 }

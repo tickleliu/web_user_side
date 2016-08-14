@@ -61,7 +61,7 @@ public class CaptchaUtil {
 	                255 - c.getBlue());
 	    }
 	    
-	    public static void outputCaptcha(HttpServletRequest request, HttpServletResponse response)
+	    public static String outputCaptcha(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException 
 	    {
 
@@ -94,6 +94,7 @@ public class CaptchaUtil {
 	        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
 	        encoder.encode(bi);
 	        out.flush();
+	        return randomString;
 	    }
 
 }
