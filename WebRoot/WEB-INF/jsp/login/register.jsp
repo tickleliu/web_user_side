@@ -79,8 +79,14 @@ $(function(){
 			error: function(request) {
 				alert("注册失败");
 			},
-			success: function(data) {
-				location.href ="l/register/detail";
+			success: function(result) {
+				result=$.parseJSON(result);
+				if(result.result=='success'){
+					location.href ="l/register/detail";
+				}
+				else{
+					alert("注册失败，请重试");
+				}
 			}
 		});
 	});

@@ -95,6 +95,7 @@ body .w1000{
 	text-overflow: ellipsis;
 	text-align: right;
 	width:100%;
+	margin:0 0px;
 }
 
 .mainNav{
