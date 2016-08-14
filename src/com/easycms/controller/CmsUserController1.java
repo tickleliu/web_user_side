@@ -18,21 +18,50 @@ import com.easycms.common.CaptchaUtil;
 @Controller
 @RequestMapping("/u")
 public class CmsUserController1 {
-	private static final Logger logger = Logger.getLogger(CmsUserController1.class);
-	
+	private static final Logger logger = Logger
+			.getLogger(CmsUserController1.class);
+
 	@RequestMapping("/check")
 	@ResponseBody
-	public String isUserNameExists(HttpServletRequest request, HttpServletResponse response) {
+	public String isUserNameExists(HttpServletRequest request,
+			HttpServletResponse response) {
 		HttpSession session = request.getSession(true);
-		session.setAttribute("uid", "password");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String keyCode = request.getParameter("key");
+		System.out.println(username);
+		System.out.println(password);
+		System.out.println(keyCode);
 		JSONObject jsonObject = new JSONObject();
+		if (keyCode != null) {
+			String keyCodeSession = (String) session.getAttribute("key_code");
+			if (keyCodeSession != null
+					&& keyCodeSession.toLowerCase().equals(
+							keyCode.toLowerCase())) {
+
+			} else {
+				jsonObject.put("result", "key");
+				return jsonObject.toString();
+			}
+		} else {
+			jsonObject.put("result", "key");
+			return jsonObject.toString();
+		}
+
+		if (username == null || username.equals("zhouw")) {
+
+			jsonObject.put("result", "username");
+			return jsonObject.toString();
+		}
+
 		jsonObject.put("result", "success");
 		return jsonObject.toString();
 	}
 
 	@RequestMapping("/key")
 	@ResponseBody
-	public void getKeyImage(HttpServletRequest request, HttpServletResponse response) {
+	public void getKeyImage(HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
 			HttpSession session = request.getSession(true);
 			String keyCodeString = CaptchaUtil.outputCaptcha(request, response);
