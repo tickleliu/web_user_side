@@ -41,10 +41,14 @@ function getFormJson(form) {
 		}
 	});
 	return o;
-};    
+};     
 
 $(function(){
 	/*jQuery处理函数*/
+	//获取验证码
+	var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
+	$("span#key").html(html);
+	
 	//动态刷新验证码
 	$("span#key").click(function(){
 		var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
@@ -127,7 +131,7 @@ $(function(){
 					<div class="one_row">
 						<label for="key">验证码:</label>
 						<input id="key" type="text" name="key" placeholder="请输入右侧验证码" class="easyui-validatebox"></input>
-						<span id="key"><img src="u/key"></span>
+						<span id="key"></span>
 					</div>
 				</form>
 				<input id="next" type="submit" value="下一步"></input>
