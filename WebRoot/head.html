@@ -4,13 +4,30 @@
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	//重新载入时检查是否已登录
+	$.ajax({
+		type:"POST",
+		url:"l/cc",	//数据发送至后台
+		async: false,
+		success: function(data) {
+			data=$.parseJSON(data);
+			var html = '<a class="user_center" href="g?aid='+data.aid+'">' + data.username + '</a>';
+			$('.user').append(html);
+		}
+	});
+}); 
+
 $(function(){
 	/*jQuery处理函数*/
-	$('a.login').click(function(){
-		top.location.href ="l/login";
+	$('a.login').click(function(){	
+		top.location.href = $('.user .login').attr('href'); //登录页
 	});
 	$('a.register').click(function(){
-		top.location.href ="l/register";
+		top.location.href = $('.user .register').attr('href');	//注册页
+	});
+	$('a.user_center').click(function(){	
+		top.location.href = $('.user .user_center').attr('href');//用户主页
 	});
 });
 </script>
@@ -27,8 +44,8 @@ $(function(){
 					<input class="keywords" value="搜索..." onfocus="if(this.value=='搜索...'){this.value='';}" onblur="if(this.value==''){this.value='搜索...';}"></input>
 				</div>
 				<div class="user">
-					<a class="login" href="login.html">登录</a>
-					<a class="register" href="register.html">注册</a>
+					<a class="login" href="l/login">登录</a>
+					<a class="register" href="l/register">注册</a>
 				</div>
 			</div>
 		</div>

@@ -108,7 +108,7 @@ $(function(){
 					</div>
 					<div class="one_row">
 						<label for="repassword">确认密码:</label>
-						<input id="repassword" type="password" name="repassword" placeholder="请再次输入用户密码" class="easyui-validatebox" validType="equalTo['#password']"></input>
+						<input id="repassword" type="password" name="repassword" placeholder="请再次输入用户密码" class="easyui-validatebox" required="true" validType="equalTo['#password']"></input>
 					</div>
 					<div class="one_row">
 						<label for="key">验证码:</label>

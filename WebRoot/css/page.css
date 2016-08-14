@@ -416,6 +416,41 @@ body .w1000{
 	margin:0 10px 0 15px;
 }
 
+.userinput  .rember_me{
+	margin-left:130px;
+	float:left;
+	width:150px;
+}
+
+.userinput  .rember_me label{
+	display:block;
+	float:left;
+	width:60px;
+	height:25px;
+	line-height:25px;
+	text-align:left;
+	color:#333;
+	font-size:12px;
+}
+
+.userinput  .rember_me input{
+	height:15px;
+	margin-top:5px;
+	width:30px;
+	font-size:12px;
+}
+
+.userinput  .rember_me{
+	margin-left:130px;
+	float:left;
+	width:180px;
+}
+
+.userinput  .forget_password{
+	float:left;
+	width:120px;
+}
+
 
 
 

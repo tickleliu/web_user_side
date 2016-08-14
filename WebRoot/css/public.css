@@ -77,7 +77,9 @@ body .w1000{
 }
 
 .top #toolbar .user{
-	float:left;
+	float:right;
+	width:90px;
+	overflow:hidden;
 }
 
 .top #toolbar .user a{
@@ -87,7 +89,13 @@ body .w1000{
 	margin:0 5px;
 	color:blue;
 }
-
+.top #toolbar .user a.user_center{
+	display: block;
+    font-size: 14px;
+	text-overflow: ellipsis;
+	text-align: right;
+	width:100%;
+}
 
 .mainNav{
 	border-top:5px solid #a90100;
