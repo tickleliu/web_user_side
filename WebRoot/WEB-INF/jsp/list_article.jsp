@@ -12,10 +12,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>军民融合综合评估中心</title>
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <link rel="stylesheet" type="text/css" href="css/page.css" />
-<link rel="stylesheet" type="text/css" href="jeasyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="jeasyui/themes/cupertino/easyui.css">
 <link rel="stylesheet" type="text/css" href="jeasyui/themes/icon.css">
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="jeasyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jeasyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 
 function sendAjax(page,rows,ct){

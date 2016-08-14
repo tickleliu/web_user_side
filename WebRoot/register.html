@@ -37,7 +37,7 @@ function getFormJson(form) {
 $(function(){
 	/*jQuery处理函数*/
 	//动态刷新验证码
-	$("span#imagecode").click(function(){
+	$("span#key").click(function(){
 		var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
 		$(this).html(html);
 	});
@@ -57,8 +57,8 @@ $(function(){
 		$.cookie("password",$.md5(data.password));
 				
 		$.ajax({
-			type: "POST",
-			url:"#",	//发送给后台，检查邮箱和验证码
+			type:"POST",
+			url:"register/t?username=${username}",	//发送给后台，检查邮箱和验证码
 			data:{
 				username:data.username,
 				key:data.key
@@ -85,7 +85,7 @@ $(function(){
 	<div class="mainbody w1000"> <!--主页内容部分-->
 		<div class="userinput">
 			<div class="title">
-				<span>1.欢迎注册</span>
+				<span>欢迎注册</span>
 			</div>
 			<div class="infoBox">
 				<form id="ff" class="ff" method="post">

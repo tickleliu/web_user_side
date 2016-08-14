@@ -1,7 +1,16 @@
-<html lang="zh-CN">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
+<base href="<%=basePath%>">
+
 <meta charset="utf-8" />
-<title>欢迎登陆</title>
+<title>用户注册页面</title>
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <link rel="stylesheet" type="text/css" href="css/page.css" />
 <link rel="stylesheet" type="text/css" href="jeasyui/themes/cupertino/easyui.css">
@@ -32,7 +41,7 @@ function getFormJson(form) {
 		}
 	});
 	return o;
-};
+};    
 
 $(function(){
 	/*jQuery处理函数*/
@@ -42,28 +51,36 @@ $(function(){
 		$(this).html(html);
 	});
 	
-	$("#login").click(function(){
+	
+	//验证表单内容，并将邮箱和密码写入cookie
+	var COOKIE_NAME = 'userinfo';
+	$.cookie(COOKIE_NAME);
+	$("#next").click(function(){
 		var data=getFormJson("#ff");
-		if($.cookie("userinfo")==null){
-			$.cookie("userinfo");
+		if(data.key.length!=4){
+			alert('请输入长度为4的验证码！');
+			return;
 		}
-		$.cookie("username",data.username);	
 		
+		$.cookie("username",data.username); 			// 写入cookie
+		$.cookie("password",$.md5(data.password));
+				
 		$.ajax({
-			type: "POST",
-			url:"#",	//发送给后台，检查用户名和验证码
-			data:data,	//发送用户名和密码
+			type:"POST",
+			url:"register/t?username=${username}",	//发送给后台，检查邮箱和验证码
+			data:{
+				username:data.username,
+				key:data.key
+			},	//发送用户名和验证码
 			async: false,
 			beforeSend:function(jqXHR,settings){
 				return $("#ff").form('validate');
 			},
 			error: function(request) {
-				alert("登陆失败，请重试");
+				alert("注册失败");
 			},
 			success: function(data) {
-				$.cookie("loginStatus",true);
-				alert("登陆成功");
-				location.href ="index.html";
+				location.href ="user_basicinfo.html";
 			}
 		});
 	});
@@ -77,9 +94,9 @@ $(function(){
 	<div class="mainbody w1000"> <!--主页内容部分-->
 		<div class="userinput">
 			<div class="title">
-				<span>欢迎登陆</span>
+				<span>欢迎注册</span>
 			</div>
-			<div class="info_input">
+			<div class="infoBox">
 				<form id="ff" class="ff" method="post">
 					<div class="one_row">
 						<label for="username">用户名:</label>
@@ -90,12 +107,16 @@ $(function(){
 						<input id="password" type="password" name="password" placeholder="密码应由6-20位字符" class="easyui-validatebox" data-options="required:true,validType:['length[6,20]']"></input>
 					</div>
 					<div class="one_row">
+						<label for="repassword">确认密码:</label>
+						<input id="repassword" type="password" name="repassword" placeholder="请再次输入用户密码" class="easyui-validatebox" validType="equalTo['#password']"></input>
+					</div>
+					<div class="one_row">
 						<label for="key">验证码:</label>
 						<input id="key" type="text" name="key" placeholder="请输入右侧验证码" class="easyui-validatebox"></input>
 						<span id="key"><img src="u/key"></span>
 					</div>
 				</form>
-				<input id="login" type="button" value="登陆"></input>
+				<input id="next" type="submit" value="下一步"></input>
 			</div>
 		</div>
 	</div>
