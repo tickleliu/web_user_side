@@ -3,6 +3,7 @@ package com.easycms.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -85,5 +86,17 @@ public class CmsUserController1 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value = "/register")
+	@ResponseBody
+	public String registerSubmitResult(HttpServletRequest request, HttpServletResponse response) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", "success");
+			Cookie cookie = new Cookie("login", "success");
+					cookie.setMaxAge(24 * 60 * 60 * 30);
+					cookie.setPath("/");
+					response.addCookie(cookie);
+		return jsonObject.toString();
 	}
 }

@@ -42,6 +42,7 @@ public class CmsLoginController {
 		return "redirect:http://localhost:8000/o/l/register";
 
 	}
+	
 
 	@RequestMapping(value = "cc")
 	@ResponseBody
