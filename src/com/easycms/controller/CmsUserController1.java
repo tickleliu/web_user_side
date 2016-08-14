@@ -66,9 +66,18 @@ public class CmsUserController1 {
 	@ResponseBody
 	public void getKeyImage(HttpServletRequest request,
 			HttpServletResponse response) {
+		Long id = 0L;
+		String idString = request.getParameter("id");
+		try {
+			id = Long.parseLong(idString);
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			id = 0L;
+		}
+		
 		try {
 			HttpSession session = request.getSession(true);
-			String keyCodeString = CaptchaUtil.outputCaptcha(request, response);
+			String keyCodeString = CaptchaUtil.outputCaptcha(id, request, response);
 			session.setAttribute("key_code", keyCodeString);
 			System.out.println("register:" + keyCodeString);
 		} catch (ServletException | IOException e) {

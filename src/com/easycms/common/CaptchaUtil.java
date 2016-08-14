@@ -43,6 +43,17 @@ public class CaptchaUtil {
 	        return buffer.toString();
 	    }
 	    
+	    private static String getRandomString(Long seed)
+	    {
+	    	Random random = new Random(seed);
+	        StringBuffer buffer = new StringBuffer();
+	        for(int i = 0; i < 4; i++)
+	        {
+	            buffer.append(CHARS[random.nextInt(CHARS.length)]);
+	        }
+	        return buffer.toString();
+	    }
+	    
 	    /*
 	     * 获取随机数颜色
 	     */
@@ -52,6 +63,12 @@ public class CaptchaUtil {
 	                random.nextInt(255));
 	    }
 	    
+	    private static Color getRandomColor(Long seed)
+	    {
+	    	Random random = new Random(seed);
+	        return new Color(random.nextInt(255),random.nextInt(255),
+	                random.nextInt(255));
+	    }
 	    /*
 	     * 返回某颜色的反色
 	     */
@@ -61,18 +78,18 @@ public class CaptchaUtil {
 	                255 - c.getBlue());
 	    }
 	    
-	    public static String outputCaptcha(HttpServletRequest request, HttpServletResponse response)
+	    public static String outputCaptcha(Long id, HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException 
 	    {
 
 	        response.setContentType("image/jpeg");
 
-	        String randomString = getRandomString();
+	        String randomString = getRandomString(id);
 
 	        int width = 150;
 	        int height = 40;
 
-	        Color color = getRandomColor();
+	        Color color = getRandomColor(id);
 	        Color reverse = getReverseColor(color);
 
 	        BufferedImage bi = new BufferedImage(width, height,
@@ -83,6 +100,7 @@ public class CaptchaUtil {
 	        g.fillRect(0, 0, width, height);
 	        g.setColor(reverse);
 	        g.drawString(randomString, 18, 30);
+	        Random random = new Random(id);
 	        for (int i = 0, n = random.nextInt(100); i < n; i++) 
 	        {
 	            g.drawRect(random.nextInt(width), random.nextInt(height), 1, 1);
