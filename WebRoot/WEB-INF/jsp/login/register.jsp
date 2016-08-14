@@ -52,7 +52,7 @@ $(function(){
 	});
 	
 	
-	//验证表单内容，并将邮箱和密码写入cookie
+	//验证表单内容，并将用户名和md5加密后的密码写入cookie
 	var COOKIE_NAME = 'userinfo';
 	$.cookie(COOKIE_NAME);
 	$("#next").click(function(){
@@ -81,7 +81,15 @@ $(function(){
 			},
 			success: function(result) {
 				result=$.parseJSON(result);
-				if(result.result=='success'){
+				if(result.result=='key'){
+					alert("请重新输入验证码");
+					var html = '<img src="u/key?id=' + (new Date()).valueOf() + '">';
+					$('#key').html(html);
+				}
+				else if(result.result=='username'){
+					alert("用户名已存在，请重试");
+				}
+				else if(result.result=='success'){
 					location.href ="l/register/detail";
 				}
 				else{
