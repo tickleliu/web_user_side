@@ -115,5 +115,4 @@ public class CmsLoginController {
 		jsonObject.append("status", "unlogin");
 		return jsonObject.toString();
 	}
-
 }
