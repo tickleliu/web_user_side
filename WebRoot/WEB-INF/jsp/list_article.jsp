@@ -51,7 +51,7 @@ function sendAjax(page,rows,ct){
 				 html += '<span>' + item['create_time'] + '</span>';
 				 html += '</li>';
 				 $('.list_article ul').append(html);     
-		　　}); 
+		}); 
 		
 			$("#"+message.cate).addClass("current"); 	/*给当前栏目增加红色背景*/
 		},

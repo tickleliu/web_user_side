@@ -56,11 +56,12 @@ public class CmsSearchController {
 	
 	/**
 	 * 搜索结果列表生成
+	 * @throws UnsupportedEncodingException 
 	 * */
-	@RequestMapping(value = "/s_result", produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "s_result", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getSearchResult(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
+			HttpServletResponse response, Model model) throws UnsupportedEncodingException {
 
 		response.setContentType("text/json;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -91,7 +92,8 @@ public class CmsSearchController {
 		
 		showPages = showPages * pageSize;
 
-		String keyword = request.getParameter("keyw");
+		String keyword = new String(request.getParameter("keyw").getBytes("iso8859-1"),"utf-8");
+		
 		List<String> keywords = new LinkedList<String>();
 		if (keyword != null) {
 			StringTokenizer stringTokenizer = new StringTokenizer(keyword,
@@ -132,7 +134,9 @@ public class CmsSearchController {
 			content = content.replace("　", "");
 			content = content.replace("	", "");
 			content = content.replace("\t", "");
-			content = content.substring(0, 256);
+			if (content.length()>=256) {
+				content = content.substring(0, 256);
+			}			
 			jsonMap.put("content", content);
 			jsonArray.put(jsonMap);
 		}
@@ -141,7 +145,7 @@ public class CmsSearchController {
 		return jsonObject.toString();
 	}
 	
-	@RequestMapping(value = "/s_show", produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "s_show", produces = "text/html;charset=UTF-8")
 	public String showSearchResult(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 

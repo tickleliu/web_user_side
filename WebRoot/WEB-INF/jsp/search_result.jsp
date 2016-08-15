@@ -1,7 +1,12 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	request.setCharacterEncoding("utf-8");
+	response.setCharacterEncoding("utf-8");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -17,8 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="jeasyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jeasyui/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
 function sendAjax(page,rows,keyw){
 	$.ajax(
 	{
@@ -31,7 +36,7 @@ function sendAjax(page,rows,keyw){
 			rows:rows,
 			keyw:keyw,
 		},
-		dataType: "text",
+		dataType: "text",		
 		success: function(message, status){
 			message = $.parseJSON(message);
 			$(".title_module .title").html(message.category);
@@ -52,7 +57,7 @@ function sendAjax(page,rows,keyw){
 				 html += '<span>' + item['content'] + '</span>';
 				 html += '</li>';
 				 $('.list_article ul').append(html);  
-		　　		}); 
+				}); 
 		
 			$("#"+message.cate).addClass("current"); 	/*给当前栏目增加红色背景*/
 		},
@@ -61,33 +66,36 @@ function sendAjax(page,rows,keyw){
 		}
 	});
 };
-
+</script>
+<script>
 $(function(){
 	/*jQuery处理函数*/
-	sendAjax(1,20,${keyw});
+	sendAjax(1,10,"${keyw}");
 	
 	$('#pp').pagination({	/*创建翻页*/
-		pageSize:20,
+		pageSize:10,
 		pageList:[20,30,50],
 		onSelectPage:function(pageNumber, pageSize){	/*当用户选择新的页面时触发。回调函数包含两个参数*/	
-			sendAjax(pageNumber,pageSize,${keyw})
+			sendAjax(pageNumber,pageSize,"${keyw}")
 		}
 	});
-	
-	$("#search_btn").click(function(){
-		sendAjax(1,20,$('#searchkw').val());
+});
+</script>
+<script type="text/javascript">
+	function doSearch() {		
+		sendAjax(1,10,$('#searchkw').val());
 	
 		$('#pp').pagination({	/*创建翻页*/
-			pageSize:20,
+			pageSize:10,
 			pageList:[20,30,50],
 			onSelectPage:function(pageNumber, pageSize){	/*当用户选择新的页面时触发。回调函数包含两个参数*/	
 				sendAjax(pageNumber,pageSize,$('#searchkw').val())
 			}
 		});
 		
-	}); 
-});
+	}; 
 </script>
+
 </head>
 <!--头部结束-->
 
@@ -104,15 +112,9 @@ $(function(){
 	</div>
 	<div class="mainbody w1000"> <!--主页内容部分-->
 		<input id="searchkw" name="searchkw" textField="text" style="width:300px">		
-		<input type="button" name="search_btn" id="search_btn" value="提交" /> 
+		<a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
 		<!--文章列表栏-->
-		<div class="center">	
-			<div class="title_module"> <!--板块标题-->
-				<a class="title" href="#">法律法规</a>
-				<div class="place">
-					<strong>当前位置:</strong> <a href='#'>主页</a> > <a href='info/list/'></a>
-				</div>
-			</div>
+		<div class="center">				
 			<div class="list_article"> <!--文章列表-->
 				<ul>  	<!--标题、发表时间-->
 					<li>
