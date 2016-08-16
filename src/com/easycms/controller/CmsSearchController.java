@@ -153,7 +153,7 @@ public class CmsSearchController {
 		response.setCharacterEncoding("UTF-8");
 		
 		String keyw = request.getParameter("keyw");
-		model.addAttribute("keyw", keyw);
+		model.addAttribute("keyw", "中国");
 
 		return "search_result";
 	}
