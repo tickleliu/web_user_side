@@ -42,7 +42,6 @@ public class CmsUserController1 {
 			if (keyCodeSession != null
 					&& keyCodeSession.toLowerCase().equals(
 							keyCode.toLowerCase())) {
-
 			} else {
 				jsonObject.put("result", "key");
 				return jsonObject.toString();
