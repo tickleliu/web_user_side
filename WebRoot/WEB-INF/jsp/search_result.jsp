@@ -25,8 +25,7 @@
 
 <script type="text/javascript">
 function sendAjax(page,rows,keyw){
-	$.ajax(
-	{
+	$.ajax({
 		url: "s_result",
 		cache:false,
 		type:'get',
@@ -49,14 +48,14 @@ function sendAjax(page,rows,keyw){
 				total:message.total,
 			});
 			
-			$(".list_article ul").empty();
+			$(".search_result ul").empty();
 			$.each(message.rows, function(i, item){
 				var html = '<li>';
-				 html += '<a href="g/'+item['cate']+'/'+item['aid']+'" target="_blank">' + item['title'] + '</a>';
-				 html += '<span>' + item['create_time'] + '</span>';
-				 html += '<span>' + item['content'] + '</span>';
+				 html += '<div class="title"><a href="g/'+item['cate']+'/'+item['aid']+'" target="_blank">' + item['title'] + '</a>';
+				 html += '<span>' + item['create_time'] + '</span></div>';
+				 html += '<div class="content"><p>' + item['content'] + '</p></div>';
 				 html += '</li>';
-				 $('.list_article ul').append(html);  
+				 $('.search_result ul').append(html);  
 				}); 
 		
 			$("#"+message.cate).addClass("current"); 	/*给当前栏目增加红色背景*/
@@ -69,16 +68,18 @@ function sendAjax(page,rows,keyw){
 </script>
 <script>
 $(function(){
-	/*jQuery处理函数*/
+	//jQuery处理函数
 	sendAjax(1,10,"${keyw}");
+	$('#searchkw').val() = "${keyw}";
 	
-	$('#pp').pagination({	/*创建翻页*/
+	$('#pp').pagination({	//创建翻页
 		pageSize:10,
-		pageList:[20,30,50],
-		onSelectPage:function(pageNumber, pageSize){	/*当用户选择新的页面时触发。回调函数包含两个参数*/	
+		pageList:[10,20,30],
+		onSelectPage:function(pageNumber, pageSize){	//当用户选择新的页面时触发。回调函数包含两个参数	
 			sendAjax(pageNumber,pageSize,"${keyw}")
 		}
 	});
+	
 });
 </script>
 <script type="text/javascript">
@@ -87,7 +88,7 @@ $(function(){
 	
 		$('#pp').pagination({	/*创建翻页*/
 			pageSize:10,
-			pageList:[20,30,50],
+			pageList:[10,20,30],
 			onSelectPage:function(pageNumber, pageSize){	/*当用户选择新的页面时触发。回调函数包含两个参数*/	
 				sendAjax(pageNumber,pageSize,$('#searchkw').val())
 			}
@@ -101,52 +102,43 @@ $(function(){
 
 <iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
 <body class="articleview">
-	<div class="banner">	<!--导航菜单下的图片-->
-		<div class="banner_img">
-			<img src="images/banner/${banner_image}.jpg"/>
-			<div class="banner_text" style="">
-				<span class="title_chn">标题</span>
-				<span class="title_eng">Title</span>
-			</div>
-		</div>
-	</div>
 	<div class="mainbody w1000"> <!--主页内容部分-->
-		<input id="searchkw" name="searchkw" textField="text" style="width:300px">		
-		<a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
-		<!--文章列表栏-->
-		<div class="center">				
-			<div class="list_article"> <!--文章列表-->
-				<ul>  	<!--标题、发表时间-->
-					<li>
-						<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
-						<span>2016-07-30</span>
-					</li>
-					<li>
-						<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
-						<span>2016-07-30</span>
-					</li>
-					<li>
-						<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
-						<span>2016-07-30</span>
-					</li>
-					<li>
-						<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
-						<span>2016-07-30</span>
-					</li>
-					<li>
-						<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
-						<span>2016-07-30</span>
-					</li>
-					<li>
-						<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
-						<span>2016-07-30</span>
-					</li>
-				</ul>
-			</div>
-			
-			<div style="clear:both;width:100%; height:20px;"></div>
-			<div id="pp" style="height:40px;"></div>
-		</div>		
+		<div class="search">
+			<input id="searchkw" name="searchkw" textField="text">		
+			<a href="javascript:doSearch()">搜索</a>
+		</div>
+		<!--文章列表栏-->			
+		<div class="search_result"> <!--文章列表-->
+			<ul>  	<!--标题、发表时间-->
+				<li>
+					<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
+					<span>2016-07-30</span>
+				</li>
+				<li>
+					<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
+					<span>2016-07-30</span>
+				</li>
+				<li>
+					<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
+					<span>2016-07-30</span>
+				</li>
+				<li>
+					<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
+					<span>2016-07-30</span>
+				</li>
+				<li>
+					<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
+					<span>2016-07-30</span>
+				</li>
+				<li>
+					<a href="#" target="_blank">习近平向2名晋升为上将军官颁发命令...</a>
+					<span>2016-07-30</span>
+				</li>
+			</ul>
+		</div>
+		
+		<div style="clear:both;width:100%; height:20px;"></div>
+		<a style="display:block;height:25px;float:left;padding-top:3px;color:#999;">每页显示条数:</a><div id="pp" style="height:40px;width:460px;float:left;"></div>	
 
 	</div>
 	<div style="clear:both;"></div>
