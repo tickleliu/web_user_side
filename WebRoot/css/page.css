@@ -279,6 +279,73 @@ body .w1000{
 	height:120px;
 }
 
+/*搜索页*/
+.articleview .search{
+	height:40px;
+	width:420px;
+	margin:10px auto;
+}
+
+.articleview .search input{
+	height:40px;
+	line-height:40px;
+	width:300px;
+	float:left;
+	border:1px solid #ddd;
+	border-radius:5px;
+}
+
+.articleview .search a{
+	height:40px;
+	line-height:40px;
+	width:100px;
+	text-align:center;
+	color:#fff;
+	font-size:14px;
+	background-color:#7ac4ff;
+	display:block;
+	float:right;
+	border-radius:5px;
+}
+
+.articleview .search_result li{
+	margin:8px 0;
+	float:left;
+	width:100%;
+}
+
+.articleview .search_result li .title{
+	height:30px;
+	width:100%;
+}
+
+.articleview .search_result li .title a{
+    padding-left: 12px;
+	display:block;
+	float:left;
+	font-size:14px;
+	color:#333;
+	line-height:30px;
+	background:url("../images/icon111.jpg") no-repeat 0 center;
+	background-size:3px 3px;
+}
+
+.articleview .search_result li .title span{
+	text-align:center;
+	float:right;
+	line-height:30px;
+	font-size:12px;
+	color:#333;
+}
+
+.articleview .search_result li .content{
+	clear:both;
+	width:100%;
+}
+
+.articleview .search_result li .content p{
+	text-indent:2em; 
+}
 
 /*用户注册页*/
 .userinput{

@@ -32,6 +32,21 @@ $(function(){
 	$('a.user_center').click(function(){	
 		top.location.href = $('.user .user_center').attr('href');//用户主页
 	});
+	$('span.search_btn').click(function(){
+			if($(".keywords").val()!="搜索..."){
+				$.ajax({
+				type: "POST",
+				url:"s_show",	//数据发送至后台
+				data:{
+					keyw:$('.keywords').val(),
+				},
+				async: false,
+				success: function(result) {
+					top.location.href = "s_show";//跳转到搜索页
+				}
+			});
+		}
+	});
 });
 </script>
 </head>
