@@ -183,7 +183,7 @@ public class CmsUserController {
 	}
 	
 	//注册跳转链接
-	@RequestMapping("/register")
+	@RequestMapping("/rster")
 	public String register(HttpServletRequest req, ModelMap model){
 		return "register";
 	}

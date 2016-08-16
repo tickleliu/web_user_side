@@ -87,7 +87,7 @@ $(function(){
 			error: function(request) {
 				alert("注册失败");
 			},
-			success: function(data) {
+			success: function(result) {
 				$.cookie('username', null); 
 				$.cookie('password', null); 
 				
@@ -122,13 +122,14 @@ $(function(){
 			error: function(request) {
 				alert("注册失败");
 			},
-			success: function(data) {
+			success: function(result) {
 				$.cookie('username', null); 
 				$.cookie('password', null); 
 				$.cookie('sex', null); 
 				
 				result=$.parseJSON(result);
 				if(result.result=='success'){
+					alert("注册成功");	
 					location.href ="index.html";
 				}else if(result.result=='fail'){
 					alert("注册失败");
