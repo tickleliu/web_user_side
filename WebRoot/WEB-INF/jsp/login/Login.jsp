@@ -21,7 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="jeasyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="js/jQuery.validatebox.js"></script>
 <script type="text/javascript">
-
 // 将form中的值转换为键值对：
 // 如：{Name:'摘取天上星',position:'IT技术'}
 // ps:注意将同名的放在一个数组里
@@ -43,7 +42,6 @@ function getFormJson(form) {
 };
 
 $(function(){
-	//动态刷新验证码
 	$(".ok_btn").click(function(){
 		var data=getFormJson("#ff");
 		
@@ -53,7 +51,7 @@ $(function(){
 			data:data,	//发送用户名和密码
 			async: false,
 			beforeSend:function(jqXHR,settings){
-				return $("#ff").form('validate');
+				return true;
 			},
 			error: function(request) {
 				alert("登陆失败，请重试");

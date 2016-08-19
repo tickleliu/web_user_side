@@ -54,19 +54,14 @@ $(function(){
 		}
 	});
 });
+
+
 /* 右侧导航栏浮动*/
 $(function() { 
     var elm = $('.right'); 
-    var startPos = $(elm).offset().top; /*滑动至右侧导航栏*/
-	var endPos = document.body.scrollHeight - $('#footer').height(); /*滑动至屏幕底部*/
+    var startPos = $(elm).offset().top; //滑动至右侧导航栏
+	var endPos = document.body.scrollHeight - $('#footer').height(); //滑动至屏幕底部
 	var offset = ($(document.body).width())/2-($('.mainbody').width())/2;
-	/*alert(window.scrollHeight);
-	alert(window.innerHeight);
-	alert(window.offsetHeight);
-	alert($('#head').outerHeight(true));
-	alert($('#footer').outerHeight(true));
-	alert(document.body.scrollHeight);
-	alert('endPos=' + endPos);*/
 	
     $.event.add(window, "scroll", function() { 
         var p = $(window).scrollTop(); 

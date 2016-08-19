@@ -98,6 +98,164 @@ body .w1000{
 	margin:0 0px;
 }
 
+#login{
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin-left:-225px;
+	margin-top:-200px;
+	display:none;
+	z-index:99;
+	background:#fff;
+}
+
+#login .loginpd {
+    border-bottom: 1px solid #ecf2f5;
+}
+#login .pd20 {
+    padding: 20px;
+}
+#login .closealert {
+	display:block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: url("../images/close.png") no-repeat;
+}
+
+#login .loginwrap {
+    margin: 0 auto;
+    width: 340px;
+}
+#login .loginh {
+    height: 40px;
+    margin-top: 20px;
+}
+#login .loginh .fl {
+    color: #292929;
+    font-size: 30px;
+    line-height: 40px;
+}
+#login .fl {
+    float: left;
+}
+#login .loginh .fr {
+    color: #707070;
+    font-size: 18px;
+    line-height: 50px;
+}
+
+#login .loginh .fr a {
+    color: #ff4200;
+    font-size: 18px;
+    line-height: 50px;
+    margin-left: 5px;
+}
+#login .loginwrap h3 {
+    color: #292929;
+    font-size: 14px;
+    font-weight: 500;
+    height: 20px;
+    margin-top: 15px;
+}
+#login .loginwrap h3 span {
+    color: #292929;
+    display: block;
+    float: left;
+    font-size: 14px;
+    font-weight: 500;
+    height: 26px;
+    line-height: 26px;
+}
+#login .logininput .loginusername {
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+#login .logininput input {
+    transition: all 0.2s ease-in 0s;
+}
+#login .logininput input:focus {
+    border-color:#ff9600;
+}
+#login .logininput input {
+    border: 1px solid #dae2e5;
+    color: #979696;
+    display: block;
+    height: 40px;
+    line-height: 14px;
+    overflow: hidden;
+    padding-bottom: 13px;
+    padding-top: 13px;
+    text-indent: 10px;
+    width: 100%;
+}
+#login input, textarea {
+    outline: medium none;
+}
+#login .loginbtn {
+    color: #6b6a6a;
+    line-height: 70px;
+}
+#login .loginsubmit {
+    height: 40px;
+    margin: 15px 20px 0 0;
+    position: relative;
+    width: 130px;
+}
+#login .loginsubmit input {
+    background: #70ca10 none repeat scroll 0 0;
+    border: medium none;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 130px;
+}
+
+#login .thirdlogin {
+    padding:10px 20px 30px 20px;
+}
+
+#login .thirdlogin h4 {
+    color: #6b6a6a;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+#login .thirdlogin ul li {
+    margin-right: 20px;
+}
+#login .thirdlogin ul li {
+    display: block;
+    float: left;
+    margin-bottom: 10px;
+}
+#login #sinal a {
+    background: #d63b22 url("share/weibo.png") no-repeat scroll 0 -5px;
+}
+#login .thirdlogin ul li a {
+    color: #fff;
+    display: block;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 60px;
+    width: 160px;
+}
+
+#login .fr {
+    float: right;
+}
+#login .fr {
+    float: right;
+}
+#login .clear {
+    clear: both;
+}
+
 .mainNav{
 	border-top:5px solid #a90100;
 	height:35px;

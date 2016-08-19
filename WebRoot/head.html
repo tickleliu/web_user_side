@@ -21,8 +21,13 @@ $(document).ready(function(){
 	});
 }); 
 
+var $parent = self.parent.$;
 $(function(){
 	/*jQuery处理函数*/
+	/*$('a.login').click(function(){
+		$('#login', window.top.document).html($('#loginalert').html());
+		$('#login', window.top.document).show();
+	});*/
 	$('a.login').click(function(){	
 		top.location.href = $('.user .login').attr('href'); //登录页
 	});
@@ -104,6 +109,44 @@ $(function(){
 			</ul>
 		</div>
 	</div>
+	
+	<div id="loginalert" style="display:none;">
+		<div class="pd20 loginpd">
+			<a class="closealert fr"></a>
+			<div class="clear"></div>
+			<div class="loginwrap">
+				<div class="loginh">
+						<div class="fl">会员登录</div>
+						<div class="fr">还没有账号<a id="sigup_now" href="http://www.jq22.com/" onclick="return false;">立即注册</a></div>
+						<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				<form action="" method="post" id="login_form">
+					<div class="logininput">
+					  <input type="text" name="username" class="loginusername" placeholder="用户名" />
+					  <input type="password" name="password" class="password" placeholder="密码" />
+					</div>
+					<div class="loginbtn">
+						<div class="loginsubmit fl">
+							<input class="ok_btn" type="submit" value="登录" />
+						</div>
+						<div class="logcheckbox fl">
+							<input id="bcdl" type="checkbox" checked="true" />
+							保持登录
+						</div>
+						<div class="fr"><a href="">忘记密码?</a></div>
+						<div class="clear"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="thirdlogin">
+			<h4>用第三方帐号直接登录</h4>
+			<a href="">使用微信账号登陆<img src="images/weChart.png" width="20px"></a>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
 
