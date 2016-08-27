@@ -20,7 +20,7 @@ function getFormJson(form) {
 };
 
 $(function(){
-	$("#login .ok_btn").click(function(){
+	$("#login .ok_btn").bind("click",function(){
 		alert("点击了登陆");
 		
 		var data=getFormJson("#ff");
@@ -48,7 +48,7 @@ $(function(){
 		});
 	});
 	
-	$("#login .closealert").click(function(){
+	$("#login .closealert").bind("click",function(){
 		alert("点击了关闭");
 		$("#login").hide();
 	});

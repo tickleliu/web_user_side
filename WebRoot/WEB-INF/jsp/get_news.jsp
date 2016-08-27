@@ -87,7 +87,7 @@ $(function() {
 <!--头部结束-->
 
 <iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
-<body class="articleview" id="articleview">
+<body class="articleview pages" id="articleview">
 	<div class="banner">	<!--导航菜单下的图片-->
 		<div class="banner_img">
 			<img src="images/banner/${banner_image}.jpg"/>

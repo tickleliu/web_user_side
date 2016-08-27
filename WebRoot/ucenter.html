@@ -1,0 +1,183 @@
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>军民融合综合评估中心</title>
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/page.css" />
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+function resize(element, maxWidth, maxHeight){  
+	if(element.width / element.height > maxWidth / maxHeight){ 
+		var offset=0.5*(element.width*(maxHeight/element.height)-maxWidth);
+		element.height = maxHeight;
+		$(element).css("margin-left",'-' + offset + 'px');
+	}
+	else{ 
+		var offset=0.5*(element.height*(maxWidth/element.width)-maxHeight);
+		element.width = maxWidth;  
+		$(element).css('margin-top','-' + offset + 'px');
+	} 
+};
+
+$(function(){
+	/*jQuery处理函数*/
+	$.ajax(
+	{
+		url: "",
+		cache:false,
+		type:'get',
+		contentType: "application/json; charset=utf-8", 
+		/*data: "data",*/
+		dataType: "text",
+		success: function(message, status){
+			message = $.parseJSON(message);
+			
+		},
+		error:function()
+		{
+		
+		}
+	});
+	
+	// 左侧导航切换
+	$('.leftNav ul>li').click(function(){
+        $('.leftNav ul>li').removeClass('current');
+        $(this).addClass('current');
+		$(".content>div").css("display","none");
+		$(".content #" + $(this).attr("id")).css("display","block");
+    });
+});
+
+</script>
+</head>
+<!--头部结束-->
+
+<iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
+<body class="ucenter pages" id="ucenter">
+	<div class="mainbody w1000"> <!--主页内容部分-->
+		<!--页面左侧-->
+		<div class="left">
+			<div class="leftNav">
+				<ul>  	<!--左侧导航菜单-->
+					<li id="uinfo" class="current">
+						<a href="#"><span></span>个人信息</a>
+					</li>
+					<li id="uedit">
+						<a href="#"><span></span>信息编辑</a>
+					</li>
+					<li id="uclass">
+						<a href="#"><span></span>我的课程</a>
+					</li>
+					<li id="uevaluate">
+						<a href="#"><span></span>我的评估</a>
+					</li>
+				</ul>
+			</div>
+			<div id="QRcode">	<!--二维码-->
+				<a><img src="images/app.png"/></a>
+			</div>
+		</div>
+		
+		<!--个人信息栏-->
+		<div class="center">	
+			<div class="title_module"> <!--板块标题-->
+				<a class="title" href="#">个人中心</a>
+				<div class="place">
+					<strong>当前位置:</strong> <a href='#'>主页</a> > <a href='#'>个人中心</a>
+				</div>
+			</div>
+			<div class="content">
+				<div id="uinfo" style="display:block;">
+					<div class="info_basic"> 
+						<div class="uimage"><img src="images/icon111.jpg" onload="resize(this, 200, 200);"></div>
+						<div class="fleft">
+							<div id="username"><a>用户名</a></div>
+							<div id="company"><a>企业名称</a></div>
+						</div>
+					</div>
+					<div class="info_detail"> <!--文章正文-->
+						<ul>
+							<li>
+								<a class="title">企业名称</a>
+								<a id="name" class="value">企业名称是什么</a>
+							</li>
+							<li>
+								<a class="title">企业法人</a>
+								<a id="law" class="value">企业法人</a>
+							</li>
+							<li>
+								<a class="title">注册资金</a>
+								<a id="money" class="value">注册资金</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="uedit" style="display:none;">
+					<div class="info_basic"> 
+						<div class="uimage"><img src="images/icon111.jpg" onload="resize(this, 200, 200);"></div>
+						<div class="fleft">
+							<div id="username"><a>用户名</a></div>
+							<div id="company"><a>企业名称</a></div>
+						</div>
+					</div>
+					<div class="info_detail"> <!--文章正文-->
+						<ul>
+							<li>
+								<a class="title">企业名称</a>
+								<a id="name" class="value">企业名称是什么</a>
+							</li>
+							<li>
+								<a class="title">企业法人</a>
+								<a id="law" class="value">企业法人</a>
+							</li>
+							<li>
+								<a class="title">注册资金</a>
+								<a id="money" class="value">注册资金</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="uclass" style="display:none;">
+					<div class="list_class list_article"> <!--课程列表-->
+						<ul>  	<!--课程名、加入时间-->
+							<li>
+								<a href="#" target="_blank">我的课程1</a>
+								<span>2016-07-30</span>
+							</li>
+							<li>
+								<a href="#" target="_blank">我的课程2</a>
+								<span>2016-07-30</span>
+							</li>
+							<li>
+								<a href="#" target="_blank">我的课程3</a>
+								<span>2016-07-30</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="uevaluate" style="display:none;">
+					<div class="list_evaluate list_article"> <!--评估列表-->
+						<ul>  	<!--评估名称、加入时间-->
+							<li>
+								<a href="#" target="_blank">我的评估1</a>
+								<span>2016-07-30</span>
+							</li>
+							<li>
+								<a href="#" target="_blank">我的评估2</a>
+								<span>2016-07-30</span>
+							</li>
+							<li>
+								<a href="#" target="_blank">我的评估3</a>
+								<span>2016-07-30</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+</body>
+</html>
+<iframe id="footer" src="footer.html" frameborder="false" scrolling="off" style="border:none;" width="100%" height="150px" allowtransparency="true"></iframe>
+
