@@ -87,7 +87,7 @@ $(function(){
 				</div>
 			</div>
 			<div class="content">
-				<div id="uinfo" style="display:block;">
+				<div id="uinfo" style="display:block;"><!--用户信息-->
 					<div class="info_basic"> 
 						<div class="uimage"><img src="images/icon111.jpg" onload="resize(this, 200, 200);"></div>
 						<div class="fleft">
@@ -95,7 +95,7 @@ $(function(){
 							<div id="company"><a>企业名称</a></div>
 						</div>
 					</div>
-					<div class="info_detail"> <!--文章正文-->
+					<div class="info_detail"> 
 						<ul>
 							<li>
 								<a class="title">企业名称</a>
@@ -112,32 +112,40 @@ $(function(){
 						</ul>
 					</div>
 				</div>
-				<div id="uedit" style="display:none;">
+				<div id="uedit" style="display:none;"><!--信息编辑-->
 					<div class="info_basic"> 
 						<div class="uimage"><img src="images/icon111.jpg" onload="resize(this, 200, 200);"></div>
 						<div class="fleft">
-							<div id="username"><a>用户名</a></div>
-							<div id="company"><a>企业名称</a></div>
+							<form class="ff_1" id="ff_1" method="post">
+								<div class="one_row">
+									<label for="username">用户名:</label>
+									<input type="text" name="username" class="easyui-validatebox" data-options="required:true"></input>
+								</div>
+								<div class="one_row">
+									<label for="company">企业名称:</label>
+									<input type="text" name="company" class="easyui-validatebox" data-options="required:true"></input>
+								</div>
+							</form>
 						</div>
 					</div>
-					<div class="info_detail"> <!--文章正文-->
-						<ul>
-							<li>
-								<a class="title">企业名称</a>
-								<a id="name" class="value">企业名称是什么</a>
-							</li>
-							<li>
-								<a class="title">企业法人</a>
-								<a id="law" class="value">企业法人</a>
-							</li>
-							<li>
-								<a class="title">注册资金</a>
-								<a id="money" class="value">注册资金</a>
-							</li>
-						</ul>
+					<div class="info_detail"> 
+						<form class="ff_2" id="ff_2" method="post">
+							<div class="one_row">
+								<label for="company">企业名称:</label>
+								<input type="text" name="company" class="easyui-validatebox" data-options="required:true"></input>
+							</div>
+							<div class="one_row">
+								<label for="law">企业法人:</label>
+								<input type="text" name="law" class="easyui-validatebox" data-options="required:true"></input>
+							</div>
+							<div class="one_row">
+								<label for="money">注册资金:</label>
+								<input type="text" name="money" class="easyui-validatebox" data-options="required:true"></input>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div id="uclass" style="display:none;">
+				<div id="uclass" style="display:none;"><!--课程信息-->
 					<div class="list_class list_article"> <!--课程列表-->
 						<ul>  	<!--课程名、加入时间-->
 							<li>
@@ -155,7 +163,7 @@ $(function(){
 						</ul>
 					</div>
 				</div>
-				<div id="uevaluate" style="display:none;">
+				<div id="uevaluate" style="display:none;"><!--评估信息-->
 					<div class="list_evaluate list_article"> <!--评估列表-->
 						<ul>  	<!--评估名称、加入时间-->
 							<li>

@@ -627,6 +627,37 @@ body .w1000{
 	float:left;
 }
 
+.ucenter .center .one_row{
+	height:40px;
+}
+
+.ucenter .center label{
+	height:30px;
+	line-height:30px;
+	width:100px;
+	display:inline-block;
+	color:#333;
+	font:14px;
+}
+
+.ucenter .center input{
+	height:30px;
+	line-height:30px;
+	width:200px;
+	color:#333;
+	border: 1px solid #ddd;
+	border-radius:3px;
+	font:14px;
+}
+
+.ucenter .center .info_detail label{
+	width:120px;
+}
+
+.ucenter .center .info_detail input{
+	width:250px;
+}
+
 
 
 
