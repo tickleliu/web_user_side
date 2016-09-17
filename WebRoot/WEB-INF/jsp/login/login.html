@@ -1,0 +1,119 @@
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>欢迎登陆</title>
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/page.css" />
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/jQuery.md5.js"></script>
+<script type="text/javascript">
+
+// 将form中的值转换为键值对：
+// 如：{Name:'摘取天上星',position:'IT技术'}
+// ps:注意将同名的放在一个数组里
+function getFormJson(form) {
+	var o = {};
+	var a = $(form).serializeArray();
+	$.each(a, function () {
+		if (o[this.name] !== undefined) {
+			if (!o[this.name].push) {
+				o[this.name] = [o[this.name]];
+			}
+			o[this.name].push(this.value || '');
+		} 
+		else {
+			o[this.name] = this.value || '';
+		}
+	});
+	return o;
+};
+
+$(function(){
+	/*jQuery处理函数*/
+	$("#login").click(function(){
+		var data=getFormJson("#ff");
+		var ok_email=true;
+		var ok_password=true;
+		var ok_imagecode=true;
+		
+		ok_email = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(data.email);
+		if(! ok_email){
+			alert('请输入正确的邮箱格式');
+			return false;
+		}
+		ok_password = data.password.length>5;
+		if(! ok_password){
+			alert('密码长度小于6字符');
+			return false;
+		}
+		ok_password = /^[a-zA-Z0-9_ ]{1,}$/.test(data.password);
+		if(! ok_password){
+			alert('密码只允许英文字母、数字及下划线');
+			return false;
+		}
+		ok_imagecode = data.imagecode.length==4;
+		if(! ok_imagecode){
+			alert('请重新输入验证码');
+			return false;
+		}
+				
+		$.ajax({
+			type: "POST",
+			url:"#",	//发送给后台，检查邮箱和验证码
+			data:{
+				email:data.email,
+				password:$.md5(data.password),
+				imagecode:data.imagecode
+			},	//发送用户邮箱和密码
+			async: false,
+			beforeSend:function(jqXHR,settings){
+				
+			},
+			error: function(request) {
+				alert("登陆失败，请重试");
+			},
+			success: function(data) {
+				alert("登陆成功");
+				location.href ="index.html";
+			}
+		});
+	});
+});
+</script>
+</head>
+<!--头部结束-->
+
+<iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
+<body>
+	<div class="mainbody w1000"> <!--主页内容部分-->
+		<div class="userinput">
+			<div class="title">
+				<span>欢迎登陆</span>
+			</div>
+			<div class="info_input">
+				<form id="ff" method="post">
+					<div class="one_row">
+						<label for="email">邮箱地址:</label>
+						<input type="text" name="email" required="required"></input>
+					</div>
+					<div class="one_row">
+						<label for="password">用户密码:</label>
+						<input id="password" type="password" name="password" placeholder="密码应由6-20位字符" required="required" maxlength="20"></input>
+					</div>
+					<div class="one_row">
+						<label for="imagecode">验证码:</label>
+						<input id="imagecode" type="text" name="imagecode" placeholder="请输入右侧验证码" required="required" maxlength="4"></input>
+						<span id="imagecode">验证码</span>
+					</div>
+				</form>
+				<input id="login" type="button" value="登陆"></input>
+			</div>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+</body>
+</html>
+<iframe id="footer" src="footer.html" frameborder="false" scrolling="off" style="border:none;" width="100%" height="150px" allowtransparency="true"></iframe>
+
+

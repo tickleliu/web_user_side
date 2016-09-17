@@ -6,14 +6,13 @@ import java.util.Date;
 public class CmsUserLoginInfo implements Serializable{
 	
 	public CmsUserLoginInfo() {
-		uid = 0L;
+		uid = System.currentTimeMillis();
 		username = "";
 		password = "";
 		create_time = new Date();
 		update_time = new Date();
 		uwechatid = "";
 		head_image = "";
-		email = "";
 		status = 0;
 	}
 	public Long getUid() {
@@ -58,12 +57,7 @@ public class CmsUserLoginInfo implements Serializable{
 	public void setHead_image(String head_image) {
 		this.head_image = head_image;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -77,6 +71,5 @@ public class CmsUserLoginInfo implements Serializable{
 	private Date update_time;
 	private String uwechatid;
 	private String head_image;
-	private String email;
 	private Integer status;
 }

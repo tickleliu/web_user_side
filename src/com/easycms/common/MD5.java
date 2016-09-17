@@ -37,5 +37,9 @@ public class MD5 {
 		}
 		return resultString;
 	}
+	public static void main(String[] args) {
+		String passwordString= "123456";
+		System.out.println(MD5.MD5Encode(passwordString));
+	}
 
 }

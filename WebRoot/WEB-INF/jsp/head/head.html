@@ -1,0 +1,74 @@
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	/*jQuery处理函数*/
+	$('a.login').click(function(){
+		location.href ="login.html";
+	});
+	$('a.register').click(function(){
+		location.href ="register.html";
+	});
+});
+</script>
+</head>
+<body>
+	<div class="top">	<!--顶部，加载logo图像-->
+		<div class="w1000">
+			<div id="logoImg">
+				<img src="images/logo.png" height="114"/>
+			</div>
+			<div id="toolbar">
+				<div class="search">
+					<span class="search_btn"></span>
+					<input class="keywords" value="搜索..." onfocus="if(this.value=='搜索...'){this.value='';}" onblur="if(this.value==''){this.value='搜索...';}"></input>
+				</div>
+				<div class="user">
+					<a class="login" href="login.html">登录</a>
+					<a class="register" href="register.html">注册</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mainNav">	<!--首页导航标签-->
+		<div class="w1000">
+			<ul class="nav">  <!--导航菜单-->
+				<li>
+					<a href="index.html" target="_blank">首页</a>
+				</li>
+				<li>
+					<a href="#" target="_blank">中心概况</a>
+				</li>
+				<li>
+					<a href="info/list/news" target="_blank">新闻资讯</a>
+				</li>
+				<li>
+					<a href="#" target="_blank">组织架构</a>
+				</li>
+				<li>
+					<a href="#" target="_blank">重点推荐</a>
+				</li>
+				<li>
+					<a href="info/list/identy" target="_blank">试点信息</a>
+				</li>
+				<li>
+					<a href="info/list/tech" target="_blank">技术前沿</a>
+				</li>
+				<li>
+					<a href="info/list/policy" target="_blank">政策解读</a>
+				</li>
+				<li>
+					<a href="info/list/policy" target="_blank">信息公开</a>
+				</li>
+				<li>
+					<a href="info/list/class" target="_blank">课程信息</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
+
