@@ -1,222 +1,199 @@
 package com.easycms.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.lang3.StringUtils;
+
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.easycms.common.CaptchaServlet;
 import com.easycms.common.CaptchaUtil;
-import com.easycms.common.MD5;
 import com.easycms.common.Pager;
-import com.easycms.entity.CmsUser;
-import com.easycms.entity.CmsUserExt;
-import com.easycms.entity.CmsUserGroup;
-import com.easycms.service.CmsLogService;
-import com.easycms.service.CmsUserExtService;
-import com.easycms.service.CmsUserGroupService;
-import com.easycms.service.CmsUserService;
+import com.easycms.entity.user.CmsUserBasicInfo;
+import com.easycms.entity.user.CmsUserLoginInfo;
+import com.easycms.entity.user.CmsUserRoleInfo;
+import com.easycms.service.impl.user.CmsUserBasicInfoServiceImpl;
+import com.easycms.service.impl.user.CmsUserLoginInfoServiceImpl;
+import com.easycms.service.impl.user.CmsUserRoleServiceImpl;
 
 @Controller
 @RequestMapping("/u")
 public class CmsUserController {
-	private static final Logger logger = Logger.getLogger(CmsUserController.class);
-	@Resource(name = "cmsUserServiceImpl")
-	private CmsUserService us;
-	@Resource(name = "cmsUserGroupServiceImpl")
-	private CmsUserGroupService ugs;
-	@Resource(name = "cmsUserExtServiceImpl")
-	private CmsUserExtService ues;
-	@Resource(name = "cmsLogServiceImpl")
-	private CmsLogService ls;
-	
-	// 分页显示列表
-	@RequestMapping("/v_list.do")
-	public String list(HttpServletRequest req, ModelMap model) {
-		 int pageSize = 10;
-		 int pageNo = 0;
-		 String sPageNo = req.getParameter("pager.offset");
-		 if(sPageNo!=null) {
-			   pageNo = Integer.parseInt(sPageNo);
-		 }
-		 Pager<CmsUser> userPager = us.findByPage(pageNo, pageSize);
-		 model.addAttribute("userPager", userPager);
-		return "user/showUser";
-	}
-	
-	//显示添加
-	@RequestMapping("/v_add.do")
-	public String showAdd(HttpServletRequest req, ModelMap model){
-		//获的会员组
-		List<CmsUserGroup> groups = ugs.findAll();
-		model.addAttribute("groups", groups);
-		return "user/showAddUser";
-	}
-	
-	//添加数据
-	@RequestMapping("/o_add.do")
-	public String add(HttpServletRequest req, ModelMap model, CmsUser user, CmsUserExt userExt, Integer gid){
-		user.setGroup_id(gid);
-		user.setPassword(MD5.MD5Encode(user.getPassword()));
-		us.saveUser(user, userExt);
-		return list(req, model);
-	}
-	
-	//删除数据
-	@RequestMapping("/o_delete.do")
-	public String delete(HttpServletRequest req, ModelMap model, Integer id){
-		us.deleteById(id);
-		return list(req, model);
-	}
 
-	//显示修改
-	@RequestMapping("/v_update.do")
-	public String showUpdate(HttpServletRequest req, ModelMap model, Integer id){
-		//获得用户
-		CmsUser user = us.findById(id);
-		//获得用户扩展
-		CmsUserExt userExt = ues.findById(id);
-		//获的会员组
-		List<CmsUserGroup> groups = ugs.findAll();
-		
-		model.addAttribute("groups", groups);
-		model.addAttribute("user", user);
-		model.addAttribute("userExt", userExt);
-		return "user/updateUser";
-	}
-	
-	//修改
-	@RequestMapping("/o_update.do")
-	public String update(HttpServletRequest req, ModelMap model,CmsUser user, CmsUserExt userExt){
-		user.setPassword(MD5.MD5Encode(user.getPassword()));
-		us.update(user);
-		ues.update(userExt);
-		//System.out.println(user.getId());
-		//System.out.println(userExt.getId());
-		//System.out.println(user.getGroup_id());
+	private static final Logger logger = Logger
+			.getLogger(CmsUserController.class);
 
-		//log it
-		if(logger.isDebugEnabled()){
-			logger.debug(model);
-		}
-		return list(req, model);
-	}
-	
-	//登陆
-	@RequestMapping("/login.do")
-	public String login(HttpServletRequest req, ModelMap model,CmsUser user, String verifyCode) {
-		String captcha = CaptchaServlet.getStoredCaptchaString(req);
-		if(StringUtils.isNotBlank(captcha)){
-			if(captcha.equalsIgnoreCase(verifyCode)) {
-				CmsUser cu = us.findByName(user.getUsername());
-				if(cu != null){
-					if(cu.getPassword().equals(MD5.MD5Encode(user.getPassword()))){
-						//CmsUser cus = us.login(user);
-						logger.info("登录密码："+cu.getUsername() +"用户名：" +cu.getPassword());
-						HttpSession session = req.getSession();
-						session.setAttribute("user", cu);
-						ls.loginSucssessLog(req, "登录成功！");
-						return "index";
-					}else{
-						ls.loginFailureLog(req, "登录失败！","登录密码："+user.getUsername() +"用户名：" +user.getPassword());
-						return "login";
-					}
-				}else{
-					ls.loginFailureLog(req, "登录失败！","登录密码："+user.getUsername() +"用户名：" +user.getPassword());
-					return "login";
-				}
-				
-			}else{
-				ls.loginFailureLog(req, "登录失败！","登录密码："+user.getUsername() +"用户名：" +user.getPassword());
-				return "login";
+	@Resource(name = "cmsUserLoginInfoServiceImpl")
+	private CmsUserLoginInfoServiceImpl userLoginInfoService;
+
+	@Resource(name = "cmsUserRoleServiceImpl")
+	private CmsUserRoleServiceImpl userRoleService;
+
+	@Resource(name = "cmsUserBasicInfoServiceImpl")
+	private CmsUserBasicInfoServiceImpl userBasicInfoService;
+
+	@RequestMapping("/check")
+	@ResponseBody
+	public String isUserNameExists(HttpServletRequest request,
+			HttpServletResponse response) {
+		HttpSession session = request.getSession(true);
+		String username = request.getParameter("username");
+		String keyCode = request.getParameter("key");
+
+		session.setAttribute("register_status", "fail");
+
+		JSONObject jsonObject = new JSONObject();
+		if (keyCode != null) {
+			String keyCodeSession = (String) session.getAttribute("key_code");
+			System.out.println("session" + keyCodeSession);
+			System.out.println("param" + keyCode);
+			if (keyCodeSession != null
+					&& keyCodeSession.toLowerCase().equals(
+							keyCode.toLowerCase())) {
+			} else {
+				jsonObject.put("result", "key");
+				return jsonObject.toString();
 			}
-		}else{
-			ls.loginFailureLog(req, "登录失败！","登录密码："+user.getUsername() +"用户名：" +user.getPassword());
-			return "login";
+		} else {
+			jsonObject.put("result", "key");
+			return jsonObject.toString();
 		}
 
+		if (username == null || username.equals("zhouw")) {
 
+			jsonObject.put("result", "username");
+			return jsonObject.toString();
+		}
 
-		//验证码不能为空
-		/*if(StringUtils.isNotBlank(captcha)){
-			if(captcha.equalsIgnoreCase(verifyCode)) {
-				user.setPassword(MD5.MD5Encode(user.getPassword()));
-				user.setUsername(user.getUsername());
-				CmsUser cu = us.login(user);
-				logger.info("登录密码："+cu.getUsername() +"用户名：" +cu.getPassword());
-				HttpSession session = req.getSession();
-				session.setAttribute("user", cu);
-				//设置session超时时间
-				//session.setMaxInactiveInterval(100);
-				return "index";
-			}else{
-				return "login";
-			}
-		}*/
-		//return "login";
+		jsonObject.put("result", "success");
+		session.setAttribute("register_status", "success");
+		return jsonObject.toString();
 	}
-	
 
-	@RequestMapping(value="/logoutpage",method=RequestMethod.GET)
-	public String logoutpage(){
-		return "login";
-	}
-	
-	//注销
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest req, ModelMap model){
-		HttpSession session = req.getSession();
-		session.removeAttribute("user");
-		session.invalidate();
-		return "redirect:/member/logoutpage";
-	}
-	
-	//注册跳转链接
-	@RequestMapping("/rster")
-	public String register(HttpServletRequest req, ModelMap model){
-		return "register";
-	}
-	//用户注册操作
-	@RequestMapping("/register.do")
-	public String registerOperating(HttpServletRequest req, ModelMap model, CmsUser user, CmsUserExt userExt, Integer gid, String verifyCode){
-		String captcha = CaptchaServlet.getStoredCaptchaString(req);
-		if(StringUtils.isNotBlank(captcha)){
-			if(captcha.equalsIgnoreCase(verifyCode)) {
-				user.setGroup_id(gid);
-				user.setPassword(MD5.MD5Encode(user.getPassword()));
-				us.saveUser(user, userExt);
-				logger.info("有用户注册了 name={"+ user.getUsername() +"}");
-				return "login";
-			}else{
-				return "register";
-			}
-		}else{
-			return "register";
+	@RequestMapping("/key")
+	@ResponseBody
+	public void getKeyImage(HttpServletRequest request,
+			HttpServletResponse response) {
+		Long id = 0L;
+		String idString = request.getParameter("id");
+		try {
+			id = Long.parseLong(idString);
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			id = 0L;
+		}
+
+		try {
+			HttpSession session = request.getSession(true);
+			String keyCodeString = CaptchaUtil.outputCaptcha(id, request,
+					response);
+			session.setAttribute("key_code", keyCodeString);
+			System.out.println("register:" + keyCodeString);
+			System.out.println("id:" + id);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
-	
-	//找回密码跳转链接
-	@RequestMapping("/forgot")
-	public String forgot(HttpServletRequest req, ModelMap model){
-		return "forgot";
-	}
-	
-	//找回密码操作
-	@RequestMapping("/forgot.do")
-	public String forgotOperating(HttpServletRequest req, ModelMap model){
-		return null;
-	}
-	
 
+	/**
+	 * realname=fadsf&idcard=230903198704191413&education=fasdf&+major=fasdf&
+	 * work=fasdfsda&position=sdfafd&
+	 * phone=13269198593&email=liuminglu19870420%40163.
+	 * com&usertype=1&sex=man&username=null&password=null
+	 * */
+	@RequestMapping(value = "/register")
+	@ResponseBody
+	public String registerSubmitResult(HttpServletRequest request,
+			HttpServletResponse response) {
+		JSONObject jsonObject = new JSONObject();
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+
+		if (username == null || username.length() < 0 || password == null) {
+			jsonObject.put("result", "fail");
+			return jsonObject.toString();
+		}
+
+		CmsUserLoginInfo cmsUserLoginInfo = new CmsUserLoginInfo();
+		cmsUserLoginInfo.setUsername(username);
+		cmsUserLoginInfo.setPassword(password);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		Pager<CmsUserLoginInfo> pager = userLoginInfoService
+				.findUserLoginInfoByKey(map, 0, 1);
+		if (pager != null && pager.getPageList().size() != 0) {
+			jsonObject.put("result", "fail");
+		} else {
+			userLoginInfoService.save(cmsUserLoginInfo);
+		}
+		String usertype = request.getParameter("usertype");
+		if (usertype == null) {
+
+			jsonObject.put("result", "fail");
+			return jsonObject.toString();
+		} else if (usertype.equals("1")) {
+
+			String realname = request.getParameter("realname");
+			String idcard = request.getParameter("idcard");
+			String education = request.getParameter("education");
+			String major = request.getParameter("major");
+			String work = request.getParameter("work");
+			String position = request.getParameter("position");
+			String phone = request.getParameter("phone");
+			String email = request.getParameter("email");
+			String sex = request.getParameter("sex");
+
+			CmsUserRoleInfo cmsUserRoleInfo = new CmsUserRoleInfo();
+			cmsUserRoleInfo.setUid(cmsUserLoginInfo.getUid());
+			userRoleService.save(cmsUserRoleInfo);
+
+			CmsUserBasicInfo cmsUserBasicInfo = new CmsUserBasicInfo();
+			cmsUserBasicInfo.setUid(cmsUserLoginInfo.getUid());
+			cmsUserBasicInfo.setRealname(realname);
+			cmsUserBasicInfo.setIdcard_number(idcard);
+			cmsUserBasicInfo.setDegree(education);
+			cmsUserBasicInfo.setSpecialty(major);
+			cmsUserBasicInfo.setWork_unit(work);
+			cmsUserBasicInfo.setPosition_level(position);
+			cmsUserBasicInfo.setPhone(phone);
+			cmsUserBasicInfo.setEmail(email);
+			if (sex != null && sex.equals("woman")) {
+				cmsUserBasicInfo.setSex(2);
+			} else {
+				cmsUserBasicInfo.setSex(1);
+			}
+			
+			userBasicInfoService.save(cmsUserBasicInfo);
+
+		} else if (usertype.equals("2")) {
+
+			String realname = request.getParameter("realname");
+			String idcard = request.getParameter("idcard");
+			String education = request.getParameter("education");
+			String major = request.getParameter("major");
+			String work = request.getParameter("work");
+			String position = request.getParameter("position");
+			String phone = request.getParameter("phone");
+			String email = request.getParameter("email");
+			String sex = request.getParameter("sex");
+		}
+
+		jsonObject.put("result", "success");
+		Cookie cookie = new Cookie("login", "success");
+		cookie.setMaxAge(24 * 60 * 60 * 30);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		return jsonObject.toString();
+	}
 }
