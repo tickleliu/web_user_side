@@ -24,6 +24,7 @@ import com.easycms.common.MD5;
 import com.easycms.common.Pager;
 import com.easycms.entity.user.CmsUserLoginInfo;
 import com.easycms.service.impl.user.CmsUserLoginInfoServiceImpl;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 @Controller
 @RequestMapping(value = "/l/")
@@ -70,22 +71,28 @@ public class CmsLoginController {
 
 				String cookieString = cookie.getValue();
 				JSONObject cookieJsonObject = new JSONObject(cookieString);
-				UsernamePasswordToken token = new UsernamePasswordToken(
-						cookieJsonObject.getString("username"),
-						cookieJsonObject.getString("password").toCharArray(),
-						false);
-				Subject subject = SecurityUtils.getSubject();
-				try {
-					subject.login(token);
-				} catch (AuthenticationException e) {
-					// TODO: handle exception
-					jsonObject.put("result", "failed");
+				if (cookieJsonObject.has("username")
+						&& cookieJsonObject.has("password") &&cookieJsonObject.has("uid")) {
+					UsernamePasswordToken token = new UsernamePasswordToken(
+							cookieJsonObject.getString("username"),
+							cookieJsonObject.getString("password")
+									.toCharArray(), false);
+					Subject subject = SecurityUtils.getSubject();
+					try {
+						subject.login(token);
+					} catch (AuthenticationException e) {
+						// TODO: handle exception
+						jsonObject.put("result", "failed");
+						return jsonObject.toString();
+					}
+					jsonObject.put("uid", cookieJsonObject.getString("uid"));
+					jsonObject.put("username",
+							cookieJsonObject.getString("username"));
+					jsonObject.put("status", "login");
+					jsonObject.put("result", "success");
 					return jsonObject.toString();
 				}
-				jsonObject.append("uid", jsonObject.getString("uid"));
-				jsonObject.append("username", jsonObject.getString("username"));
-				jsonObject.append("status", "login");
-				return jsonObject.toString();
+
 			}
 		}
 		jsonObject.put("result", "fail");
@@ -119,11 +126,11 @@ public class CmsLoginController {
 			CmsUserLoginInfo cmsUserLoginInfo = userPager.getPageList().get(0);
 			JSONObject cookieJsonObject = new JSONObject();
 
-			cookieJsonObject.append("username", username);
-			cookieJsonObject.append("password", password);
-			cookieJsonObject.append("uid", cmsUserLoginInfo.getUid());
+			cookieJsonObject.put("username", username);
+			cookieJsonObject.put("password", password);
+			cookieJsonObject.put("uid", cmsUserLoginInfo.getUid().toString());
 			cookieJsonObject
-					.append("wechatid", cmsUserLoginInfo.getUwechatid());
+					.put("wechatid", cmsUserLoginInfo.getUwechatid());
 			String cookieString = cookieJsonObject.toString();
 
 			String rememberMeString = request.getParameter("rember_me");
@@ -172,9 +179,9 @@ public class CmsLoginController {
 					jsonObject.put("result", "failed");
 					return jsonObject.toString();
 				}
-				jsonObject.append("uid", jsonObject.getString("uid"));
-				jsonObject.append("username", jsonObject.getString("username"));
-				jsonObject.append("status", "login");
+				jsonObject.put("uid", jsonObject.getString("uid"));
+				jsonObject.put("username", jsonObject.getString("username"));
+				jsonObject.put("status", "login");
 				return jsonObject.toString();
 			}
 		}

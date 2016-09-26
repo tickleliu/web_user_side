@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.hibernate.validator.constraints.Email;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +23,7 @@ import com.easycms.entity.user.CmsOrgUser;
 import com.easycms.entity.user.CmsUserBasicInfo;
 import com.easycms.entity.user.CmsUserLoginInfo;
 import com.easycms.entity.user.CmsUserRoleInfo;
+import com.easycms.service.impl.user.CmsOrgUserServiceImpl;
 import com.easycms.service.impl.user.CmsUserBasicInfoServiceImpl;
 import com.easycms.service.impl.user.CmsUserLoginInfoServiceImpl;
 import com.easycms.service.impl.user.CmsUserRoleServiceImpl;
@@ -43,6 +43,9 @@ public class CmsUserController {
 
 	@Resource(name = "cmsUserBasicInfoServiceImpl")
 	private CmsUserBasicInfoServiceImpl userBasicInfoService;
+	
+	@Resource(name = "cmsOrgUserServiceImpl")
+	private CmsOrgUserServiceImpl orgUserService;
 
 	@RequestMapping("/check")
 	@ResponseBody
@@ -85,7 +88,6 @@ public class CmsUserController {
 				jsonObject.put("result", "username");
 				return jsonObject.toString();
 			}
-
 		}
 
 		jsonObject.put("result", "success");
@@ -150,9 +152,10 @@ public class CmsUserController {
 		} else {
 			userLoginInfoService.save(cmsUserLoginInfo);
 		}
+		
+
 		String usertype = request.getParameter("usertype");
 		if (usertype == null) {
-
 			jsonObject.put("result", "fail");
 			return jsonObject.toString();
 		} else if (usertype.equals("1")) {
@@ -188,6 +191,7 @@ public class CmsUserController {
 			}
 
 			userBasicInfoService.save(cmsUserBasicInfo);
+			
 
 		} else if (usertype.equals("2")) {
 
@@ -200,6 +204,11 @@ public class CmsUserController {
 			String email = request.getParameter("email");
 			String address = request.getParameter("address");
 			String zipcode = request.getParameter("zipcode");
+			
+			CmsUserRoleInfo cmsUserRoleInfo = new CmsUserRoleInfo();
+			cmsUserRoleInfo.setUid(cmsUserLoginInfo.getUid());
+			cmsUserRoleInfo.setIsorg(1);
+			userRoleService.save(cmsUserRoleInfo);
 
 			CmsOrgUser cmsOrgUser = new CmsOrgUser();
 			cmsOrgUser.setUid(cmsUserLoginInfo.getUid());
@@ -212,6 +221,8 @@ public class CmsUserController {
 			cmsOrgUser.setEmail(email);
 			cmsOrgUser.setAddress(address);
 			cmsOrgUser.setZip_code(zipcode);
+			orgUserService.save(cmsOrgUser);
+			
 		}
 
 		jsonObject.put("result", "success");

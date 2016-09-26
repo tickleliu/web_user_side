@@ -13,7 +13,7 @@ public class CmsUserLoginInfo implements Serializable{
 		update_time = new Date();
 		uwechatid = "";
 		head_image = "";
-		status = 0;
+		status = 1;
 	}
 	public Long getUid() {
 		return uid;
