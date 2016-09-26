@@ -135,7 +135,7 @@ public class CmsUserController {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		if (username == null || username.length() < 0 || password == null) {
+		if (username == null || username.length() < 6  || password == null) {
 			jsonObject.put("result", "fail");
 			return jsonObject.toString();
 		}
