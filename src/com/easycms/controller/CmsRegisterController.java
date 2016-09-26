@@ -24,7 +24,6 @@ public class CmsRegisterController {
 	
 	@RequestMapping(value="r")
 	public String registerUser(HttpServletRequest request, HttpServletResponse response) {
-		
 	return "login/loginResult";	
 	}
 

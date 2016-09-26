@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.Email;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.easycms.common.CaptchaUtil;
 import com.easycms.common.Pager;
+import com.easycms.entity.user.CmsOrgUser;
 import com.easycms.entity.user.CmsUserBasicInfo;
 import com.easycms.entity.user.CmsUserLoginInfo;
 import com.easycms.entity.user.CmsUserRoleInfo;
@@ -69,10 +71,21 @@ public class CmsUserController {
 			return jsonObject.toString();
 		}
 
-		if (username == null || username.equals("zhouw")) {
+		if (username == null) {
 
 			jsonObject.put("result", "username");
 			return jsonObject.toString();
+		} else {
+			Map<String, Object> map = new HashMap<>();
+
+			map.put("username", username);
+			Pager<CmsUserLoginInfo> pager = userLoginInfoService
+					.findUserLoginInfoByKey(map, 0, 1);
+			if (pager.getPageList() != null && pager.getTotal() > 0) {
+				jsonObject.put("result", "username");
+				return jsonObject.toString();
+			}
+
 		}
 
 		jsonObject.put("result", "success");
@@ -173,20 +186,32 @@ public class CmsUserController {
 			} else {
 				cmsUserBasicInfo.setSex(1);
 			}
-			
+
 			userBasicInfoService.save(cmsUserBasicInfo);
 
 		} else if (usertype.equals("2")) {
 
-			String realname = request.getParameter("realname");
-			String idcard = request.getParameter("idcard");
-			String education = request.getParameter("education");
-			String major = request.getParameter("major");
-			String work = request.getParameter("work");
-			String position = request.getParameter("position");
+			String orgname = request.getParameter("orgname");
+			String president = request.getParameter("president");
+			String region = request.getParameter("region");
+			String contact_name = request.getParameter("contact_name");
+			String contact_position = request.getParameter("contact_position");
 			String phone = request.getParameter("phone");
 			String email = request.getParameter("email");
-			String sex = request.getParameter("sex");
+			String address = request.getParameter("address");
+			String zipcode = request.getParameter("zipcode");
+
+			CmsOrgUser cmsOrgUser = new CmsOrgUser();
+			cmsOrgUser.setUid(cmsUserLoginInfo.getUid());
+			cmsOrgUser.setEnterprise_name(orgname);
+			cmsOrgUser.setLegal_representative(president);
+			cmsOrgUser.setRegion(region);
+			cmsOrgUser.setContact_name(contact_name);
+			cmsOrgUser.setContact_position(contact_position);
+			cmsOrgUser.setPhone(phone);
+			cmsOrgUser.setEmail(email);
+			cmsOrgUser.setAddress(address);
+			cmsOrgUser.setZip_code(zipcode);
 		}
 
 		jsonObject.put("result", "success");
