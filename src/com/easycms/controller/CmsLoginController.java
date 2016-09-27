@@ -14,6 +14,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,6 @@ import com.easycms.common.MD5;
 import com.easycms.common.Pager;
 import com.easycms.entity.user.CmsUserLoginInfo;
 import com.easycms.service.impl.user.CmsUserLoginInfoServiceImpl;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 @Controller
 @RequestMapping(value = "/l/")
@@ -66,33 +66,45 @@ public class CmsLoginController {
 		JSONObject jsonObject = new JSONObject();
 		Cookie[] cookies = request.getCookies();
 		HttpSession session = request.getSession(true);
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("login")) {
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("login")) {
 
-				String cookieString = cookie.getValue();
-				JSONObject cookieJsonObject = new JSONObject(cookieString);
-				if (cookieJsonObject.has("username")
-						&& cookieJsonObject.has("password") &&cookieJsonObject.has("uid")) {
-					UsernamePasswordToken token = new UsernamePasswordToken(
-							cookieJsonObject.getString("username"),
-							cookieJsonObject.getString("password")
-									.toCharArray(), false);
-					Subject subject = SecurityUtils.getSubject();
+					String cookieString = cookie.getValue();
+					JSONObject cookieJsonObject = null;
 					try {
-						subject.login(token);
-					} catch (AuthenticationException e) {
+						cookieJsonObject = new JSONObject(cookieString);
+					} catch (JSONException e) {
 						// TODO: handle exception
-						jsonObject.put("result", "failed");
-						return jsonObject.toString();
+						break;
 					}
-					jsonObject.put("uid", cookieJsonObject.getString("uid"));
-					jsonObject.put("username",
-							cookieJsonObject.getString("username"));
-					jsonObject.put("status", "login");
-					jsonObject.put("result", "success");
-					return jsonObject.toString();
-				}
+					if (cookieJsonObject.has("username")
+							&& cookieJsonObject.has("password")
+							&& cookieJsonObject.has("uid")) {
+						UsernamePasswordToken token = new UsernamePasswordToken(
+								cookieJsonObject.getString("username"),
+								cookieJsonObject.getString("password")
+										.toCharArray(), false);
+						Subject subject = SecurityUtils.getSubject();
+						try {
+							subject.login(token);
+						} catch (AuthenticationException e) {
+							// TODO: handle exception
+							jsonObject.put("result", "failed");
+							return jsonObject.toString();
+						}
+						jsonObject
+								.put("uid", cookieJsonObject.getString("uid"));
+						jsonObject.put("username",
+								cookieJsonObject.getString("username"));
+						jsonObject.put("status", "login");
+						jsonObject.put("result", "success");
+						return jsonObject.toString();
+					} else {
+						break;
+					}
 
+				}
 			}
 		}
 		jsonObject.put("result", "fail");
@@ -129,8 +141,7 @@ public class CmsLoginController {
 			cookieJsonObject.put("username", username);
 			cookieJsonObject.put("password", password);
 			cookieJsonObject.put("uid", cmsUserLoginInfo.getUid().toString());
-			cookieJsonObject
-					.put("wechatid", cmsUserLoginInfo.getUwechatid());
+			cookieJsonObject.put("wechatid", cmsUserLoginInfo.getUwechatid());
 			String cookieString = cookieJsonObject.toString();
 
 			String rememberMeString = request.getParameter("rember_me");
