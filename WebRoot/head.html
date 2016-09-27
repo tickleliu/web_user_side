@@ -16,6 +16,10 @@ $(document).ready(function(){
 				$(".user").empty();
 				var html = '<a class="user_center" href="g?aid='+data.uid+'">' + data.username + '</a>';
 				$('.user').append(html);
+	
+				$(".logout").empty();
+				html = '<a class="logout" href="l/logout">账号注销</a>';
+				$('.logout').append(html);
 			}
 		}
 	});
@@ -37,10 +41,11 @@ $(function(){
 	$('a.user_center').click(function(){	
 		top.location.href = $('.user .user_center').attr('href');//用户主页
 	});
-	$("a.user_center").hover(function(){
+	//$("a.user_center").hover(function(){
+	$(".login_logout").hover(function(){
 		$(".logout").css("display","block");//显示注销
 		},function(){
-			$(".logout").css("display","none");//显示注销
+			$(".logout").css("display","none");
 	});
 	
 	$('span.search_btn').click(function(){
@@ -72,12 +77,14 @@ $(function(){
 					<span class="search_btn"></span>
 					<input class="keywords" value="搜索..." onfocus="if(this.value=='搜索...'){this.value='';}" onblur="if(this.value==''){this.value='搜索...';}"></input>
 				</div>
-				<div class="user">
-					<a class="login" href="l/login">登录</a>
-					<a class="register" href="l/register">注册</a>
-				</div>
-				<div class="logout" style="display:none;">
-					<a class="logout" href="l/logout">账号注销</a>
+				<div class="login_logout">
+					<div class="user">
+						<a class="login" href="l/login">登录</a>
+						<a class="register" href="l/register">注册</a>
+					</div>
+					<div class="logout" style="display:none;">
+						<a class="logout"> </a>;
+					</div>
 				</div>
 			</div>
 		</div>
