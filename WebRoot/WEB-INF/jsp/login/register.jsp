@@ -59,6 +59,9 @@ $(function(){
 	//验证表单内容，并将用户名和md5加密后的密码写入cookie
 	var COOKIE_NAME = 'userinfo';
 	$.cookie(COOKIE_NAME);
+	$.cookie('username', '',{ path: '/', expires: -1 });// 先情况cookie中的用户名和密码
+	$.cookie('password', '',{ path: '/', expires: -1 });
+	
 	$("#next").click(function(){
 		var data=getFormJson("#ff");
 		if(data.key.length!=4){
@@ -66,8 +69,8 @@ $(function(){
 			return;
 		}
 		
-		$.cookie("username",data.username); 			// 写入cookie
-		$.cookie("password",$.md5(data.password));
+		$.cookie("username",data.username,{ path: '/'}); 			// 写入cookie
+		$.cookie("password",$.md5(data.password),{ path: '/'});
 				
 		$.ajax({
 			type:"POST",

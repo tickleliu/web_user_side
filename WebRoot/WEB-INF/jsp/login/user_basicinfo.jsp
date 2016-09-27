@@ -61,12 +61,12 @@ $(function(){
 	$("#sex_man").click(function(){		/*选择用户性别*/
 		$("#sex_womman").removeClass("selected");
 		$(this).addClass("selected");
-		$.cookie("sex","man");
+		$.cookie("sex","man",{ path: '/'});
 	});
 	$("#sex_womman").click(function(){
 		$("#sex_man").removeClass("selected");
 		$(this).addClass("selected");
-		$.cookie("sex","woman");
+		$.cookie("sex","woman",{ path: '/'});
 	});
 	
 	$("#ok_org").click(function(){
@@ -88,8 +88,8 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(result) {
-				$.cookie('username', null); 
-				$.cookie('password', null); 
+				$.cookie('username', '',{ path: '/', expires: -1 }); 
+				$.cookie('password', '',{ path: '/', expires: -1 }); 
 				
 				result=$.parseJSON(result);
 				if(result.result=='success'){
@@ -123,9 +123,9 @@ $(function(){
 				alert("注册失败");
 			},
 			success: function(result) {
-				$.cookie('username', null); 
-				$.cookie('password', null); 
-				$.cookie('sex', null); 
+				$.cookie('username', '',{ path: '/', expires: -1 }); 
+				$.cookie('password', '',{ path: '/', expires: -1 }); 
+				$.cookie('sex', '',{ path: '/', expires: -1 }); 
 				
 				result=$.parseJSON(result);
 				if(result.result=='success'){
