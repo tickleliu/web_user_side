@@ -48,7 +48,8 @@ $(document).ready(function(){
 	if($.cookie("userinfo")==null){
 		$.cookie("userinfo");
 	}
-	$.cookie("sex","man");
+	$.cookie('sex', '',{ path: '/', expires: -1 });
+	$.cookie('sex','man',{ path: '/'});
 });    
 
 $(function(){
@@ -61,12 +62,14 @@ $(function(){
 	$("#sex_man").click(function(){		/*选择用户性别*/
 		$("#sex_womman").removeClass("selected");
 		$(this).addClass("selected");
-		$.cookie("sex","man",{ path: '/'});
+		$.cookie('sex', '',{ path: '/', expires: -1 });
+		$.cookie('sex','man',{ path: '/'});
 	});
 	$("#sex_womman").click(function(){
 		$("#sex_man").removeClass("selected");
 		$(this).addClass("selected");
-		$.cookie("sex","woman",{ path: '/'});
+		$.cookie('sex', '',{ path: '/', expires: -1 });
+		$.cookie('sex','woman',{ path: '/'});
 	});
 	
 	$("#ok_org").click(function(){
@@ -90,6 +93,7 @@ $(function(){
 			success: function(result) {
 				$.cookie('username', '',{ path: '/', expires: -1 }); 
 				$.cookie('password', '',{ path: '/', expires: -1 }); 
+				$.cookie('sex', '',{ path: '/', expires: -1 });
 				
 				result=$.parseJSON(result);
 				if(result.result=='success'){
@@ -146,6 +150,18 @@ $(function(){
 <iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
 <body>
 	<div class="mainbody w1000"> <!--主页内容部分-->
+		<div class="left" style="height:645px;">
+			<div class="leftNav">
+				<ul>  	<!--左侧导航菜单-->
+					<li>
+						<a id="left_register" style="color:#333;"><span></span>填写注册信息</a>
+					</li>
+					<li>
+						<a id="left_userinfo" style="color:#fff;background-color:#a90100;"><span></span>填写基本信息</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<div class="userinput">
 			<div class="title">
 				<span>请完善您的注册信息</span>

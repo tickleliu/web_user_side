@@ -52,6 +52,8 @@ body .w1000{
 .top #toolbar{
 	float:right;
 	padding-top:70px;
+	height:70px;
+	width:295px;
 }
 
 .top #toolbar .search{
@@ -85,8 +87,12 @@ body .w1000{
 .top #toolbar .user a{
 	font-size:14px;
 	height:30px;
+	width:40px;
+	display: block;
+	float:right;
 	line-height:30px;
-	margin:0 5px;
+	margin:0 0 0 5px;
+	text-align:right;
 	color:blue;
 }
 .top #toolbar .user a.user_center{
@@ -95,7 +101,21 @@ body .w1000{
 	text-overflow: ellipsis;
 	text-align: right;
 	width:100%;
-	margin:0 0px;
+}
+
+.top #toolbar .logout{
+	float:right;
+	width:70px;
+	height:30px;
+	overflow:hidden;
+}
+
+.top #toolbar .logout a{
+	font-size:12px;
+	height:30px;
+	line-height:30px;
+	color:blue;
+	text-align:right;
 }
 
 #login{
@@ -351,6 +371,13 @@ body .w1000{
 }
 .left .leftNav li #left_7 span{
 	background:url("../images/icons.png")  no-repeat scroll -160px 0;
+}
+
+.left .leftNav li #left_register span{
+	background:url("../images/reg.png")  no-repeat;
+}
+.left .leftNav li #left_userinfo span{
+	background:url("../images/info.png")  no-repeat;
 }
 
 .left #QRcode{

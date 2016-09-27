@@ -386,14 +386,14 @@ body .w1000{
 
 /*用户注册页*/
 .userinput{
-	margin:30px auto;
+	margin:0px auto;
+	padding-top:30px;
 	width:540px;
-	background:#f8f8f8;
-	border:1px solid #dddddd;
+	/*border:1px solid #dddddd;*/
 }
 
 .userinput .title{
-	border-bottom:1px solid #dddddd;
+	border:1px solid #dddddd;
 }
 .userinput .title span{
 	display:block;
@@ -409,6 +409,8 @@ body .w1000{
 
 .userinput .infoBox{
 	padding:20px 30px;
+	background:#f8f8f8;
+	border:1px solid #dddddd;
 }
 
 .userinput .one_row label{

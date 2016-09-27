@@ -113,6 +113,18 @@ $(function(){
 <iframe id="head" src="head.html" frameborder="false" scrolling="no" style="border:none;" width="100%" height="223px" allowtransparency="true"></iframe>
 <body>
 	<div class="mainbody w1000"> <!--主页内容部分-->
+		<div class="left" style="height:430px;">
+			<div class="leftNav">
+				<ul>  	<!--左侧导航菜单-->
+					<li>
+						<a id="left_register" style="color:#fff;background-color:#a90100;"><span></span>填写注册信息</a>
+					</li>
+					<li>
+						<a id="left_userinfo" style="color:#333;"><span></span>填写基本信息</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<div class="userinput">
 			<div class="title">
 				<span>欢迎注册</span>
