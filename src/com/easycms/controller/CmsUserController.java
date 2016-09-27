@@ -226,7 +226,15 @@ public class CmsUserController {
 		}
 
 		jsonObject.put("result", "success");
-		Cookie cookie = new Cookie("login", "success");
+		JSONObject cookieJsonObject = new JSONObject();
+
+		cookieJsonObject.put("username", username);
+		cookieJsonObject.put("password", password);
+		cookieJsonObject.put("uid", cmsUserLoginInfo.getUid().toString());
+		cookieJsonObject.put("wechatid", cmsUserLoginInfo.getUwechatid());
+		String cookieString = cookieJsonObject.toString();
+
+		Cookie cookie = new Cookie("login", cookieString);
 		cookie.setMaxAge(24 * 60 * 60 * 30);
 		cookie.setPath("/");
 		response.addCookie(cookie);
