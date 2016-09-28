@@ -16,11 +16,7 @@
 		<property name="unauthorizedUrl" value="/member/unauth"></property>
 		<property name="filterChainDefinitions">
 			<value>
-			/ = anon
-			/member/** = anon
-			/index = anon
-			/info/** = authc, roles[admin]
-			/user/** = authc, roles[super_admin]
+			/** = anon
 			</value>
 		</property>
 	</bean>

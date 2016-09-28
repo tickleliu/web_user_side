@@ -307,6 +307,7 @@ body .w1000{
 	float:left;
 	border:1px solid #ddd;
 	border-radius:5px;
+	padding-left:5px;
 }
 
 .articleview .search a{
