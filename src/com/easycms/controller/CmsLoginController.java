@@ -69,7 +69,6 @@ public class CmsLoginController {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("login")) {
-
 					String cookieString = cookie.getValue();
 					JSONObject cookieJsonObject = null;
 					try {
@@ -198,5 +197,28 @@ public class CmsLoginController {
 		}
 		jsonObject.append("status", "unlogin");
 		return jsonObject.toString();
+	}
+
+	@RequestMapping(value = "logout")
+	public String logOut(HttpServletRequest request,
+			HttpServletResponse response) {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			subject.logout();
+		}
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("login")) {
+					cookie.setMaxAge(0);
+					cookie.setValue("");
+					cookie.setPath("/");
+					response.addCookie(cookie);
+				}
+			}
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", "success");
+		return "redirect:/";
 	}
 }
